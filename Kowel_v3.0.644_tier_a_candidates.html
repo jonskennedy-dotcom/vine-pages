@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Tier A candidates</title>
+<style>
+  body { font-family: monospace; max-width: 1200px; margin: 1em auto; padding: 0 1em; }
+  h2 { background:#eee; padding:0.3em; border-top:2px solid #999; }
+  h3 { color:#555; margin-top:1em; }
+  .pair { border:1px solid #ddd; padding:0.5em; margin:0.5em 0; background:#fafafa; }
+  .pair h4 { margin:0 0 0.3em 0; color:#333; }
+  .meta { color:#666; font-size:0.85em; }
+  .EXACT { color:#080; font-weight:bold; }
+  .CLOSE { color:#860; }
+  .FAR { color:#a00; }
+  .ONE-SIDED { color:#888; }
+  .BOTH-UNKNOWN { color:#888; }
+  .SAME { color:#080; }
+  .low_z { color:#a00; }
+  .high_z { color:#080; }
+  .already_hardened { color:#888; }
+  .unregistered { color:#a00; font-style:italic; }
+  table { border-collapse:collapse; margin:0.3em 0; }
+  td, th { padding:2px 6px; border:1px solid #ddd; font-size:0.85em; }
+  .toc { background:#f4f4f4; padding:0.5em; margin-bottom:1em; }
+  .toc a { display:inline-block; margin:0 0.5em 0.3em 0; }
+</style>
+</head><body>
+<h1>Tier A candidate FU pairs — manual review</h1>
+<p>Pairs where the FUA architecture detects a family unit candidate (FatherNameSim or MotherNameSim ≥ 0.85)
+but at least one Tier A axis is loosened to admit. Each section: 30 examples per sub-bucket.
+Constituent z values shown: <span class="low_z">low_z (&lt;0.65 — Phase 2 would add this merge)</span>,
+<span class="high_z">high_z (≥0.65 — standard pipeline would harden)</span>,
+<span class="already_hardened">already_hardened</span>,
+<span class="unregistered">unregistered (no Same variable — Phase 2 widening would create)</span>.
+</p>
+<div class='toc'><b>Sections:</b><br>
+<a href='#matched_children__count=0'>matched_children / count=0 (198)</a>
+<a href='#matched_children__count=1'>matched_children / count=1 (43)</a>
+<a href='#mother_given__shared_letters'>mother_given / shared_letters (2)</a>
+<a href='#multi'>multi-axis (1164)</a>
+</div>
+<h2 id='matched_children__count=0'>matched_children / count=0 <span class='meta'>(198 total, showing up to 30)</span></h2>
+<div class='pair'>
+<h4>FU-000016 ↔ FU-000650</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Myśliński</td><td>Myśliński</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1811, 1849) | year range B: (1811, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000258,C007252)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000016 ↔ FU-002768</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (inf)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Myśliński</td><td>Myśliński</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1811, 1849) | year range B: (1811, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000258,K-003316)</td><td class='already_hardened'>already_hardened</td><td>0.764</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000027 ↔ FU-000679</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1817, 1849) | year range B: (1806, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000590,C007482)</td><td class='already_hardened'>already_hardened</td><td>0.750</td></tr>
+<tr><td>mother</td><td>Same(C007483,K-009953)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000027 ↔ FU-001318</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1817, 1849) | year range B: (1806, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000590,C011366)</td><td class='already_hardened'>already_hardened</td><td>0.768</td></tr>
+<tr><td>mother</td><td>Same(C011367,K-009953)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000027 ↔ FU-002767</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1817, 1849) | year range B: (1806, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000590,K-003314)</td><td class='already_hardened'>already_hardened</td><td>0.826</td></tr>
+<tr><td>mother</td><td>Same(C007084,K-009953)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000078 ↔ FU-000094</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Polikron (att)</td><td>Polikron (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Ksawera (att)</td><td>Ksawera (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Łoza</td><td>Łoza</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;, &#x27;Myślina&#x27;, &#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1833, 1875) | year range B: (1833, 1875)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002031,C002419)</td><td class='already_hardened'>already_hardened</td><td>0.763</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000078 ↔ FU-000103</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Polikron (att)</td><td>Polikron (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Ksawera (att)</td><td>Ksawera (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Łoza</td><td>Łoza</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;, &#x27;Myślina&#x27;, &#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1833, 1875) | year range B: (1833, 1875)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002031,C002646)</td><td class='already_hardened'>already_hardened</td><td>0.666</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000094 ↔ FU-000103</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Polikron (att)</td><td>Polikron (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Ksawera (att)</td><td>Ksawera (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Łoza</td><td>Łoza</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1833, 1875) | year range B: (1833, 1875)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002419,C002646)</td><td class='already_hardened'>already_hardened</td><td>0.829</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000102 ↔ FU-000113</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Marcelina (att)</td><td>Marcelina (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1849, 1885) | year range B: (1849, 1885)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002623,C002841)</td><td class='already_hardened'>already_hardened</td><td>0.779</td></tr>
+<tr><td>mother</td><td>Same(C002624,C002842)</td><td class='already_hardened'>already_hardened</td><td>0.802</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000102 ↔ FU-000128</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Marcelina (att)</td><td>Marcelina (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1849, 1885) | year range B: (1849, 1885)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002623,C002979)</td><td class='already_hardened'>already_hardened</td><td>0.771</td></tr>
+<tr><td>mother</td><td>Same(C002624,C002980)</td><td class='already_hardened'>already_hardened</td><td>0.795</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000102 ↔ FU-000844</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Marcelina (att)</td><td>Marcelina (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1849, 1885) | year range B: (1849, 1885)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002623,C008609)</td><td class='already_hardened'>already_hardened</td><td>0.755</td></tr>
+<tr><td>mother</td><td>Same(C002624,C008610)</td><td class='already_hardened'>already_hardened</td><td>0.773</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000102 ↔ FU-003254</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Marcelina (att)</td><td>Marcelina (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1849, 1885) | year range B: (1849, 1885)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002623,K-007556)</td><td class='already_hardened'>already_hardened</td><td>0.746</td></tr>
+<tr><td>mother</td><td>Same(C002624,C003431)</td><td class='already_hardened'>already_hardened</td><td>0.616</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000102 ↔ FU-003255</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Marcelina (att)</td><td>Marcelina (inf)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1849, 1885) | year range B: (1846, 1883)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002623,K-007557)</td><td class='already_hardened'>already_hardened</td><td>0.675</td></tr>
+<tr><td>mother</td><td>Same(C002624,K-003797)</td><td class='already_hardened'>already_hardened</td><td>0.736</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000113 ↔ FU-000128</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Marcelina (att)</td><td>Marcelina (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1849, 1885) | year range B: (1849, 1885)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002841,C002979)</td><td class='already_hardened'>already_hardened</td><td>0.714</td></tr>
+<tr><td>mother</td><td>Same(C002842,C002980)</td><td class='already_hardened'>already_hardened</td><td>0.736</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000113 ↔ FU-000844</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Marcelina (att)</td><td>Marcelina (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1849, 1885) | year range B: (1849, 1885)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002841,C008609)</td><td class='already_hardened'>already_hardened</td><td>0.782</td></tr>
+<tr><td>mother</td><td>Same(C002842,C008610)</td><td class='already_hardened'>already_hardened</td><td>0.669</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000113 ↔ FU-003254</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Marcelina (att)</td><td>Marcelina (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1849, 1885) | year range B: (1849, 1885)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002841,K-007556)</td><td class='already_hardened'>already_hardened</td><td>0.716</td></tr>
+<tr><td>mother</td><td>Same(C002842,C003431)</td><td class='already_hardened'>already_hardened</td><td>0.738</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000113 ↔ FU-003255</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Marcelina (att)</td><td>Marcelina (inf)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1849, 1885) | year range B: (1846, 1883)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002841,K-007557)</td><td class='already_hardened'>already_hardened</td><td>0.677</td></tr>
+<tr><td>mother</td><td>Same(C002842,K-003797)</td><td class='already_hardened'>already_hardened</td><td>0.737</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000128 ↔ FU-000844</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Marcelina (att)</td><td>Marcelina (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1849, 1885) | year range B: (1849, 1885)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002979,C008609)</td><td class='already_hardened'>already_hardened</td><td>0.705</td></tr>
+<tr><td>mother</td><td>Same(C002980,C008610)</td><td class='already_hardened'>already_hardened</td><td>0.726</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000128 ↔ FU-003254</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Marcelina (att)</td><td>Marcelina (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1849, 1885) | year range B: (1849, 1885)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002979,K-007556)</td><td class='already_hardened'>already_hardened</td><td>0.716</td></tr>
+<tr><td>mother</td><td>Same(C002980,C003431)</td><td class='already_hardened'>already_hardened</td><td>0.749</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000128 ↔ FU-003255</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Marcelina (att)</td><td>Marcelina (inf)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1849, 1885) | year range B: (1846, 1883)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002979,K-007557)</td><td class='already_hardened'>already_hardened</td><td>0.677</td></tr>
+<tr><td>mother</td><td>Same(C002980,K-003797)</td><td class='already_hardened'>already_hardened</td><td>0.738</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000130 ↔ FU-000132</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Emilia (att)</td><td>Emilia (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1839, 1883) | year range B: (1839, 1883)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002991,C003056)</td><td class='already_hardened'>already_hardened</td><td>0.688</td></tr>
+<tr><td>mother</td><td>Same(C002992,C003057)</td><td class='already_hardened'>already_hardened</td><td>0.719</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000130 ↔ FU-001442</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Emilia (att)</td><td>Emilia (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1839, 1883) | year range B: (1839, 1883)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002991,C014742)</td><td class='already_hardened'>already_hardened</td><td>0.620</td></tr>
+<tr><td>mother</td><td>Same(C002992,C014743)</td><td class='already_hardened'>already_hardened</td><td>0.672</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000130 ↔ FU-001443</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Emilia (att)</td><td>Emilia (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1839, 1883) | year range B: (1839, 1883)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002991,C014745)</td><td class='already_hardened'>already_hardened</td><td>0.765</td></tr>
+<tr><td>mother</td><td>Same(C002992,C014746)</td><td class='already_hardened'>already_hardened</td><td>0.783</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000130 ↔ FU-003177</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Emilia (att)</td><td>Emilia (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1839, 1883) | year range B: (1839, 1883)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002991,K-006636)</td><td class='already_hardened'>already_hardened</td><td>0.652</td></tr>
+<tr><td>mother</td><td>Same(C002834,C002992)</td><td class='already_hardened'>already_hardened</td><td>0.725</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000132 ↔ FU-000810</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Emilia (att)</td><td>Emilia (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1839, 1883) | year range B: (1839, 1883)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C003056,C008371)</td><td class='already_hardened'>already_hardened</td><td>0.719</td></tr>
+<tr><td>mother</td><td>Same(C003057,C008372)</td><td class='already_hardened'>already_hardened</td><td>0.773</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000132 ↔ FU-001442</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Emilia (att)</td><td>Emilia (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1839, 1883) | year range B: (1839, 1883)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C003056,C014742)</td><td class='already_hardened'>already_hardened</td><td>0.618</td></tr>
+<tr><td>mother</td><td>Same(C003057,C014743)</td><td class='already_hardened'>already_hardened</td><td>0.719</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000132 ↔ FU-001443</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Emilia (att)</td><td>Emilia (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1839, 1883) | year range B: (1839, 1883)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C003056,C014745)</td><td class='already_hardened'>already_hardened</td><td>0.760</td></tr>
+<tr><td>mother</td><td>Same(C003057,C014746)</td><td class='already_hardened'>already_hardened</td><td>0.711</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000132 ↔ FU-003177</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Emilia (att)</td><td>Emilia (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1839, 1883) | year range B: (1839, 1883)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C003056,K-006636)</td><td class='already_hardened'>already_hardened</td><td>0.651</td></tr>
+<tr><td>mother</td><td>Same(C002834,C003057)</td><td class='already_hardened'>already_hardened</td><td>0.719</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000554 ↔ FU-000666</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Bonawentura (att)</td><td>Bonawentura (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Róża (att)</td><td>Róża (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Harusza par. Turzysk&#x27;, &#x27;Myślina&#x27;, &#x27;Rudniki&#x27;] | villages B: [&#x27;Kowel&#x27;, &#x27;Lubitów&#x27;, &#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1792, 1833) | year range B: (1792, 1833)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C006657,C007361)</td><td class='already_hardened'>already_hardened</td><td>0.655</td></tr>
+<tr><td>mother</td><td>Same(C006658,C007362)</td><td class='already_hardened'>already_hardened</td><td>0.618</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000554 ↔ FU-000680</h4>
+<div class='meta'>fails: matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Bonawentura (att)</td><td>Bonawentura (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Róża (att)</td><td>Róża (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Harusza par. Turzysk&#x27;, &#x27;Myślina&#x27;, &#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1792, 1833) | year range B: (1792, 1833)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C006657,C007488)</td><td class='already_hardened'>already_hardened</td><td>0.742</td></tr>
+<tr><td>mother</td><td>Same(C006658,C007489)</td><td class='already_hardened'>already_hardened</td><td>0.772</td></tr>
+</table>
+</div>
+<h2 id='matched_children__count=1'>matched_children / count=1 <span class='meta'>(43 total, showing up to 30)</span></h2>
+<div class='pair'>
+<h4>FU-000027 ↔ FU-001326</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1817, 1849) | year range B: (1817, 1849)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Ludwik</td><td>Ludwik</td><td>1832 [y]</td><td>1832 [y]</td><td class='SAME'>SAME YEAR</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000590,C011577)</td><td class='already_hardened'>already_hardened</td><td>0.903</td></tr>
+<tr><td>mother</td><td>Same(K-009953,K-009954)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+<tr><td>child</td><td>Same(K-009988,K-009989)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000050 ↔ FU-001359</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Antonina (att)</td><td>Antonina (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1817, 1857) | year range B: (1817, 1857)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Nemezy</td><td>Nemezy</td><td>1840 [y]</td><td>1840 [y]</td><td class='SAME'>SAME YEAR</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C001375,C012226)</td><td class='already_hardened'>already_hardened</td><td>0.904</td></tr>
+<tr><td>mother</td><td>Same(K-009970,K-009971)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+<tr><td>child</td><td>Same(K-009974,K-009975)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000130 ↔ FU-000810</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Emilia (att)</td><td>Emilia (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1839, 1883) | year range B: (1839, 1883)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Florentyna</td><td>Florentyna</td><td>1865 [y]</td><td>1867 [y]</td><td class='CLOSE'>CLOSE (Δ2y)</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002991,C008371)</td><td class='already_hardened'>already_hardened</td><td>0.886</td></tr>
+<tr><td>mother</td><td>Same(C002992,C008372)</td><td class='already_hardened'>already_hardened</td><td>0.768</td></tr>
+<tr><td>child</td><td>Same(K-009957,K-009958)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000130 ↔ FU-003178</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Emilia (att)</td><td>Emilia (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1839, 1883) | year range B: (1839, 1885)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Florentyna</td><td>Florentyna</td><td>1865 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002991,K-006637)</td><td class='already_hardened'>already_hardened</td><td>0.758</td></tr>
+<tr><td>mother</td><td>Same(C002992,K-005721)</td><td class='already_hardened'>already_hardened</td><td>0.743</td></tr>
+<tr><td>child</td><td>Same(C017012,K-009957)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000132 ↔ FU-003178</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Emilia (att)</td><td>Emilia (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1839, 1883) | year range B: (1839, 1885)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Julia</td><td>Julian</td><td>1867 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C003056,K-006637)</td><td class='already_hardened'>already_hardened</td><td>0.758</td></tr>
+<tr><td>mother</td><td>Same(C003057,K-005721)</td><td class='already_hardened'>already_hardened</td><td>0.710</td></tr>
+<tr><td>child</td><td>Same(K-001050,K-010034)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000650 ↔ FU-002768</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (inf)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Myśliński</td><td>Myśliński</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1811, 1849) | year range B: (1811, 1849)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Franciszka</td><td>Franciszka</td><td>1821 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C007252,K-003316)</td><td class='already_hardened'>already_hardened</td><td>0.887</td></tr>
+<tr><td>child</td><td>Same(C012970,K-009935)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000666 ↔ FU-001380</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Bonawentura (att)</td><td>Bonawentura (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Róża (att)</td><td>Róża (inf)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;, &#x27;Lubitów&#x27;, &#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1792, 1833) | year range B: (1792, 1835)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Franciszek</td><td>Franciszek</td><td>1817 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C007361,C012931)</td><td class='low_z'>low_z</td><td>0.026</td></tr>
+<tr><td>mother</td><td>Same(C007362,K-007747)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>child</td><td>Same(K-006963,K-010008)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000666 ↔ FU-003184</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Bonawentura (att)</td><td>Bonawentura (inf)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Róża (att)</td><td>Róża (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;, &#x27;Lubitów&#x27;, &#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1792, 1833) | year range B: (1792, 1835)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Franciszek</td><td>Franciszek</td><td>1817 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C007361,K-006671)</td><td class='low_z'>low_z</td><td>0.027</td></tr>
+<tr><td>mother</td><td>Same(C007362,K-007747)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>child</td><td>Same(K-006963,K-010009)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000680 ↔ FU-001380</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Bonawentura (att)</td><td>Bonawentura (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Róża (att)</td><td>Róża (inf)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1792, 1833) | year range B: (1792, 1835)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Antoni</td><td>Antoni</td><td>1811 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C007488,C012931)</td><td class='already_hardened'>already_hardened</td><td>0.878</td></tr>
+<tr><td>mother</td><td>Same(C007489,K-007747)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>child</td><td>Same(C012934,K-003315)</td><td class='already_hardened'>already_hardened</td><td>0.878</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000680 ↔ FU-003184</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Bonawentura (att)</td><td>Bonawentura (inf)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Róża (att)</td><td>Róża (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1792, 1833) | year range B: (1792, 1835)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Antoni</td><td>Antoni</td><td>1811 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C007488,K-006671)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>mother</td><td>Same(C007489,K-007747)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>child</td><td>Same(C013350,K-003315)</td><td class='already_hardened'>already_hardened</td><td>0.884</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000724 ↔ FU-003253</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Salomea (att)</td><td>Salomea (inf)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Michałowicz</td><td>Michałowicz</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Myślina&#x27;, &#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1805, 1840) | year range B: (1805, 1840)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Ksawery</td><td>Ksawery</td><td>1818 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C007839,K-007545)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>child</td><td>Same(K-007701,K-007735)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000810 ↔ FU-003178</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Emilia (att)</td><td>Emilia (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1839, 1883) | year range B: (1839, 1885)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Florentyna</td><td>Florentyna</td><td>1867 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C008371,K-006637)</td><td class='already_hardened'>already_hardened</td><td>0.758</td></tr>
+<tr><td>mother</td><td>Same(C008372,K-005721)</td><td class='already_hardened'>already_hardened</td><td>0.719</td></tr>
+<tr><td>child</td><td>Same(C017012,K-009958)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000844 ↔ FU-003255</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Marcelina (att)</td><td>Marcelina (inf)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1849, 1885) | year range B: (1846, 1883)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Józefa</td><td>Józefa</td><td>1870 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C008609,K-007557)</td><td class='already_hardened'>already_hardened</td><td>0.826</td></tr>
+<tr><td>mother</td><td>Same(C008610,K-003797)</td><td class='already_hardened'>already_hardened</td><td>0.816</td></tr>
+<tr><td>child</td><td>Same(K-010016,K-010017)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000882 ↔ FU-001380</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Bonawentura (att)</td><td>Bonawentura (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Róża (att)</td><td>Róża (inf)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1792, 1833) | year range B: (1792, 1835)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Piotr</td><td>Piotr</td><td>1823 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C008834,C012931)</td><td class='low_z'>low_z</td><td>0.006</td></tr>
+<tr><td>mother</td><td>Same(C008835,K-007747)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>child</td><td>Same(K-006936,K-006937)</td><td class='low_z'>low_z</td><td>0.004</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000882 ↔ FU-003184</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Bonawentura (att)</td><td>Bonawentura (inf)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Róża (att)</td><td>Róża (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1792, 1833) | year range B: (1792, 1835)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Piotr</td><td>Piotr</td><td>1823 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C008834,K-006671)</td><td class='low_z'>low_z</td><td>0.004</td></tr>
+<tr><td>mother</td><td>Same(C008835,K-007747)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>child</td><td>Same(K-006936,K-007147)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-001442 ↔ FU-003177</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Emilia (att)</td><td>Emilia (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1839, 1883) | year range B: (1839, 1883)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Kamila</td><td>Teresa Kamila</td><td>1862 [y]</td><td>1863 [y]</td><td class='CLOSE'>CLOSE (Δ1y)</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C014742,K-006636)</td><td class='already_hardened'>already_hardened</td><td>0.728</td></tr>
+<tr><td>mother</td><td>Same(C002834,C014743)</td><td class='already_hardened'>already_hardened</td><td>0.853</td></tr>
+<tr><td>child</td><td>Same(K-010026,K-010027)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-001442 ↔ FU-003178</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Emilia (att)</td><td>Emilia (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1839, 1883) | year range B: (1839, 1885)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Kamila</td><td>Kamila</td><td>1862 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C014742,K-006637)</td><td class='already_hardened'>already_hardened</td><td>0.698</td></tr>
+<tr><td>mother</td><td>Same(C014743,K-005721)</td><td class='already_hardened'>already_hardened</td><td>0.694</td></tr>
+<tr><td>child</td><td>Same(K-005941,K-010026)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-003177 ↔ FU-003178</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Emilia (att)</td><td>Emilia (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1839, 1883) | year range B: (1839, 1885)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Teresa Kamila</td><td>Kamila</td><td>1863 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(K-006636,K-006637)</td><td class='already_hardened'>already_hardened</td><td>0.645</td></tr>
+<tr><td>mother</td><td>Same(C002834,K-005721)</td><td class='already_hardened'>already_hardened</td><td>0.758</td></tr>
+<tr><td>child</td><td>Same(K-005941,K-010027)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-003254 ↔ FU-003255</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Marcelina (att)</td><td>Marcelina (inf)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1849, 1885) | year range B: (1846, 1883)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Konstanty</td><td>Konstanty</td><td>1879 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(K-007556,K-007557)</td><td class='already_hardened'>already_hardened</td><td>0.826</td></tr>
+<tr><td>mother</td><td>Same(C003431,K-003797)</td><td class='already_hardened'>already_hardened</td><td>0.826</td></tr>
+<tr><td>child</td><td>Same(K-010046,K-010047)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000293 ↔ FU-001083</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Bronisław (att)</td><td>Bronisław (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Stanisława (att)</td><td>Stanisława (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Biernacki</td><td>Biernacki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;] | villages B: [&#x27;Kowel&#x27;]</div>
+<div class='meta'>year range A: (1879, 1919) | year range B: (1879, 1919)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Stanisława</td><td>Stanisława</td><td>1902 [y]</td><td>1902 [y]</td><td class='SAME'>SAME YEAR</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C004563,C010153)</td><td class='already_hardened'>already_hardened</td><td>0.909</td></tr>
+<tr><td>mother</td><td>Same(K-009931,K-009932)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+<tr><td>child</td><td>Same(K-009992,K-009993)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000297 ↔ FU-001095</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Bronisław (att)</td><td>Bronisław (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Popławski</td><td>Popławski</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Stanisława (att)</td><td>Stanisława (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Bernacki</td><td>Bernacki</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;] | villages B: [&#x27;Kowel&#x27;]</div>
+<div class='meta'>year range A: (1879, 1918) | year range B: (1879, 1918)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Bronisława</td><td>Bronisława</td><td>1903 [y]</td><td>1904 [y]</td><td class='CLOSE'>CLOSE (Δ1y)</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C004608,C010391)</td><td class='already_hardened'>already_hardened</td><td>0.908</td></tr>
+<tr><td>mother</td><td>Same(C004609,C010392)</td><td class='already_hardened'>already_hardened</td><td>0.908</td></tr>
+<tr><td>child</td><td>Same(K-009976,K-009977)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000063 ↔ FU-001382</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Piotr (att)</td><td>Piotr (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Malinowski</td><td>Malinowski</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Kazimiera (att)</td><td>Kazimiera (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Pniewski</td><td>Pniewski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;] | villages B: [&#x27;Kowel&#x27;]</div>
+<div class='meta'>year range A: (1822, 1863) | year range B: (1822, 1863)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Katarzyna</td><td>Katarzyna</td><td>1845 [y]</td><td>1845 [y]</td><td class='SAME'>SAME YEAR</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C001677,C013055)</td><td class='already_hardened'>already_hardened</td><td>0.899</td></tr>
+<tr><td>mother</td><td>Same(C001678,C013056)</td><td class='already_hardened'>already_hardened</td><td>0.921</td></tr>
+<tr><td>child</td><td>Same(K-009986,K-009987)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000072 ↔ FU-003230</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Piotr (att)</td><td>Piotr (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Malinowski</td><td>Malinowski</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Kazimiera (att)</td><td>Kazimiera (inf)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Pniewski</td><td>Pniewski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;] | villages B: [&#x27;Kowel&#x27;]</div>
+<div class='meta'>year range A: (1822, 1863) | year range B: (1819, 1867)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Stefan</td><td>Stefan</td><td>1848 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C001902,K-007129)</td><td class='already_hardened'>already_hardened</td><td>0.809</td></tr>
+<tr><td>mother</td><td>Same(C001903,K-009965)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+<tr><td>child</td><td>Same(C013518,K-009951)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000035 ↔ FU-003064</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (inf)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Koprowski</td><td>Koprowski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;] | villages B: [&#x27;Kowel&#x27;]</div>
+<div class='meta'>year range A: (1829, 1863) | year range B: (1829, 1863)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Fortunata</td><td>Fortunata</td><td>1835 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000877,K-005669)</td><td class='already_hardened'>already_hardened</td><td>0.769</td></tr>
+<tr><td>mother</td><td>Same(C000878,C013803)</td><td class='already_hardened'>already_hardened</td><td>0.758</td></tr>
+<tr><td>child</td><td>Same(K-010012,K-010013)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000060 ↔ FU-001411</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Kuprowski</td><td>Koprowski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;] | villages B: [&#x27;Kowel&#x27;]</div>
+<div class='meta'>year range A: (1829, 1863) | year range B: (1829, 1863)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Marianna</td><td>Marianna</td><td>1843 [y]</td><td>1845 [y]</td><td class='CLOSE'>CLOSE (Δ2y)</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C001562,C013814)</td><td class='already_hardened'>already_hardened</td><td>0.895</td></tr>
+<tr><td>mother</td><td>Same(C001563,C013815)</td><td class='already_hardened'>already_hardened</td><td>0.898</td></tr>
+<tr><td>child</td><td>Same(K-009984,K-009985)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000071 ↔ FU-003064</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (inf)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Koprowski</td><td>Koprowski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;] | villages B: [&#x27;Kowel&#x27;]</div>
+<div class='meta'>year range A: (1829, 1863) | year range B: (1829, 1863)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Paulina</td><td>Paulina</td><td>1848 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C001864,K-005669)</td><td class='already_hardened'>already_hardened</td><td>0.743</td></tr>
+<tr><td>mother</td><td>Same(C001865,C013803)</td><td class='already_hardened'>already_hardened</td><td>0.784</td></tr>
+<tr><td>child</td><td>Same(K-010014,K-010015)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000082 ↔ FU-001403</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (att)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Koprowski</td><td>Koprowski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;] | villages B: [&#x27;Kowel&#x27;]</div>
+<div class='meta'>year range A: (1829, 1863) | year range B: (1829, 1863)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Jan</td><td>Jan</td><td>1851 [y]</td><td>1851 [y]</td><td class='SAME'>SAME YEAR</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C002105,C013647)</td><td class='already_hardened'>already_hardened</td><td>0.899</td></tr>
+<tr><td>mother</td><td>Same(C002106,C013648)</td><td class='already_hardened'>already_hardened</td><td>0.917</td></tr>
+<tr><td>child</td><td>Same(K-009982,K-009983)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-003064 ↔ FU-003100</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Józef (inf)</td><td>Józef (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Lisiecki</td><td>Lisiecki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Koprowski</td><td>Koprowski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;] | villages B: [&#x27;Kowel&#x27;]</div>
+<div class='meta'>year range A: (1829, 1863) | year range B: (1829, 1863)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Sylwester</td><td>Sylwester</td><td>? [?]</td><td>1832 [y]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(K-005669,K-006224)</td><td class='already_hardened'>already_hardened</td><td>0.789</td></tr>
+<tr><td>mother</td><td>Same(C000633,C013803)</td><td class='already_hardened'>already_hardened</td><td>0.802</td></tr>
+<tr><td>child</td><td>Same(K-010004,K-010005)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-003068 ↔ FU-003101</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Wincenty (att)</td><td>Wincenty (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Lisiecki</td><td>Lesicki,Lisiecki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (inf)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Godlewski</td><td>Godlewski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;] | villages B: [&#x27;Kowel&#x27;]</div>
+<div class='meta'>year range A: (1824, 1861) | year range B: (1809, 1861)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Olimpia</td><td>Olimpia Józefa</td><td>? [?]</td><td>1835 [y]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(K-005717,K-006235)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>child</td><td>Same(K-005883,K-005884)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000045 ↔ FU-000723</h4>
+<div class='meta'>fails: matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Franciszek (att)</td><td>Franciszek (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Myśliński</td><td>Myśliński</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Magdalena (att)</td><td>Magdalena (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Myśliński</td><td>Myśliński</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Myślina&#x27;] | villages B: [&#x27;Myślina&#x27;]</div>
+<div class='meta'>year range A: (1818, 1852) | year range B: (1818, 1852)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Antonina</td><td>Antonina</td><td>1839 [y]</td><td>1841 [y]</td><td class='CLOSE'>CLOSE (Δ2y)</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C001256,C007835)</td><td class='already_hardened'>already_hardened</td><td>0.809</td></tr>
+<tr><td>mother</td><td>Same(C001257,C007836)</td><td class='already_hardened'>already_hardened</td><td>0.898</td></tr>
+<tr><td>child</td><td>Same(K-009939,K-009940)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<h2 id='mother_given__shared_letters'>mother_given / shared_letters <span class='meta'>(2 total, showing up to 30)</span></h2>
+<div class='pair'>
+<h4>FU-003098 ↔ FU-003240</h4>
+<div class='meta'>fails: mother_given/shared_letters</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Piotr (att)</td><td>Piotr (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Albina (att)</td><td>Emilia (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Poplawski,Popławski</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;, &#x27;Rudniki&#x27;] | villages B: [&#x27;Kowel&#x27;, &#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1834, 1882) | year range B: (1832, 1874)</div>
+<div class='meta'>matched children (2/2):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Antoni</td><td>Antoni</td><td>1856-12-07 [ymd]</td><td>1856 [y]</td><td class='SAME'>SAME YEAR</td></tr>
+<tr><td>Leonarda</td><td>Leonard</td><td>? [?]</td><td>1854-03-09 [ymd]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(K-006217,K-007399)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>mother</td><td>Same(K-005956,K-007400)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>child</td><td>Same(C002486,C014511)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>child</td><td>Same(C002315,C015962)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-003223 ↔ FU-003224</h4>
+<div class='meta'>fails: mother_given/shared_letters</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Stefan (inf)</td><td>Stefan (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Bogusz</td><td>Bogusz</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Anna (att)</td><td>Marianna (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Ochman</td><td>Ochman</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Kowel&#x27;] | villages B: [&#x27;Kowel&#x27;]</div>
+<div class='meta'>year range A: (1871, 1909) | year range B: (1871, 1914)</div>
+<div class='meta'>matched children (5/5):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Anna</td><td>Anna</td><td>? [?]</td><td>? [?]</td><td class='BOTHUNKNOWN'>BOTH-UNKNOWN</td></tr>
+<tr><td>Julia</td><td>Julia</td><td>? [?]</td><td>? [?]</td><td class='BOTHUNKNOWN'>BOTH-UNKNOWN</td></tr>
+<tr><td>Klemens</td><td>Klim</td><td>? [?]</td><td>? [?]</td><td class='BOTHUNKNOWN'>BOTH-UNKNOWN</td></tr>
+<tr><td>Józefat</td><td>Józef</td><td>? [?]</td><td>? [?]</td><td class='BOTHUNKNOWN'>BOTH-UNKNOWN</td></tr>
+<tr><td>Jan</td><td>Jan</td><td>? [?]</td><td>? [?]</td><td class='BOTHUNKNOWN'>BOTH-UNKNOWN</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>mother</td><td>Same(C017903,K-006755)</td><td class='already_hardened'>already_hardened</td><td>0.728</td></tr>
+<tr><td>child</td><td>Same(K-010020,K-010021)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+<tr><td>child</td><td>Same(K-010022,K-010023)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+<tr><td>child</td><td>Same(K-010024,K-010025)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+<tr><td>child</td><td>Same(K-010030,K-010031)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+<tr><td>child</td><td>Same(K-010036,K-010037)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<h2 id='multi'>multi-axis (≥2 failing gates) <span class='meta'>(1164 total, showing up to 30)</span></h2>
+<div class='pair'>
+<h4>FU-000004 ↔ FU-000102</h4>
+<div class='meta'>fails: mother_given/shared_letters, mother_maiden/different_surname, matched_children/count=0, timeline/incompatible</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Salomea (att)</td><td>Marcelina (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Pawłowski</td><td>Popławski</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1805, 1841) | year range B: (1849, 1885)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000053,C002623)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>mother</td><td>Same(C002624,K-008471)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000004 ↔ FU-000113</h4>
+<div class='meta'>fails: mother_given/shared_letters, mother_maiden/different_surname, matched_children/count=0, timeline/incompatible</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Salomea (att)</td><td>Marcelina (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Pawłowski</td><td>Popławski</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1805, 1841) | year range B: (1849, 1885)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000053,C002841)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>mother</td><td>Same(C002842,K-008471)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000004 ↔ FU-000128</h4>
+<div class='meta'>fails: mother_given/shared_letters, mother_maiden/different_surname, matched_children/count=0, timeline/incompatible</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Salomea (att)</td><td>Marcelina (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Pawłowski</td><td>Popławski</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1805, 1841) | year range B: (1849, 1885)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000053,C002979)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>mother</td><td>Same(C002980,K-008471)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000004 ↔ FU-000674</h4>
+<div class='meta'>fails: mother_maiden/different_surname, matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Salomea (att)</td><td>Salomea (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Pawłowski</td><td>Myśliński</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1805, 1841) | year range B: (1805, 1841)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Polikron</td><td>Polikron</td><td>1824 [y]</td><td>1824 [y]</td><td class='SAME'>SAME YEAR</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000053,C007451)</td><td class='already_hardened'>already_hardened</td><td>0.747</td></tr>
+<tr><td>mother</td><td>Same(K-008471,K-008472)</td><td class='already_hardened'>already_hardened</td><td>0.742</td></tr>
+<tr><td>child</td><td>Same(K-009945,K-009946)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000004 ↔ FU-000683</h4>
+<div class='meta'>fails: mother_maiden/different_surname, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Salomea (att)</td><td>Salomea (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Pawłowski</td><td>Michałowicz</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Kowel&#x27;, &#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1805, 1841) | year range B: (1805, 1840)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000053,C007506)</td><td class='already_hardened'>already_hardened</td><td>0.720</td></tr>
+<tr><td>mother</td><td>Same(K-008021,K-008471)</td><td class='low_z'>low_z</td><td>0.461</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000004 ↔ FU-000724</h4>
+<div class='meta'>fails: mother_maiden/different_surname, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Salomea (att)</td><td>Salomea (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Pawłowski</td><td>Michałowicz</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Myślina&#x27;, &#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1805, 1841) | year range B: (1805, 1840)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000053,C007839)</td><td class='already_hardened'>already_hardened</td><td>0.722</td></tr>
+<tr><td>mother</td><td>Same(K-008021,K-008471)</td><td class='low_z'>low_z</td><td>0.461</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000004 ↔ FU-000844</h4>
+<div class='meta'>fails: mother_given/shared_letters, mother_maiden/different_surname, matched_children/count=0, timeline/incompatible</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Salomea (att)</td><td>Marcelina (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Pawłowski</td><td>Popławski</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1805, 1841) | year range B: (1849, 1885)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000053,C008609)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>mother</td><td>Same(C008610,K-008471)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000004 ↔ FU-001631</h4>
+<div class='meta'>fails: mother_given/missing, mother_maiden/missing, matched_children/count=0, timeline/incompatible</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Salomea</td><td>?</td><td>—</td></tr>
+<tr><td>mother maiden</td><td>Pawłowski</td><td>?</td><td>—</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Kowel&#x27;, &#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1805, 1841) | year range B: (1849, 1881)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000053,C017600)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000004 ↔ FU-003253</h4>
+<div class='meta'>fails: mother_maiden/different_surname, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Salomea (att)</td><td>Salomea (inf)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Pawłowski</td><td>Michałowicz</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1805, 1841) | year range B: (1805, 1840)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000053,K-007545)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>mother</td><td>Same(K-008021,K-008471)</td><td class='low_z'>low_z</td><td>0.461</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000004 ↔ FU-003254</h4>
+<div class='meta'>fails: mother_given/shared_letters, mother_maiden/different_surname, matched_children/count=0, timeline/incompatible</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Salomea (att)</td><td>Marcelina (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Pawłowski</td><td>Popławski</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1805, 1841) | year range B: (1849, 1885)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000053,K-007556)</td><td class='already_hardened'>already_hardened</td><td>0.676</td></tr>
+<tr><td>mother</td><td>Same(C003431,K-008471)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000004 ↔ FU-003255</h4>
+<div class='meta'>fails: mother_given/shared_letters, mother_maiden/different_surname, matched_children/count=0, timeline/incompatible</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Salomea (att)</td><td>Marcelina (inf)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Pawłowski</td><td>Popławski</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1805, 1841) | year range B: (1846, 1883)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000053,K-007557)</td><td class='low_z'>low_z</td><td>0.650</td></tr>
+<tr><td>mother</td><td>Same(K-003797,K-008471)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000004 ↔ FU-003259</h4>
+<div class='meta'>fails: mother_maiden/different_surname, village/no_overlap, matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Tomasz (att)</td><td>Tomasz (inf)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Salomea (att)</td><td>Salomea (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Pawłowski</td><td>Myśliński</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Myślina&#x27;]</div>
+<div class='meta'>year range A: (1805, 1841) | year range B: (1794, 1831)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Polikron</td><td>Polikron</td><td>1824 [y]</td><td>? [?]</td><td class='ONESIDED'>ONE-SIDED</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000053,K-007712)</td><td class='low_z'>low_z</td><td>0.638</td></tr>
+<tr><td>mother</td><td>Same(C012802,K-008471)</td><td class='low_z'>low_z</td><td>0.560</td></tr>
+<tr><td>child</td><td>Same(C012807,K-009945)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000016 ↔ FU-000027</h4>
+<div class='meta'>fails: mother_maiden/different_surname, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Myśliński</td><td>Rudnicki</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1811, 1849) | year range B: (1817, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000258,C000590)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>mother</td><td>Same(K-009852,K-009953)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000016 ↔ FU-000050</h4>
+<div class='meta'>fails: mother_given/shared_letters, mother_maiden/different_surname, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Antonina (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Myśliński</td><td>Popławski</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1811, 1849) | year range B: (1817, 1857)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000258,C001375)</td><td class='already_hardened'>already_hardened</td><td>0.719</td></tr>
+<tr><td>mother</td><td>Same(K-009852,K-009970)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000016 ↔ FU-000678</h4>
+<div class='meta'>fails: village/no_overlap, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Myśliński</td><td>Myśliński</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Myślina&#x27;]</div>
+<div class='meta'>year range A: (1811, 1849) | year range B: (1811, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000258,C007472)</td><td class='already_hardened'>already_hardened</td><td>0.651</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000016 ↔ FU-000679</h4>
+<div class='meta'>fails: mother_maiden/different_surname, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Myśliński</td><td>Rudnicki</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1811, 1849) | year range B: (1806, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000258,C007482)</td><td class='already_hardened'>already_hardened</td><td>0.750</td></tr>
+<tr><td>mother</td><td>Same(C007483,K-009852)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000016 ↔ FU-001318</h4>
+<div class='meta'>fails: mother_maiden/different_surname, matched_children/count=1</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Myśliński</td><td>Rudnicki</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1811, 1849) | year range B: (1806, 1849)</div>
+<div class='meta'>matched children (1/1):</div>
+<table><tr><th>name A</th><th>name B</th><th>date A</th><th>date B</th><th>precision</th></tr>
+<tr><td>Aniela</td><td>Aniela</td><td>1829 [y]</td><td>1829 [y]</td><td class='SAME'>SAME YEAR</td></tr>
+</table>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000258,C011366)</td><td class='already_hardened'>already_hardened</td><td>0.730</td></tr>
+<tr><td>mother</td><td>Same(C011367,K-009852)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+<tr><td>child</td><td>Same(K-010018,K-010019)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000016 ↔ FU-001326</h4>
+<div class='meta'>fails: mother_maiden/different_surname, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Myśliński</td><td>Rudnicki</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1811, 1849) | year range B: (1817, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000258,C011577)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>mother</td><td>Same(K-009852,K-009954)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000016 ↔ FU-001359</h4>
+<div class='meta'>fails: mother_given/shared_letters, mother_maiden/different_surname, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Antonina (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Myśliński</td><td>Popławski</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1811, 1849) | year range B: (1817, 1857)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000258,C012226)</td><td class='already_hardened'>already_hardened</td><td>0.719</td></tr>
+<tr><td>mother</td><td>Same(K-009852,K-009971)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000016 ↔ FU-001644</h4>
+<div class='meta'>fails: mother_given/shared_letters, village/no_overlap, matched_children/count=0, timeline/incompatible</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Marianna (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Myśliński</td><td>Myśliński</td><td>1.000</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Myślin&#x27;]</div>
+<div class='meta'>year range A: (1811, 1849) | year range B: (1882, 1931)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000258,C017693)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>mother</td><td>Same(K-003119,K-009852)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000016 ↔ FU-002767</h4>
+<div class='meta'>fails: mother_maiden/different_surname, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Myśliński</td><td>Rudnicki</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1811, 1849) | year range B: (1806, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000258,K-003314)</td><td class='already_hardened'>already_hardened</td><td>0.680</td></tr>
+<tr><td>mother</td><td>Same(C007084,K-009852)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000027 ↔ FU-000050</h4>
+<div class='meta'>fails: mother_given/shared_letters, mother_maiden/different_surname, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Antonina (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Popławski</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1817, 1849) | year range B: (1817, 1857)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000590,C001375)</td><td class='already_hardened'>already_hardened</td><td>0.735</td></tr>
+<tr><td>mother</td><td>Same(K-009953,K-009970)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000027 ↔ FU-000650</h4>
+<div class='meta'>fails: mother_maiden/different_surname, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Myśliński</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1817, 1849) | year range B: (1811, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000590,C007252)</td><td class='already_hardened'>already_hardened</td><td>0.758</td></tr>
+<tr><td>mother</td><td>Same(K-009852,K-009953)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000027 ↔ FU-000678</h4>
+<div class='meta'>fails: mother_maiden/different_surname, village/no_overlap, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Myśliński</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Myślina&#x27;]</div>
+<div class='meta'>year range A: (1817, 1849) | year range B: (1811, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000590,C007472)</td><td class='already_hardened'>already_hardened</td><td>0.678</td></tr>
+<tr><td>mother</td><td>Same(K-009852,K-009953)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000027 ↔ FU-001359</h4>
+<div class='meta'>fails: mother_given/shared_letters, mother_maiden/different_surname, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Antonina (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Popławski</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1817, 1849) | year range B: (1817, 1857)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000590,C012226)</td><td class='already_hardened'>already_hardened</td><td>0.735</td></tr>
+<tr><td>mother</td><td>Same(K-009953,K-009971)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000027 ↔ FU-001644</h4>
+<div class='meta'>fails: mother_given/shared_letters, mother_maiden/different_surname, village/no_overlap, matched_children/count=0, timeline/incompatible</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Marianna (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Myśliński</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Myślin&#x27;]</div>
+<div class='meta'>year range A: (1817, 1849) | year range B: (1882, 1931)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000590,C017693)</td><td class='low_z'>low_z</td><td>0.000</td></tr>
+<tr><td>mother</td><td>Same(K-003119,K-009953)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000027 ↔ FU-002768</h4>
+<div class='meta'>fails: mother_maiden/different_surname, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (inf)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Joanna (att)</td><td>Joanna (att)</td><td>1.000</td></tr>
+<tr><td>mother maiden</td><td>Rudnicki</td><td>Myśliński</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1817, 1849) | year range B: (1811, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C000590,K-003316)</td><td class='already_hardened'>already_hardened</td><td>0.679</td></tr>
+<tr><td>mother</td><td>Same(K-009852,K-009953)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000050 ↔ FU-000650</h4>
+<div class='meta'>fails: mother_given/shared_letters, mother_maiden/different_surname, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Antonina (att)</td><td>Joanna (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Myśliński</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1817, 1857) | year range B: (1811, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C001375,C007252)</td><td class='already_hardened'>already_hardened</td><td>0.727</td></tr>
+<tr><td>mother</td><td>Same(K-009852,K-009970)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000050 ↔ FU-000678</h4>
+<div class='meta'>fails: mother_given/shared_letters, mother_maiden/different_surname, village/no_overlap, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Antonina (att)</td><td>Joanna (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Myśliński</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Myślina&#x27;]</div>
+<div class='meta'>year range A: (1817, 1857) | year range B: (1811, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C001375,C007472)</td><td class='already_hardened'>already_hardened</td><td>0.699</td></tr>
+<tr><td>mother</td><td>Same(K-009852,K-009970)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+<div class='pair'>
+<h4>FU-000050 ↔ FU-000679</h4>
+<div class='meta'>fails: mother_given/shared_letters, mother_maiden/different_surname, matched_children/count=0</div>
+<table><tr><th></th><th>side A</th><th>side B</th><th>sim</th></tr>
+<tr><td>father given</td><td>Antoni (att)</td><td>Antoni (att)</td><td>1.000</td></tr>
+<tr><td>father surname</td><td>Rudnicki</td><td>Rudnicki</td><td>1.000</td></tr>
+<tr><td>mother given</td><td>Antonina (att)</td><td>Joanna (att)</td><td>0.300</td></tr>
+<tr><td>mother maiden</td><td>Popławski</td><td>Rudnicki</td><td>0.300</td></tr>
+</table>
+<div class='meta'>villages A: [&#x27;Rudniki&#x27;] | villages B: [&#x27;Rudniki&#x27;]</div>
+<div class='meta'>year range A: (1817, 1857) | year range B: (1806, 1849)</div>
+<div class='meta'>matched children: 0 of 0</div>
+<div class='meta'>constituent Same atoms:</div>
+<table><tr><th>role</th><th>atom</th><th>class</th><th>z</th></tr>
+<tr><td>father</td><td>Same(C001375,C007482)</td><td class='already_hardened'>already_hardened</td><td>0.744</td></tr>
+<tr><td>mother</td><td>Same(C007483,K-009970)</td><td class='unregistered'>unregistered</td><td>—</td></tr>
+</table>
+</div>
+</body></html>
