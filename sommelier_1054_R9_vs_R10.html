@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sommelier — Kowel_v3.0.1054_snap_round9 vs Kowel_v3.0.1054_snap_round10</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+  
+  :root {
+    --bg: #1a1a1e;
+    --bg-raised: #212125;
+    --bg-hover: #292930;
+    --bg-active: #31313a;
+    --border: #35353d;
+    --border-light: #484852;
+    --text: #ddd9d3;
+    --text-dim: #908980;
+    --text-bright: #f5f2ed;
+    --accent: #c49a6c;
+    --accent-dim: #8a6d4b;
+    --male: #6a9fcc;
+    --female: #cc7a8a;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    
+    /* Sommelier comparison colours */
+    --agreed: #5a8a5a;
+    --agreed-bg: #1a2a1a;
+    --split: #d4a855;
+    --split-bg: #2d2a1f;
+    --merge: #6a9fcc;
+    --merge-bg: #1f2530;
+    --complex: #b07ab0;
+    --complex-bg: #2a1f2a;
+    --orphan: #cc7a8a;
+    --orphan-bg: #2d1f22;
+    
+    /* Version labels */
+    --ver-a: #c49a6c;
+    --ver-b: #7baacc;
+  }
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: var(--ui);
+    font-size: 13px;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .app {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+  }
+  
+  /* ── Header ── */
+  .header {
+    grid-column: 1 / -1;
+    background: var(--bg-raised);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .header h1 {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+  
+  .header .vs-label {
+    font-size: 12px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .header .ver-name {
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-size: 11px;
+  }
+  
+  .header .ver-a { color: var(--ver-a); border: 1px solid var(--ver-a); }
+  .header .ver-b { color: var(--ver-b); border: 1px solid var(--ver-b); }
+  
+  .summary-chips {
+    margin-left: auto;
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+  }
+  
+  .chip {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-dim);
+  }
+  
+  .chip .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  
+  .chip .count { color: var(--text-bright); font-weight: 600; }
+  .chip.agreed .dot { background: var(--agreed); }
+  .chip.split .dot { background: var(--split); }
+  .chip.merge .dot { background: var(--merge); }
+  .chip.complex .dot { background: var(--complex); }
+  .chip.orphan .dot { background: var(--orphan); }
+  
+  /* ── Sidebar ── */
+  .sidebar {
+    background: var(--bg-raised);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .sidebar-controls {
+    padding: 12px 14px 8px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  
+  .type-tabs {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  
+  .type-tab {
+    font-family: var(--ui);
+    font-size: 11px;
+    padding: 4px 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  
+  .type-tab:hover { border-color: var(--border-light); color: var(--text); }
+  .type-tab.active { color: var(--text-bright); font-weight: 600; }
+  .type-tab.active.t-split { background: var(--split-bg); border-color: var(--split); }
+  .type-tab.active.t-merge { background: var(--merge-bg); border-color: var(--merge); }
+  .type-tab.active.t-complex { background: var(--complex-bg); border-color: var(--complex); }
+  .type-tab.active.t-orphan { background: var(--orphan-bg); border-color: var(--orphan); }
+  .type-tab.active.t-all { background: var(--bg-active); border-color: var(--accent); }
+  
+  .item-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 0;
+  }
+  
+  .item {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.1s;
+    border-left: 3px solid transparent;
+  }
+  
+  .item:hover { background: var(--bg-hover); }
+  .item.active { background: var(--bg-active); }
+  .item.t-split { border-left-color: var(--split); }
+  .item.t-merge { border-left-color: var(--merge); }
+  .item.t-complex { border-left-color: var(--complex); }
+  .item.t-orphan-a, .item.t-orphan-b { border-left-color: var(--orphan); }
+  
+  .item .item-type {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+  
+  .item .item-type.split { color: var(--split); }
+  .item .item-type.merge { color: var(--merge); }
+  .item .item-type.complex { color: var(--complex); }
+  .item .item-type.orphan { color: var(--orphan); }
+  
+  .item .item-name {
+    font-size: 13px;
+    color: var(--text-bright);
+    font-family: var(--serif);
+  }
+  
+  .item .item-detail {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+  
+  /* ── Main content ── */
+  .main {
+    overflow-y: auto;
+    padding: 24px 32px;
+  }
+  
+  .welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    color: var(--text-dim);
+  }
+  
+  .welcome h2 {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  
+  .welcome p { font-size: 13px; max-width: 500px; line-height: 1.7; }
+  
+  /* Comparison detail */
+  .comp-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .comp-type {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  
+  .comp-type.split { color: var(--split); }
+  .comp-type.merge { color: var(--merge); }
+  .comp-type.complex { color: var(--complex); }
+  .comp-type.orphan { color: var(--orphan); }
+  
+  .comp-title {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-bright);
+  }
+  
+  .comp-subtitle {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+  
+  /* Side-by-side version panels */
+  .versus {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  
+  .ver-panel {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+  }
+  
+  .ver-panel .ver-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+  
+  .ver-panel.side-a .ver-label { color: var(--ver-a); }
+  .ver-panel.side-b .ver-label { color: var(--ver-b); }
+  
+  .person-card {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .person-card:last-child { border-bottom: none; }
+  
+  .person-card .pc-name {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-bright);
+  }
+  
+  .person-card .pc-name.male { color: var(--male); }
+  .person-card .pc-name.female { color: var(--female); }
+  
+  .person-card .pc-dates {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+  
+  .person-card .pc-claims {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+  
+  .person-card .pc-claims .matched { color: var(--agreed); }
+  .person-card .pc-claims .unmatched { color: var(--orphan); }
+  
+  /* Source items within person cards */
+  .pc-sources {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .pc-source {
+    padding: 8px 10px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  
+  .pc-source.unmatched-src {
+    border-left: 3px solid var(--orphan);
+    opacity: 0.7;
+  }
+  
+  .pc-source .src-role {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    margin-bottom: 2px;
+  }
+  
+  .pc-source .src-page {
+    font-size: 11px;
+    color: var(--accent-dim);
+    margin-bottom: 4px;
+  }
+  
+  .pc-source .src-text {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  
+  .pc-source .src-note {
+    font-family: var(--serif);
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 3px;
+    font-style: italic;
+  }
+  
+  .pc-source .src-links {
+    margin-top: 4px;
+    font-size: 11px;
+  }
+  
+  .pc-source .src-links a {
+    color: var(--link);
+    text-decoration: none;
+    margin-right: 8px;
+  }
+  
+  .pc-source .src-links a:hover { text-decoration: underline; }
+  
+  /* Claim flow table */
+  .flow-section {
+    margin-bottom: 24px;
+  }
+  
+  .flow-section h3 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .flow-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  
+  .flow-table th {
+    text-align: left;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+  
+  .flow-table td {
+    padding: 5px 10px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  
+  .flow-table tr:hover { background: var(--bg-hover); }
+  
+  .flow-table .col-page { color: var(--text-dim); font-size: 11px; }
+  .flow-table .col-name { font-family: var(--serif); }
+  .flow-table .col-a { color: var(--ver-a); }
+  .flow-table .col-b { color: var(--ver-b); }
+  
+  .flow-table .highlight { background: var(--split-bg); }
+  
+  /* Orphan display */
+  .orphan-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .orphan-entry {
+    padding: 8px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .orphan-entry .oe-name {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--text-bright);
+  }
+  
+  .orphan-entry .oe-detail {
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <h1>Sommelier</h1>
+    <div class="vs-label">
+      <span class="ver-name ver-a">Kowel_v3.0.1054_snap_round9</span>
+      <span>vs</span>
+      <span class="ver-name ver-b">Kowel_v3.0.1054_snap_round10</span>
+    </div>
+    <button class="type-tab" id="langBtn" onclick="toggleLang()" style="margin-left:12px;font-size:11px;">PL</button>
+    <div class="summary-chips" id="summaryChips"></div>
+  </div>
+  
+  <div class="sidebar">
+    <div class="sidebar-controls">
+      <div class="type-tabs" id="typeTabs"></div>
+    </div>
+    <div class="item-list" id="itemList"></div>
+  </div>
+  
+  <div class="main" id="mainContent">
+    <div class="welcome">
+      <h2>Select a disagreement</h2>
+      <p>The sidebar lists clustering differences between the two GEDCOM versions. Splits mean one version merged what the other kept separate. Click any item to see the claim-level detail.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const __DATA = {"disagreements":[{"type":"merge","a":[{"xref":"@I009797@","name":"Marceli Malinowski","givn":"Marceli","surn":"Malinowski","sex":"M","birth":"","death":"","birth_sort":1862.5459615384614,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 263, p. 49, pos. 17"],"sources":[{"page":"Sig. 263, p. 49, pos. 17","text":"Death of Maria Malinowska in Kowel aged 8/12 on 3/7/1862.","note":"[daughter of burgher Marceli and Julia née Pietruszewska]","text_pl":"Zg. Maria Malinowska, Kowel, lat 8/12, 3/7/1862.","note_pl":"[c. miesz. Marcelego i Julii z Pietruszewskich]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Maria&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1862&rok_koniec_szuk=1862","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20263/pages/PL_1_436_263_0027.htm","claimname":"Marceli Malinowska","claimrole":"decedent_father","matched":true,"date_sort":1862.5459615384614}]},{"xref":"@I001912@","name":"Marceli Malinowski","givn":"Marceli","surn":"Malinowski","sex":"M","birth":"","death":"","birth_sort":1862.6973076923077,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 263, p. 30-31, pos. 29"],"sources":[{"page":"Sig. 263, p. 30-31, pos. 29","text":"Birth of Kamila Malinowska in Kowel (parents: Marceli Malinowski and Julia Pietruszewska) on 2/9/1862.","note":"","text_pl":"Ur. Kamila Malinowska, Kowel, (rodzice: Marceli Malinowski i Julia z d. Pietruszewska), 2/9/1862.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Kamila&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1862&rok_koniec_szuk=1862","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20263/pages/PL_1_436_263_0016.htm","claimname":"Marceli Malinowska","claimrole":"father","matched":true,"date_sort":1862.6973076923077}]},{"xref":"@I002022@","name":"Marceli Malinowski","givn":"Marceli","surn":"Malinowski","sex":"M","birth":"","death":"","birth_sort":1866.998076923077,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 268, p. 2-3, pos. 1"],"sources":[{"page":"Sig. 268, p. 2-3, pos. 1","text":"Birth of Karol Malinowski in Kowel (parents: Marceli Malinowski and Julia Pietruszkiewicz) on 30/12/1866.","note":"","text_pl":"Ur. Karol Malinowski, Kowel, (rodzice: Marceli Malinowski i Julia z d. Pietruszkiewicz), 30/12/1866.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Karol&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1866&rok_koniec_szuk=1866","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20268/pages/PL_1_436_268_0002.htm","claimname":"Marceli Malinowski","claimrole":"father","matched":true,"date_sort":1866.998076923077}]},{"xref":"@I010355@","name":"Marceli Malinowski","givn":"Marceli","surn":"Malinowski","sex":"M","birth":"","death":"","birth_sort":1878.4690384615385,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 279, p. 74, pos. 37"],"sources":[{"page":"Sig. 279, p. 74, pos. 37","text":"Death of Antonina Malinowska in Kowel aged 2 on 3/6/1878.","note":"[daughter of burgher Marceli and Julia née Pietruszkiewicz]","text_pl":"Zg. Antonina Malinowska, Kowel, lat 2, 3/6/1878.","note_pl":"[c. miesz. Marcelego i Julii z Pietruszkiewiczów]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Antonina&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1878&rok_koniec_szuk=1878","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20279/pages/PL_1_436_279_0039.htm","claimname":"Marceli Malinowska","claimrole":"decedent_father","matched":true,"date_sort":1878.4690384615385}]},{"xref":"@I002321@","name":"Marcelli Malinowski","givn":"Marcelli","surn":"Malinowski","sex":"M","birth":"","death":"","birth_sort":1879.4865384615387,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 280, p. 40-41, pos. 58"],"sources":[{"page":"Sig. 280, p. 40-41, pos. 58","text":"Birth of Bernard Malinowski in Kowel (parents: Marcelli Malinowski and Julia Pietruszkiewicz) on 10/6/1879.","note":"","text_pl":"Ur. Bernard Malinowski, Kowel, (rodzice: Marcelli Malinowski i Julia z d. Pietruszkiewicz), 10/6/1879.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Bernard&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1879&rok_koniec_szuk=1879","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20280/pages/PL_1_436_280_0021.htm","claimname":"Marcelli Malinowski","claimrole":"father","matched":true,"date_sort":1879.4865384615387}]},{"xref":"@I006018@","name":"Marceli Malinowski","givn":"Marceli","surn":"Malinowski","sex":"M","birth":"","death":"","birth_sort":1882.6878846153845,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 283, p. 53, pos. 25"],"sources":[{"page":"Sig. 283, p. 53, pos. 25","text":"Marriage of Klaudiusz Władysław Bernacki of Kowel aged 27 (son of Stanisław Bernacki and Apolonia Kotulska) and Kamila Malinowska of Kowel aged 20 (daughter of Marceli and Julia Pietruszewska)\non 29/8/1882.","note":"","text_pl":"Ślub Klaudiusz Władysław Bernacki z Kowel lat 27 (s. Stanisław Bernacki i Apolonia z d. Kotulska) i Kamila Malinowska z Kowel lat 20 (c. Marceli i Julia z d. Pietruszewska), 29/8/1882.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Klaudiusz%20W%B3adys%B3aw&nazw_szuk=Bernacki&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1882&rok_koniec_szuk=1882","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20283/pages/PL_1_436_283_0029.htm","claimname":"Marceli Malinowska","claimrole":"bride_father","matched":true,"date_sort":1882.6878846153845}]}],"b":[{"xref":"@I001912@","name":"Marceli Malinowski","givn":"Marceli","surn":"Malinowski","sex":"M","birth":"","death":"","birth_sort":1862.5459615384614,"n_claims":6,"n_matched":6,"n_unmatched":0,"pages":["Sig. 263, p. 30-31, pos. 29","Sig. 263, p. 49, pos. 17","Sig. 268, p. 2-3, pos. 1","Sig. 279, p. 74, pos. 37","Sig. 280, p. 40-41, pos. 58","Sig. 283, p. 53, pos. 25"],"sources":[{"page":"Sig. 263, p. 49, pos. 17","text":"Death of Maria Malinowska in Kowel aged 8/12 on 3/7/1862.","note":"[daughter of burgher Marceli and Julia née Pietruszewska]","text_pl":"Zg. Maria Malinowska, Kowel, lat 8/12, 3/7/1862.","note_pl":"[c. miesz. Marcelego i Julii z Pietruszewskich]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Maria&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1862&rok_koniec_szuk=1862","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20263/pages/PL_1_436_263_0027.htm","claimname":"Marceli Malinowska","claimrole":"decedent_father","matched":true,"date_sort":1862.5459615384614},{"page":"Sig. 263, p. 30-31, pos. 29","text":"Birth of Kamila Malinowska in Kowel (parents: Marceli Malinowski and Julia Pietruszewska) on 2/9/1862.","note":"","text_pl":"Ur. Kamila Malinowska, Kowel, (rodzice: Marceli Malinowski i Julia z d. Pietruszewska), 2/9/1862.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Kamila&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1862&rok_koniec_szuk=1862","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20263/pages/PL_1_436_263_0016.htm","claimname":"Marceli Malinowska","claimrole":"father","matched":true,"date_sort":1862.6973076923077},{"page":"Sig. 268, p. 2-3, pos. 1","text":"Birth of Karol Malinowski in Kowel (parents: Marceli Malinowski and Julia Pietruszkiewicz) on 30/12/1866.","note":"","text_pl":"Ur. Karol Malinowski, Kowel, (rodzice: Marceli Malinowski i Julia z d. Pietruszkiewicz), 30/12/1866.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Karol&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1866&rok_koniec_szuk=1866","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20268/pages/PL_1_436_268_0002.htm","claimname":"Marceli Malinowski","claimrole":"father","matched":true,"date_sort":1866.998076923077},{"page":"Sig. 279, p. 74, pos. 37","text":"Death of Antonina Malinowska in Kowel aged 2 on 3/6/1878.","note":"[daughter of burgher Marceli and Julia née Pietruszkiewicz]","text_pl":"Zg. Antonina Malinowska, Kowel, lat 2, 3/6/1878.","note_pl":"[c. miesz. Marcelego i Julii z Pietruszkiewiczów]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Antonina&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1878&rok_koniec_szuk=1878","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20279/pages/PL_1_436_279_0039.htm","claimname":"Marceli Malinowska","claimrole":"decedent_father","matched":true,"date_sort":1878.4690384615385},{"page":"Sig. 280, p. 40-41, pos. 58","text":"Birth of Bernard Malinowski in Kowel (parents: Marcelli Malinowski and Julia Pietruszkiewicz) on 10/6/1879.","note":"","text_pl":"Ur. Bernard Malinowski, Kowel, (rodzice: Marcelli Malinowski i Julia z d. Pietruszkiewicz), 10/6/1879.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Bernard&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1879&rok_koniec_szuk=1879","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20280/pages/PL_1_436_280_0021.htm","claimname":"Marcelli Malinowski","claimrole":"father","matched":true,"date_sort":1879.4865384615387},{"page":"Sig. 283, p. 53, pos. 25","text":"Marriage of Klaudiusz Władysław Bernacki of Kowel aged 27 (son of Stanisław Bernacki and Apolonia Kotulska) and Kamila Malinowska of Kowel aged 20 (daughter of Marceli and Julia Pietruszewska)\non 29/8/1882.","note":"","text_pl":"Ślub Klaudiusz Władysław Bernacki z Kowel lat 27 (s. Stanisław Bernacki i Apolonia z d. Kotulska) i Kamila Malinowska z Kowel lat 20 (c. Marceli i Julia z d. Pietruszewska), 29/8/1882.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Klaudiusz%20W%B3adys%B3aw&nazw_szuk=Bernacki&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1882&rok_koniec_szuk=1882","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20283/pages/PL_1_436_283_0029.htm","claimname":"Marceli Malinowska","claimrole":"bride_father","matched":true,"date_sort":1882.6878846153845}]}],"claims":[{"page":"Sig. 263, p. 49, pos. 17","a_xref":"@I009797@","b_xref":"@I001912@","claimname":"marceli malinowska","claimrole":"decedent_father","date_sort":1862.5459615384614},{"page":"Sig. 263, p. 30-31, pos. 29","a_xref":"@I001912@","b_xref":"@I001912@","claimname":"marceli malinowska","claimrole":"father","date_sort":1862.6973076923077},{"page":"Sig. 268, p. 2-3, pos. 1","a_xref":"@I002022@","b_xref":"@I001912@","claimname":"marceli malinowski","claimrole":"father","date_sort":1866.998076923077},{"page":"Sig. 279, p. 74, pos. 37","a_xref":"@I010355@","b_xref":"@I001912@","claimname":"marceli malinowska","claimrole":"decedent_father","date_sort":1878.4690384615385},{"page":"Sig. 280, p. 40-41, pos. 58","a_xref":"@I002321@","b_xref":"@I001912@","claimname":"marcelli malinowski","claimrole":"father","date_sort":1879.4865384615387},{"page":"Sig. 283, p. 53, pos. 25","a_xref":"@I006018@","b_xref":"@I001912@","claimname":"marceli malinowska","claimrole":"bride_father","date_sort":1882.6878846153845}],"n_claims":6,"name":"Marceli Malinowski","surn":"Malinowski"},{"type":"merge","a":[{"xref":"@I008669@","name":"Wiktor Jabłoński","givn":"Wiktor","surn":"Jabłoński","sex":"M","birth":"","death":"","birth_sort":1843.8292307692307,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 858, p. 306, pos. 13"],"sources":[{"page":"Sig. 858, p. 306, pos. 13","text":"Death of Szymon Jabłoński in Biełaszów aged 60 on 24/10/1843.","note":"[wife Apolonia a Gągalskich, sons: Wiktor and Maciej, daughters: Elżbieta and Marianna]","text_pl":"Zg. Szymon Jabłoński, Biełaszów, lat 60, 24/10/1843.","note_pl":"[żona Apolonia a Gągalskich, synowie Wiktor i Maciej, córki Elżbieta i Marianna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Szymon&nazw_szuk=Jab%B3o%F1ski&miej_szuk=Bie%B3asz%F3w&para_szuk=Kowel&rok_start_szuk=1843&rok_koniec_szuk=1843","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20858/pages/PL_1_436_858_0162.htm","claimname":"Wiktor Jablonski","claimrole":"decedent_child","matched":true,"date_sort":1843.8292307692307}]},{"xref":"@I001574@","name":"Wiktor Jabłoński","givn":"Wiktor","surn":"Jabłoński","sex":"M","birth":"","death":"","birth_sort":1854.1663461538462,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 256, p. 2-3, pos. 1"],"sources":[{"page":"Sig. 256, p. 2-3, pos. 1","text":"Birth of Jan Jabłoński in Białaszów (parents: Wiktor Jabłoński and Anna Piechurska) on 5/2/1854.","note":"[Godparents: Jakub Sokalski and Franciszka Tomaszewska, attendants: Ignacy Cendrowski and Marianna Sawicka unmarried]","text_pl":"Ur. Jan Jabłoński, Białaszów, (rodzice: Wiktor Jabłoński i Anna z d. Piechurska), 5/2/1854.","note_pl":"[Rodzice chrzestni: Jakub Sokalski i Franciszka Tomaszewska, asyst. Ignacy Cendrowski i Marianna Sawicka panna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Jan&nazw_szuk=Jab%B3o%F1ski&miej_szuk=Bia%B3asz%F3w&para_szuk=Kowel&rok_start_szuk=1854&rok_koniec_szuk=1854","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20256/pages/PL_1_436_256_0002.htm","claimname":"Wiktor Jablonski","claimrole":"father","matched":true,"date_sort":1854.1663461538462}]},{"xref":"@I011352@","name":"Wiktor Jabłoński","givn":"Wiktor","surn":"Jabłoński","sex":"M","birth":"1805","death":"26 Aug 1900","birth_sort":1900.6803846153846,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 947, p. 71, pos. 40"],"sources":[{"page":"Sig. 947, p. 71, pos. 40","text":"Death of Wiktor Jabłoński in Woronna aged 95 on 26/8/1900.","note":"[peasant, 2nd wife Marianna née Czuli; from 1st marriage sons: Wincenty and Józef, daughter Wiktoria; from 2nd marriage daughters: Katarzyna and Daria]","text_pl":"Zg. Wiktor Jabłoński, Woronna, lat 95, 26/8/1900.","note_pl":"[chłop, 2-ga żona Marianna z d. Czuli, z 1-go małż. synowie Wincenty i Józef, córka Wiktoria, z 2-go córki Katarzyna i Daria]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Wiktor&nazw_szuk=Jab%B3o%F1ski&miej_szuk=Woronna&para_szuk=Kowel&rok_start_szuk=1900&rok_koniec_szuk=1900","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20947/pages/PL_1_436_947_0051.htm","claimname":"Wiktor Jablonski","claimrole":"decedent","matched":true,"date_sort":1900.6803846153846}]}],"b":[{"xref":"@I001574@","name":"Wiktor Jabłoński","givn":"Wiktor","surn":"Jabłoński","sex":"M","birth":"1805","death":"26 Aug 1900","birth_sort":1843.8292307692307,"n_claims":3,"n_matched":3,"n_unmatched":0,"pages":["Sig. 256, p. 2-3, pos. 1","Sig. 858, p. 306, pos. 13","Sig. 947, p. 71, pos. 40"],"sources":[{"page":"Sig. 858, p. 306, pos. 13","text":"Death of Szymon Jabłoński in Biełaszów aged 60 on 24/10/1843.","note":"[wife Apolonia a Gągalskich, sons: Wiktor and Maciej, daughters: Elżbieta and Marianna]","text_pl":"Zg. Szymon Jabłoński, Biełaszów, lat 60, 24/10/1843.","note_pl":"[żona Apolonia a Gągalskich, synowie Wiktor i Maciej, córki Elżbieta i Marianna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Szymon&nazw_szuk=Jab%B3o%F1ski&miej_szuk=Bie%B3asz%F3w&para_szuk=Kowel&rok_start_szuk=1843&rok_koniec_szuk=1843","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20858/pages/PL_1_436_858_0162.htm","claimname":"Wiktor Jablonski","claimrole":"decedent_child","matched":true,"date_sort":1843.8292307692307},{"page":"Sig. 256, p. 2-3, pos. 1","text":"Birth of Jan Jabłoński in Białaszów (parents: Wiktor Jabłoński and Anna Piechurska) on 5/2/1854.","note":"[Godparents: Jakub Sokalski and Franciszka Tomaszewska, attendants: Ignacy Cendrowski and Marianna Sawicka unmarried]","text_pl":"Ur. Jan Jabłoński, Białaszów, (rodzice: Wiktor Jabłoński i Anna z d. Piechurska), 5/2/1854.","note_pl":"[Rodzice chrzestni: Jakub Sokalski i Franciszka Tomaszewska, asyst. Ignacy Cendrowski i Marianna Sawicka panna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Jan&nazw_szuk=Jab%B3o%F1ski&miej_szuk=Bia%B3asz%F3w&para_szuk=Kowel&rok_start_szuk=1854&rok_koniec_szuk=1854","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20256/pages/PL_1_436_256_0002.htm","claimname":"Wiktor Jablonski","claimrole":"father","matched":true,"date_sort":1854.1663461538462},{"page":"Sig. 947, p. 71, pos. 40","text":"Death of Wiktor Jabłoński in Woronna aged 95 on 26/8/1900.","note":"[peasant, 2nd wife Marianna née Czuli; from 1st marriage sons: Wincenty and Józef, daughter Wiktoria; from 2nd marriage daughters: Katarzyna and Daria]","text_pl":"Zg. Wiktor Jabłoński, Woronna, lat 95, 26/8/1900.","note_pl":"[chłop, 2-ga żona Marianna z d. Czuli, z 1-go małż. synowie Wincenty i Józef, córka Wiktoria, z 2-go córki Katarzyna i Daria]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Wiktor&nazw_szuk=Jab%B3o%F1ski&miej_szuk=Woronna&para_szuk=Kowel&rok_start_szuk=1900&rok_koniec_szuk=1900","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20947/pages/PL_1_436_947_0051.htm","claimname":"Wiktor Jablonski","claimrole":"decedent","matched":true,"date_sort":1900.6803846153846}]}],"claims":[{"page":"Sig. 858, p. 306, pos. 13","a_xref":"@I008669@","b_xref":"@I001574@","claimname":"wiktor jablonski","claimrole":"decedent_child","date_sort":1843.8292307692307},{"page":"Sig. 256, p. 2-3, pos. 1","a_xref":"@I001574@","b_xref":"@I001574@","claimname":"wiktor jablonski","claimrole":"father","date_sort":1854.1663461538462},{"page":"Sig. 947, p. 71, pos. 40","a_xref":"@I011352@","b_xref":"@I001574@","claimname":"wiktor jablonski","claimrole":"decedent","date_sort":1900.6803846153846}],"n_claims":3,"name":"Wiktor Jabłoński","surn":"Jabłoński"},{"type":"merge","a":[{"xref":"@I009798@","name":"Julia Pietruszewska","givn":"Julia","surn":"Pietruszewska","sex":"F","birth":"","death":"","birth_sort":1862.5459615384614,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 263, p. 49, pos. 17"],"sources":[{"page":"Sig. 263, p. 49, pos. 17","text":"Death of Maria Malinowska in Kowel aged 8/12 on 3/7/1862.","note":"[daughter of burgher Marceli and Julia née Pietruszewska]","text_pl":"Zg. Maria Malinowska, Kowel, lat 8/12, 3/7/1862.","note_pl":"[c. miesz. Marcelego i Julii z Pietruszewskich]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Maria&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1862&rok_koniec_szuk=1862","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20263/pages/PL_1_436_263_0027.htm","claimname":"Julia Pietruszewski","claimrole":"decedent_mother","matched":true,"date_sort":1862.5459615384614}]},{"xref":"@I001913@","name":"Julia Pietruszewska","givn":"Julia","surn":"Pietruszewska","sex":"F","birth":"","death":"","birth_sort":1862.6973076923077,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 263, p. 30-31, pos. 29"],"sources":[{"page":"Sig. 263, p. 30-31, pos. 29","text":"Birth of Kamila Malinowska in Kowel (parents: Marceli Malinowski and Julia Pietruszewska) on 2/9/1862.","note":"","text_pl":"Ur. Kamila Malinowska, Kowel, (rodzice: Marceli Malinowski i Julia z d. Pietruszewska), 2/9/1862.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Kamila&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1862&rok_koniec_szuk=1862","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20263/pages/PL_1_436_263_0016.htm","claimname":"Julia Pietruszewska","claimrole":"mother","matched":true,"date_sort":1862.6973076923077}]},{"xref":"@I006019@","name":"Julia Pietruszewska","givn":"Julia","surn":"Pietruszewska","sex":"F","birth":"","death":"","birth_sort":1882.6878846153845,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 283, p. 53, pos. 25"],"sources":[{"page":"Sig. 283, p. 53, pos. 25","text":"Marriage of Klaudiusz Władysław Bernacki of Kowel aged 27 (son of Stanisław Bernacki and Apolonia Kotulska) and Kamila Malinowska of Kowel aged 20 (daughter of Marceli and Julia Pietruszewska)\non 29/8/1882.","note":"","text_pl":"Ślub Klaudiusz Władysław Bernacki z Kowel lat 27 (s. Stanisław Bernacki i Apolonia z d. Kotulska) i Kamila Malinowska z Kowel lat 20 (c. Marceli i Julia z d. Pietruszewska), 29/8/1882.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Klaudiusz%20W%B3adys%B3aw&nazw_szuk=Bernacki&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1882&rok_koniec_szuk=1882","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20283/pages/PL_1_436_283_0029.htm","claimname":"Julia Pietruszewska","claimrole":"bride_mother","matched":true,"date_sort":1882.6878846153845}]}],"b":[{"xref":"@I001913@","name":"Julia Pietruszewska","givn":"Julia","surn":"Pietruszewska","sex":"F","birth":"","death":"","birth_sort":1862.5459615384614,"n_claims":3,"n_matched":3,"n_unmatched":0,"pages":["Sig. 263, p. 30-31, pos. 29","Sig. 263, p. 49, pos. 17","Sig. 283, p. 53, pos. 25"],"sources":[{"page":"Sig. 263, p. 49, pos. 17","text":"Death of Maria Malinowska in Kowel aged 8/12 on 3/7/1862.","note":"[daughter of burgher Marceli and Julia née Pietruszewska]","text_pl":"Zg. Maria Malinowska, Kowel, lat 8/12, 3/7/1862.","note_pl":"[c. miesz. Marcelego i Julii z Pietruszewskich]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Maria&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1862&rok_koniec_szuk=1862","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20263/pages/PL_1_436_263_0027.htm","claimname":"Julia Pietruszewski","claimrole":"decedent_mother","matched":true,"date_sort":1862.5459615384614},{"page":"Sig. 263, p. 30-31, pos. 29","text":"Birth of Kamila Malinowska in Kowel (parents: Marceli Malinowski and Julia Pietruszewska) on 2/9/1862.","note":"","text_pl":"Ur. Kamila Malinowska, Kowel, (rodzice: Marceli Malinowski i Julia z d. Pietruszewska), 2/9/1862.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Kamila&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1862&rok_koniec_szuk=1862","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20263/pages/PL_1_436_263_0016.htm","claimname":"Julia Pietruszewska","claimrole":"mother","matched":true,"date_sort":1862.6973076923077},{"page":"Sig. 283, p. 53, pos. 25","text":"Marriage of Klaudiusz Władysław Bernacki of Kowel aged 27 (son of Stanisław Bernacki and Apolonia Kotulska) and Kamila Malinowska of Kowel aged 20 (daughter of Marceli and Julia Pietruszewska)\non 29/8/1882.","note":"","text_pl":"Ślub Klaudiusz Władysław Bernacki z Kowel lat 27 (s. Stanisław Bernacki i Apolonia z d. Kotulska) i Kamila Malinowska z Kowel lat 20 (c. Marceli i Julia z d. Pietruszewska), 29/8/1882.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Klaudiusz%20W%B3adys%B3aw&nazw_szuk=Bernacki&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1882&rok_koniec_szuk=1882","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20283/pages/PL_1_436_283_0029.htm","claimname":"Julia Pietruszewska","claimrole":"bride_mother","matched":true,"date_sort":1882.6878846153845}]}],"claims":[{"page":"Sig. 263, p. 49, pos. 17","a_xref":"@I009798@","b_xref":"@I001913@","claimname":"julia pietruszewski","claimrole":"decedent_mother","date_sort":1862.5459615384614},{"page":"Sig. 263, p. 30-31, pos. 29","a_xref":"@I001913@","b_xref":"@I001913@","claimname":"julia pietruszewska","claimrole":"mother","date_sort":1862.6973076923077},{"page":"Sig. 283, p. 53, pos. 25","a_xref":"@I006019@","b_xref":"@I001913@","claimname":"julia pietruszewska","claimrole":"bride_mother","date_sort":1882.6878846153845}],"n_claims":3,"name":"Julia Pietruszewska","surn":"Pietruszewska"},{"type":"merge","a":[{"xref":"@I001911@","name":"Kamila Malinowska","givn":"Kamila","surn":"Malinowska","sex":"F","birth":"2 Sep 1862","death":"","birth_sort":1862.6973076923077,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 263, p. 30-31, pos. 29"],"sources":[{"page":"Sig. 263, p. 30-31, pos. 29","text":"Birth of Kamila Malinowska in Kowel (parents: Marceli Malinowski and Julia Pietruszewska) on 2/9/1862.","note":"","text_pl":"Ur. Kamila Malinowska, Kowel, (rodzice: Marceli Malinowski i Julia z d. Pietruszewska), 2/9/1862.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Kamila&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1862&rok_koniec_szuk=1862","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20263/pages/PL_1_436_263_0016.htm","claimname":"Kamila Malinowska","claimrole":"child","matched":true,"date_sort":1862.6973076923077}]},{"xref":"@I006017@","name":"Kamila Malinowska","givn":"Kamila","surn":"Malinowska","sex":"F","birth":"1862","death":"","birth_sort":1882.6878846153845,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 283, p. 53, pos. 25"],"sources":[{"page":"Sig. 283, p. 53, pos. 25","text":"Marriage of Klaudiusz Władysław Bernacki of Kowel aged 27 (son of Stanisław Bernacki and Apolonia Kotulska) and Kamila Malinowska of Kowel aged 20 (daughter of Marceli and Julia Pietruszewska)\non 29/8/1882.","note":"","text_pl":"Ślub Klaudiusz Władysław Bernacki z Kowel lat 27 (s. Stanisław Bernacki i Apolonia z d. Kotulska) i Kamila Malinowska z Kowel lat 20 (c. Marceli i Julia z d. Pietruszewska), 29/8/1882.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Klaudiusz%20W%B3adys%B3aw&nazw_szuk=Bernacki&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1882&rok_koniec_szuk=1882","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20283/pages/PL_1_436_283_0029.htm","claimname":"Kamila Malinowska","claimrole":"bride","matched":true,"date_sort":1882.6878846153845}]}],"b":[{"xref":"@I001911@","name":"Kamila Malinowska","givn":"Kamila","surn":"Malinowska","sex":"F","birth":"2 Sep 1862","death":"","birth_sort":1862.6973076923077,"n_claims":2,"n_matched":2,"n_unmatched":0,"pages":["Sig. 263, p. 30-31, pos. 29","Sig. 283, p. 53, pos. 25"],"sources":[{"page":"Sig. 263, p. 30-31, pos. 29","text":"Birth of Kamila Malinowska in Kowel (parents: Marceli Malinowski and Julia Pietruszewska) on 2/9/1862.","note":"","text_pl":"Ur. Kamila Malinowska, Kowel, (rodzice: Marceli Malinowski i Julia z d. Pietruszewska), 2/9/1862.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Kamila&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1862&rok_koniec_szuk=1862","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20263/pages/PL_1_436_263_0016.htm","claimname":"Kamila Malinowska","claimrole":"child","matched":true,"date_sort":1862.6973076923077},{"page":"Sig. 283, p. 53, pos. 25","text":"Marriage of Klaudiusz Władysław Bernacki of Kowel aged 27 (son of Stanisław Bernacki and Apolonia Kotulska) and Kamila Malinowska of Kowel aged 20 (daughter of Marceli and Julia Pietruszewska)\non 29/8/1882.","note":"","text_pl":"Ślub Klaudiusz Władysław Bernacki z Kowel lat 27 (s. Stanisław Bernacki i Apolonia z d. Kotulska) i Kamila Malinowska z Kowel lat 20 (c. Marceli i Julia z d. Pietruszewska), 29/8/1882.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Klaudiusz%20W%B3adys%B3aw&nazw_szuk=Bernacki&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1882&rok_koniec_szuk=1882","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20283/pages/PL_1_436_283_0029.htm","claimname":"Kamila Malinowska","claimrole":"bride","matched":true,"date_sort":1882.6878846153845}]}],"claims":[{"page":"Sig. 263, p. 30-31, pos. 29","a_xref":"@I001911@","b_xref":"@I001911@","claimname":"kamila malinowska","claimrole":"child","date_sort":1862.6973076923077},{"page":"Sig. 283, p. 53, pos. 25","a_xref":"@I006017@","b_xref":"@I001911@","claimname":"kamila malinowska","claimrole":"bride","date_sort":1882.6878846153845}],"n_claims":2,"name":"Kamila Malinowska","surn":"Malinowska"}],"summary":{"agreed":12563,"split":0,"merge":4,"complex":0,"a_orphans":0,"b_orphans":0,"total_claims":18870,"a_individuals":13906,"b_individuals":13896,"claim_tags_a":true,"claim_tags_b":true},"a_orphans":[],"b_orphans":[],"name_a":"Kowel_v3.0.1054_snap_round9","name_b":"Kowel_v3.0.1054_snap_round10"};
+const state = {
+  filter: 'all',
+  activeIndex: -1,
+  lang: 'en',
+};
+
+function srcText(src) { return state.lang === 'pl' && src.text_pl ? src.text_pl : src.text || ''; }
+function srcNote(src) { return state.lang === 'pl' && src.note_pl ? src.note_pl : src.note || ''; }
+
+function toggleLang() {
+  state.lang = state.lang === 'en' ? 'pl' : 'en';
+  document.getElementById('langBtn').textContent = state.lang === 'en' ? 'PL' : 'EN';
+  // Re-render current detail view
+  const items = getFilteredItems();
+  if (state.activeIndex >= 0 && state.activeIndex < items.length) {
+    const item = items[state.activeIndex];
+    if (item.kind === 'disagreement') showDisagreement(item.data);
+    else showOrphan(item.data, item.kind);
+  }
+}
+
+function init() {
+  const s = __DATA.summary;
+  
+  // Summary chips
+  const chips = document.getElementById('summaryChips');
+  chips.innerHTML = [
+    { type: 'agreed', label: 'Agreed', count: s.agreed },
+    { type: 'split', label: 'Splits', count: s.split },
+    { type: 'merge', label: 'Merges', count: s.merge },
+    { type: 'complex', label: 'Complex', count: s.complex },
+    { type: 'orphan', label: 'Orphans', count: s.a_orphans + s.b_orphans },
+  ].map(c => `<div class="chip ${c.type}"><span class="dot"></span><span class="count">${c.count.toLocaleString()}</span> ${c.label}</div>`).join('');
+  
+  // Type tabs
+  const tabs = document.getElementById('typeTabs');
+  const disagreeCount = s.split + s.merge + s.complex;
+  const orphanCount = s.a_orphans + s.b_orphans;
+  tabs.innerHTML = [
+    { type: 'all', label: `All (${disagreeCount + orphanCount})`, cls: 't-all' },
+    { type: 'split', label: `Splits (${s.split})`, cls: 't-split' },
+    { type: 'merge', label: `Merges (${s.merge})`, cls: 't-merge' },
+    { type: 'complex', label: `Complex (${s.complex})`, cls: 't-complex' },
+    { type: 'orphan', label: `Orphans (${orphanCount})`, cls: 't-orphan' },
+  ].filter(t => t.type === 'all' || (t.type === 'orphan' ? orphanCount > 0 : s[t.type] > 0))
+   .map(t => `<div class="type-tab ${t.cls}${t.type === 'all' ? ' active' : ''}" data-type="${t.type}">${t.label}</div>`)
+   .join('');
+  
+  tabs.querySelectorAll('.type-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      state.filter = tab.dataset.type;
+      state.activeIndex = -1;
+      renderList();
+    });
+  });
+  
+  renderList();
+}
+
+function getFilteredItems() {
+  const items = [];
+  
+  // Disagreements
+  for (let i = 0; i < __DATA.disagreements.length; i++) {
+    const d = __DATA.disagreements[i];
+    if (state.filter === 'all' || state.filter === d.type) {
+      items.push({ kind: 'disagreement', index: i, data: d });
+    }
+  }
+  
+  // Orphans
+  if (state.filter === 'all' || state.filter === 'orphan') {
+    for (let i = 0; i < __DATA.a_orphans.length; i++) {
+      items.push({ kind: 'orphan-a', index: i, data: __DATA.a_orphans[i] });
+    }
+    for (let i = 0; i < __DATA.b_orphans.length; i++) {
+      items.push({ kind: 'orphan-b', index: i, data: __DATA.b_orphans[i] });
+    }
+  }
+  
+  return items;
+}
+
+function renderList() {
+  const list = document.getElementById('itemList');
+  const items = getFilteredItems();
+  
+  list.innerHTML = items.map((item, idx) => {
+    if (item.kind === 'disagreement') {
+      const d = item.data;
+      const na = d.a.length;
+      const nb = d.b.length;
+      let detail = '';
+      if (d.type === 'split') detail = `1 in A → ${nb} in B · ${d.n_claims} claims`;
+      else if (d.type === 'merge') detail = `${na} in A → 1 in B · ${d.n_claims} claims`;
+      else detail = `${na} in A ↔ ${nb} in B · ${d.n_claims} claims`;
+      
+      return `<div class="item t-${d.type}${state.activeIndex === idx ? ' active' : ''}" onclick="selectItem(${idx})">
+        <div class="item-type ${d.type}">${d.type}</div>
+        <div class="item-name">${esc(d.name)}</div>
+        <div class="item-detail">${detail}</div>
+      </div>`;
+    } else {
+      const o = item.data;
+      const side = item.kind === 'orphan-a' ? 'A' : 'B';
+      const dates = [o.birth ? `b. ${o.birth}` : '', o.death ? `d. ${o.death}` : ''].filter(Boolean).join(' — ');
+      return `<div class="item t-${item.kind}${state.activeIndex === idx ? ' active' : ''}" onclick="selectItem(${idx})">
+        <div class="item-type orphan">only in ${side}</div>
+        <div class="item-name">${esc(o.name)}</div>
+        <div class="item-detail">${dates}${o.n_claims ? ` · ${o.n_claims} claims` : ''}</div>
+      </div>`;
+    }
+  }).join('');
+}
+
+function selectItem(idx) {
+  state.activeIndex = idx;
+  renderList();
+  
+  const items = getFilteredItems();
+  const item = items[idx];
+  if (!item) return;
+  
+  if (item.kind === 'disagreement') {
+    showDisagreement(item.data);
+  } else {
+    showOrphan(item.data, item.kind);
+  }
+}
+
+function showDisagreement(d) {
+  const main = document.getElementById('mainContent');
+  const na = d.a.length;
+  const nb = d.b.length;
+  
+  let typeLabel = d.type;
+  let subtitle = '';
+  if (d.type === 'split') subtitle = `Version A has 1 individual; version B has ${nb}`;
+  else if (d.type === 'merge') subtitle = `Version A has ${na} individuals; version B has 1`;
+  else subtitle = `Version A has ${na} individuals; version B has ${nb}`;
+  
+  let html = `
+    <div class="comp-header">
+      <div class="comp-type ${d.type}">${typeLabel}</div>
+      <div class="comp-title">${esc(d.name)}</div>
+      <div class="comp-subtitle">${subtitle} · ${d.n_claims} shared claims</div>
+    </div>
+    
+    <div class="versus">
+      <div class="ver-panel side-a">
+        <div class="ver-label">${esc(__DATA.name_a)}</div>
+        ${d.a.map(p => personCard(p)).join('')}
+      </div>
+      <div class="ver-panel side-b">
+        <div class="ver-label">${esc(__DATA.name_b)}</div>
+        ${d.b.map(p => personCard(p)).join('')}
+      </div>
+    </div>`;
+  
+  // Claim flow table — simple one-line-per-claim with color-coded individuals
+  if (d.claims.length > 0) {
+    const aNames = {};
+    d.a.forEach(p => aNames[p.xref] = p.name);
+    const bNames = {};
+    d.b.forEach(p => bNames[p.xref] = p.name);
+    
+    const groupColors = ['#d4a855','#6a9fcc','#b07ab0','#5a8a5a','#cc7a8a','#7bc47c','#c4756a','#8ac','#c96','#9b9'];
+    
+    // Assign colors to the "many" side
+    const aColorMap = {};
+    const bColorMap = {};
+    d.a.forEach((p, i) => aColorMap[p.xref] = d.a.length > 1 ? groupColors[i % groupColors.length] : 'var(--ver-a)');
+    d.b.forEach((p, i) => bColorMap[p.xref] = d.b.length > 1 ? groupColors[i % groupColors.length] : 'var(--ver-b)');
+    
+    html += `<div class="flow-section">
+      <h3>Claim Flow</h3>
+      <table class="flow-table">
+        <tr>
+          <th>Source Record</th>
+          <th>Claim</th>
+          <th>Role</th>
+          <th style="color:var(--ver-a)">${esc(__DATA.name_a)}</th>
+          <th style="color:var(--ver-b)">${esc(__DATA.name_b)}</th>
+        </tr>`;
+    
+    for (const c of d.claims) {
+      const aName = aNames[c.a_xref] || c.a_xref;
+      const bName = bNames[c.b_xref] || c.b_xref;
+      const aColor = aColorMap[c.a_xref] || 'var(--ver-a)';
+      const bColor = bColorMap[c.b_xref] || 'var(--ver-b)';
+      html += `<tr>
+        <td class="col-page">${esc(c.page)}</td>
+        <td class="col-name">${esc(c.claimname)}</td>
+        <td style="color:var(--text-dim);font-size:11px;">${esc(c.claimrole || '')}</td>
+        <td style="color:${aColor}">${esc(aName)}</td>
+        <td style="color:${bColor}">${esc(bName)}</td>
+      </tr>`;
+    }
+    
+    html += `</table></div>`;
+  }
+  
+  main.innerHTML = html;
+}
+
+function showOrphan(o, kind) {
+  const main = document.getElementById('mainContent');
+  const side = kind === 'orphan-a' ? 'A' : 'B';
+  const verName = kind === 'orphan-a' ? __DATA.name_a : __DATA.name_b;
+  const dates = [o.birth ? `b. ${o.birth}` : '', o.death ? `d. ${o.death}` : ''].filter(Boolean).join(' — ');
+  
+  let html = `
+    <div class="comp-header">
+      <div class="comp-type orphan">Only in ${side}</div>
+      <div class="comp-title">${esc(o.name)}</div>
+      <div class="comp-subtitle">${dates} · ${o.n_claims} claims · present in ${esc(verName)} only</div>
+    </div>
+    <div class="flow-section">
+      <h3>Source Records</h3>`;
+  
+  if (o.sources && o.sources.length > 0) {
+    html += `<div class="pc-sources">`;
+    for (const src of o.sources) {
+      html += `<div class="pc-source">`;
+      if (src.claimrole) html += `<div class="src-role">${esc(src.claimrole)}</div>`;
+      if (src.page) html += `<div class="src-page">${esc(src.page)}</div>`;
+      const text = srcText(src);
+      if (text) html += `<div class="src-text">${esc(text)}</div>`;
+      const note = srcNote(src);
+      if (note) html += `<div class="src-note">${esc(note)}</div>`;
+      if (src.url || src.scan_url) {
+        html += `<div class="src-links">`;
+        if (src.url) html += `<a href="${esc(src.url)}" target="_blank" rel="noopener">record</a>`;
+        if (src.scan_url) html += `<a href="${esc(src.scan_url)}" target="_blank" rel="noopener">scan</a>`;
+        html += `</div>`;
+      }
+      html += `</div>`;
+    }
+    html += `</div>`;
+  } else {
+    html += `<p style="color:var(--text-dim)">No source records.</p>`;
+  }
+  
+  html += `</div>`;
+  main.innerHTML = html;
+}
+
+function personCard(p) {
+  const sexClass = p.sex === 'M' ? 'male' : p.sex === 'F' ? 'female' : '';
+  const dates = [p.birth ? `b. ${p.birth}` : '', p.death ? `d. ${p.death}` : ''].filter(Boolean).join(' — ');
+  const claimInfo = p.n_unmatched > 0 
+    ? `<span class="matched">${p.n_matched} matched</span>, <span class="unmatched">${p.n_unmatched} unmatched</span>`
+    : `${p.n_claims} claims`;
+  
+  let sourcesHtml = '';
+  if (p.sources && p.sources.length > 0) {
+    sourcesHtml = `<div class="pc-sources">`;
+    for (const src of p.sources) {
+      const unmatchedClass = src.matched ? '' : ' unmatched-src';
+      sourcesHtml += `<div class="pc-source${unmatchedClass}">`;
+      if (src.claimrole) sourcesHtml += `<div class="src-role">${esc(src.claimrole)}</div>`;
+      if (src.page) sourcesHtml += `<div class="src-page">${esc(src.page)}</div>`;
+      const text = srcText(src);
+      if (text) sourcesHtml += `<div class="src-text">${esc(text)}</div>`;
+      const note = srcNote(src);
+      if (note) sourcesHtml += `<div class="src-note">${esc(note)}</div>`;
+      if (src.url || src.scan_url) {
+        sourcesHtml += `<div class="src-links">`;
+        if (src.url) sourcesHtml += `<a href="${esc(src.url)}" target="_blank" rel="noopener">record</a>`;
+        if (src.scan_url) sourcesHtml += `<a href="${esc(src.scan_url)}" target="_blank" rel="noopener">scan</a>`;
+        sourcesHtml += `</div>`;
+      }
+      sourcesHtml += `</div>`;
+    }
+    sourcesHtml += `</div>`;
+  }
+  
+  return `<div class="person-card">
+    <div class="pc-name ${sexClass}">${esc(p.name)} <span style="font-family:var(--ui);font-size:11px;color:var(--text-dim);font-weight:400;">${esc(p.xref)}</span></div>
+    <div class="pc-dates">${esc(dates)}</div>
+    <div class="pc-claims">${claimInfo}</div>
+    ${sourcesHtml}
+  </div>`;
+}
+
+function esc(str) {
+  if (!str) return '';
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+init();
+</script>
+</body>
+</html>
