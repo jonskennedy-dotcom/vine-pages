@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sommelier — Kowel_v3.0.1116_snap_round2 vs Kowel_v3.0.1120_snap_round2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+  
+  :root {
+    --bg: #1a1a1e;
+    --bg-raised: #212125;
+    --bg-hover: #292930;
+    --bg-active: #31313a;
+    --border: #35353d;
+    --border-light: #484852;
+    --text: #ddd9d3;
+    --text-dim: #908980;
+    --text-bright: #f5f2ed;
+    --accent: #c49a6c;
+    --accent-dim: #8a6d4b;
+    --male: #6a9fcc;
+    --female: #cc7a8a;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    
+    /* Sommelier comparison colours */
+    --agreed: #5a8a5a;
+    --agreed-bg: #1a2a1a;
+    --split: #d4a855;
+    --split-bg: #2d2a1f;
+    --merge: #6a9fcc;
+    --merge-bg: #1f2530;
+    --complex: #b07ab0;
+    --complex-bg: #2a1f2a;
+    --orphan: #cc7a8a;
+    --orphan-bg: #2d1f22;
+    
+    /* Version labels */
+    --ver-a: #c49a6c;
+    --ver-b: #7baacc;
+  }
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: var(--ui);
+    font-size: 13px;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .app {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+  }
+  
+  /* ── Header ── */
+  .header {
+    grid-column: 1 / -1;
+    background: var(--bg-raised);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .header h1 {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+  
+  .header .vs-label {
+    font-size: 12px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .header .ver-name {
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-size: 11px;
+  }
+  
+  .header .ver-a { color: var(--ver-a); border: 1px solid var(--ver-a); }
+  .header .ver-b { color: var(--ver-b); border: 1px solid var(--ver-b); }
+  
+  .summary-chips {
+    margin-left: auto;
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+  }
+  
+  .chip {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--text-dim);
+  }
+  
+  .chip .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  
+  .chip .count { color: var(--text-bright); font-weight: 600; }
+  .chip.agreed .dot { background: var(--agreed); }
+  .chip.split .dot { background: var(--split); }
+  .chip.merge .dot { background: var(--merge); }
+  .chip.complex .dot { background: var(--complex); }
+  .chip.orphan .dot { background: var(--orphan); }
+  
+  /* ── Sidebar ── */
+  .sidebar {
+    background: var(--bg-raised);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .sidebar-controls {
+    padding: 12px 14px 8px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  
+  .type-tabs {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  
+  .type-tab {
+    font-family: var(--ui);
+    font-size: 11px;
+    padding: 4px 10px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  
+  .type-tab:hover { border-color: var(--border-light); color: var(--text); }
+  .type-tab.active { color: var(--text-bright); font-weight: 600; }
+  .type-tab.active.t-split { background: var(--split-bg); border-color: var(--split); }
+  .type-tab.active.t-merge { background: var(--merge-bg); border-color: var(--merge); }
+  .type-tab.active.t-complex { background: var(--complex-bg); border-color: var(--complex); }
+  .type-tab.active.t-orphan { background: var(--orphan-bg); border-color: var(--orphan); }
+  .type-tab.active.t-all { background: var(--bg-active); border-color: var(--accent); }
+  
+  .item-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 0;
+  }
+  
+  .item {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.1s;
+    border-left: 3px solid transparent;
+  }
+  
+  .item:hover { background: var(--bg-hover); }
+  .item.active { background: var(--bg-active); }
+  .item.t-split { border-left-color: var(--split); }
+  .item.t-merge { border-left-color: var(--merge); }
+  .item.t-complex { border-left-color: var(--complex); }
+  .item.t-orphan-a, .item.t-orphan-b { border-left-color: var(--orphan); }
+  
+  .item .item-type {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+  
+  .item .item-type.split { color: var(--split); }
+  .item .item-type.merge { color: var(--merge); }
+  .item .item-type.complex { color: var(--complex); }
+  .item .item-type.orphan { color: var(--orphan); }
+  
+  .item .item-name {
+    font-size: 13px;
+    color: var(--text-bright);
+    font-family: var(--serif);
+  }
+  
+  .item .item-detail {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+  
+  /* ── Main content ── */
+  .main {
+    overflow-y: auto;
+    padding: 24px 32px;
+  }
+  
+  .welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    color: var(--text-dim);
+  }
+  
+  .welcome h2 {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  
+  .welcome p { font-size: 13px; max-width: 500px; line-height: 1.7; }
+  
+  /* Comparison detail */
+  .comp-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .comp-type {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  
+  .comp-type.split { color: var(--split); }
+  .comp-type.merge { color: var(--merge); }
+  .comp-type.complex { color: var(--complex); }
+  .comp-type.orphan { color: var(--orphan); }
+  
+  .comp-title {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-bright);
+  }
+  
+  .comp-subtitle {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+  
+  /* Side-by-side version panels */
+  .versus {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  
+  .ver-panel {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+  }
+  
+  .ver-panel .ver-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+  
+  .ver-panel.side-a .ver-label { color: var(--ver-a); }
+  .ver-panel.side-b .ver-label { color: var(--ver-b); }
+  
+  .person-card {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .person-card:last-child { border-bottom: none; }
+  
+  .person-card .pc-name {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-bright);
+  }
+  
+  .person-card .pc-name.male { color: var(--male); }
+  .person-card .pc-name.female { color: var(--female); }
+  
+  .person-card .pc-dates {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+  
+  .person-card .pc-claims {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+  
+  .person-card .pc-claims .matched { color: var(--agreed); }
+  .person-card .pc-claims .unmatched { color: var(--orphan); }
+  
+  /* Source items within person cards */
+  .pc-sources {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .pc-source {
+    padding: 8px 10px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  
+  .pc-source.unmatched-src {
+    border-left: 3px solid var(--orphan);
+    opacity: 0.7;
+  }
+  
+  .pc-source .src-role {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    margin-bottom: 2px;
+  }
+  
+  .pc-source .src-page {
+    font-size: 11px;
+    color: var(--accent-dim);
+    margin-bottom: 4px;
+  }
+  
+  .pc-source .src-text {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  
+  .pc-source .src-note {
+    font-family: var(--serif);
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 3px;
+    font-style: italic;
+  }
+  
+  .pc-source .src-links {
+    margin-top: 4px;
+    font-size: 11px;
+  }
+  
+  .pc-source .src-links a {
+    color: var(--link);
+    text-decoration: none;
+    margin-right: 8px;
+  }
+  
+  .pc-source .src-links a:hover { text-decoration: underline; }
+  
+  /* Claim flow table */
+  .flow-section {
+    margin-bottom: 24px;
+  }
+  
+  .flow-section h3 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-bottom: 10px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .flow-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  
+  .flow-table th {
+    text-align: left;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+  
+  .flow-table td {
+    padding: 5px 10px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  
+  .flow-table tr:hover { background: var(--bg-hover); }
+  
+  .flow-table .col-page { color: var(--text-dim); font-size: 11px; }
+  .flow-table .col-name { font-family: var(--serif); }
+  .flow-table .col-a { color: var(--ver-a); }
+  .flow-table .col-b { color: var(--ver-b); }
+  
+  .flow-table .highlight { background: var(--split-bg); }
+  
+  /* Orphan display */
+  .orphan-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .orphan-entry {
+    padding: 8px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .orphan-entry .oe-name {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--text-bright);
+  }
+  
+  .orphan-entry .oe-detail {
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <h1>Sommelier</h1>
+    <div class="vs-label">
+      <span class="ver-name ver-a">Kowel_v3.0.1116_snap_round2</span>
+      <span>vs</span>
+      <span class="ver-name ver-b">Kowel_v3.0.1120_snap_round2</span>
+    </div>
+    <button class="type-tab" id="langBtn" onclick="toggleLang()" style="margin-left:12px;font-size:11px;">PL</button>
+    <div class="summary-chips" id="summaryChips"></div>
+  </div>
+  
+  <div class="sidebar">
+    <div class="sidebar-controls">
+      <div class="type-tabs" id="typeTabs"></div>
+    </div>
+    <div class="item-list" id="itemList"></div>
+  </div>
+  
+  <div class="main" id="mainContent">
+    <div class="welcome">
+      <h2>Select a disagreement</h2>
+      <p>The sidebar lists clustering differences between the two GEDCOM versions. Splits mean one version merged what the other kept separate. Click any item to see the claim-level detail.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const __DATA = {"disagreements":[{"type":"complex","a":[{"xref":"@I001363@","name":"Dominik Myśliński","givn":"Dominik","surn":"Myśliński","sex":"M","birth":"1817","death":"","birth_sort":1850.5609615384615,"n_claims":3,"n_matched":3,"n_unmatched":0,"pages":["Sig. 0195-1-28, p. 1V-2R, pos. 1","Sig. 253, p. 18-19, pos. 25","Sig. 253, p. 28, pos. 8"],"sources":[{"page":"Sig. 253, p. 28, pos. 8","text":"Marriage of Dominik Myśliński of Myślina aged 33 (son of Franciszek Myśliński and Salomea Myślińska) and Helena Łobaczewska of Myślina aged 24 (daughter of Leon and Agnieszka Myślińska) on\n9/7/1850.","note":"[Witnesses: Karol Bałkowski, Joachim Łobaczewski]","text_pl":"Ślub Dominik Myśliński z Myślina lat 33 (s. Franciszek Myśliński i Salomea z d. Myślińska) i Helena Łobaczewska z Myślina lat 24 (c. Leon i Agnieszka z d. Myślińska), 9/7/1850.","note_pl":"[Świadkowie: Karol Bałkowski, Joachim Łobaczewski]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Dominik&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1850&rok_koniec_szuk=1850","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20253/pages/PL_1_436_253_0015.htm","claimname":"Dominik Myslinski","claimrole":"groom","matched":true,"date_sort":1850.5609615384615},{"page":"Sig. 253, p. 18-19, pos. 25","text":"Birth of Urszula Myślińska in Myślina (parents: Dominik Myśliński and Helena Łobaczewska) on 22/11/1850.","note":"[Godparents: Julian Myśliński and Julia Myślińska married]","text_pl":"Ur. Urszula Myślińska, Myślina, (rodzice: Dominik Myśliński i Helena z d. Łobaczewska), 22/11/1850.","note_pl":"[Rodzice chrzestni: Julian Myśliński i Julia Myślińska zamężna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Urszula&nazw_szuk=My%B6li%F1ska&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1850&rok_koniec_szuk=1850","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20253/pages/PL_1_436_253_0010.htm","claimname":"Dominik Myslinska","claimrole":"father","matched":true,"date_sort":1850.9011538461539},{"page":"Sig. 0195-1-28, p. 1V-2R, pos. 1","text":"Birth of Adam Makary Myśliński in Myślina (parents: Dominik Myśliński and Helena Łobaczewska) on 20/1/1852.","note":"[Godparents: Joachim Łobaczewski and Julia Łączyńska unmarried]","text_pl":"Ur. Adam Makary Myśliński, Myślina, (rodzice: Dominik Myśliński i Helena z d. Łobaczewska), 20/1/1852.","note_pl":"[Rodzice chrzestni: Joachim Łobaczewski i Julia Łączyńska panna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Adam%20Makary&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1852&rok_koniec_szuk=1852","scan_url":"","claimname":"Dominik Myslinski","claimrole":"father","matched":true,"date_sort":1852.126923076923}]},{"xref":"@I009619@","name":"Dominik Myśliński","givn":"Dominik","surn":"Myśliński","sex":"M","birth":"1830","death":"15 Nov 1855","birth_sort":1855.8836538461537,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 257, p. 199, pos. 339"],"sources":[{"page":"Sig. 257, p. 199, pos. 339","text":"Death of Dominik Myśliński in Myślina aged 25 on 15/11/1855.","note":"[Magnificence, wife Helena née Łobaczewska, son Adam, daughter Urszula]","text_pl":"Zg. Dominik Myśliński, Myślina, lat 25, 15/11/1855.","note_pl":"[wlm., żona Helena z Łobaczewskich, syn Adam, córka Urszula]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Dominik&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1855&rok_koniec_szuk=1855","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20257/pages/PL_1_436_257_0105.htm","claimname":"Dominik Myslinski","claimrole":"decedent","matched":true,"date_sort":1855.8836538461537}]}],"b":[{"xref":"@I005558@","name":"Dominik Myśliński","givn":"Dominik","surn":"Myśliński","sex":"M","birth":"1817","death":"","birth_sort":1850.5609615384615,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 253, p. 28, pos. 8"],"sources":[{"page":"Sig. 253, p. 28, pos. 8","text":"Marriage of Dominik Myśliński of Myślina aged 33 (son of Franciszek Myśliński and Salomea Myślińska) and Helena Łobaczewska of Myślina aged 24 (daughter of Leon and Agnieszka Myślińska) on\n9/7/1850.","note":"[Witnesses: Karol Bałkowski, Joachim Łobaczewski]","text_pl":"Ślub Dominik Myśliński z Myślina lat 33 (s. Franciszek Myśliński i Salomea z d. Myślińska) i Helena Łobaczewska z Myślina lat 24 (c. Leon i Agnieszka z d. Myślińska), 9/7/1850.","note_pl":"[Świadkowie: Karol Bałkowski, Joachim Łobaczewski]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Dominik&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1850&rok_koniec_szuk=1850","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20253/pages/PL_1_436_253_0015.htm","claimname":"Dominik Myslinski","claimrole":"groom","matched":true,"date_sort":1850.5609615384615}]},{"xref":"@I001363@","name":"Dominik Myśliński","givn":"Dominik","surn":"Myśliński","sex":"M","birth":"1830","death":"15 Nov 1855","birth_sort":1850.9011538461539,"n_claims":3,"n_matched":3,"n_unmatched":0,"pages":["Sig. 0195-1-28, p. 1V-2R, pos. 1","Sig. 253, p. 18-19, pos. 25","Sig. 257, p. 199, pos. 339"],"sources":[{"page":"Sig. 253, p. 18-19, pos. 25","text":"Birth of Urszula Myślińska in Myślina (parents: Dominik Myśliński and Helena Łobaczewska) on 22/11/1850.","note":"[Godparents: Julian Myśliński and Julia Myślińska married]","text_pl":"Ur. Urszula Myślińska, Myślina, (rodzice: Dominik Myśliński i Helena z d. Łobaczewska), 22/11/1850.","note_pl":"[Rodzice chrzestni: Julian Myśliński i Julia Myślińska zamężna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Urszula&nazw_szuk=My%B6li%F1ska&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1850&rok_koniec_szuk=1850","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20253/pages/PL_1_436_253_0010.htm","claimname":"Dominik Myslinska","claimrole":"father","matched":true,"date_sort":1850.9011538461539},{"page":"Sig. 0195-1-28, p. 1V-2R, pos. 1","text":"Birth of Adam Makary Myśliński in Myślina (parents: Dominik Myśliński and Helena Łobaczewska) on 20/1/1852.","note":"[Godparents: Joachim Łobaczewski and Julia Łączyńska unmarried]","text_pl":"Ur. Adam Makary Myśliński, Myślina, (rodzice: Dominik Myśliński i Helena z d. Łobaczewska), 20/1/1852.","note_pl":"[Rodzice chrzestni: Joachim Łobaczewski i Julia Łączyńska panna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Adam%20Makary&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1852&rok_koniec_szuk=1852","scan_url":"","claimname":"Dominik Myslinski","claimrole":"father","matched":true,"date_sort":1852.126923076923},{"page":"Sig. 257, p. 199, pos. 339","text":"Death of Dominik Myśliński in Myślina aged 25 on 15/11/1855.","note":"[Magnificence, wife Helena née Łobaczewska, son Adam, daughter Urszula]","text_pl":"Zg. Dominik Myśliński, Myślina, lat 25, 15/11/1855.","note_pl":"[wlm., żona Helena z Łobaczewskich, syn Adam, córka Urszula]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Dominik&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1855&rok_koniec_szuk=1855","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20257/pages/PL_1_436_257_0105.htm","claimname":"Dominik Myslinski","claimrole":"decedent","matched":true,"date_sort":1855.8836538461537}]}],"claims":[{"page":"Sig. 253, p. 28, pos. 8","a_xref":"@I001363@","b_xref":"@I005558@","claimname":"dominik myslinski","claimrole":"groom","date_sort":1850.5609615384615},{"page":"Sig. 253, p. 18-19, pos. 25","a_xref":"@I001363@","b_xref":"@I001363@","claimname":"dominik myslinska","claimrole":"father","date_sort":1850.9011538461539},{"page":"Sig. 0195-1-28, p. 1V-2R, pos. 1","a_xref":"@I001363@","b_xref":"@I001363@","claimname":"dominik myslinski","claimrole":"father","date_sort":1852.126923076923},{"page":"Sig. 257, p. 199, pos. 339","a_xref":"@I009619@","b_xref":"@I001363@","claimname":"dominik myslinski","claimrole":"decedent","date_sort":1855.8836538461537}],"n_claims":4,"name":"Dominik Myśliński","surn":"Myśliński"},{"type":"split","a":[{"xref":"@I001046@","name":"Piotr Malinowski","givn":"Piotr","surn":"Malinowski","sex":"M","birth":"1800","death":"22 Jan 1853","birth_sort":1837.2407692307693,"n_claims":11,"n_matched":11,"n_unmatched":0,"pages":["Sig. 1072, p. 110","Sig. 245, p. 13, pos. 2","Sig. 248, p. 3, pos. 6","Sig. 251, p. 7, pos. 14","Sig. 252, p. 38, pos. 1","Sig. 255, p. 25, pos. 2","Sig. 257, p. 183, pos. 308","Sig. 852, p. 327, pos. 7","Sig. 858, p. 287, pos. 3","Sig. 906, p. 53R, pos. 35"],"sources":[{"page":"Sig. 852, p. 327, pos. 7","text":"Death of Mikołaj Malinowski in Kowel aged 75 on 4/3/1837.","note":"[from stomach pain, esteemed, widower, sons: Ignacy and Piotr]","text_pl":"Zg. Mikołaj Malinowski, Kowel, lat 75, 4/3/1837.","note_pl":"[z bólu żołądka, sław., wdowiec, synowie Ignacy i Piotr]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Miko%B3aj&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1837&rok_koniec_szuk=1837","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20852/pages/PL_1_436_852_0172.htm","claimname":"Piotr Malinowski","claimrole":"decedent_child","matched":true,"date_sort":1837.2407692307693},{"page":"Sig. 245, p. 13, pos. 2","text":"Marriage of Piotr Malinowski of Kowel aged 40 (son of Mikołaj Malinowski and Anastazja Tomaszewicz) (widower) and Kazimiera Pniewska of Kowel aged 25 (daughter of Józef and Franciszka\nWolańska) on 10/5/1842.","note":"[Witnesses: Bazyli Iwankiewicz, Bazyli Malinowski, Wojciech Malinowski, Jakub Malinowski]","text_pl":"Ślub Piotr Malinowski z Kowel lat 40 (s. Mikołaj Malinowski i Anastazja z d. Tomaszewicz) (wdowiec) i Kazimiera Pniewska z Kowel lat 25 (c. Józef i Franciszka z d. Wolańska), 10/5/1842.","note_pl":"[Świadkowie: Bazyli Iwankiewicz, Bazyli Malinowski, Wojciech Malinowski, Jakub Malinowski]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Piotr&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1842&rok_koniec_szuk=1842","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20245/pages/PL_1_436_245_0009.htm","claimname":"Piotr Malinowski","claimrole":"groom","matched":true,"date_sort":1842.4096153846156},{"page":"Sig. 858, p. 287, pos. 3","text":"Birth of Roman Malinowski in Kowel (parents: Piotr Malinowski and Kazimiera Pinińska) on 28/2/1843.","note":"[Godparents: Baltazar Malinowski and Karolina Panasiewicz wife of Ignacy]","text_pl":"Ur. Roman Malinowski, Kowel, (rodzice: Piotr Malinowski i Kazimiera z d. Pinińska), 28/2/1843.","note_pl":"[Rodzice chrzestni: Baltazar Malinowski i Karolina Panasiewicz ż. Ignacego]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Roman&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1843&rok_koniec_szuk=1843","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20858/pages/PL_1_436_858_0153.htm","claimname":"Piotr Malinowski","claimrole":"father","matched":true,"date_sort":1843.2238461538461},{"page":"Sig. 248, p. 3, pos. 6","text":"Birth of Katarzyna Malinowska in Kowel (parents: Piotr Malinowski and Kazimiera Pniewska) on 29/4/1845.","note":"[Godparents: Baltazar Malinowski and Karolina Panasewicz wife of Ignacy]","text_pl":"Ur. Katarzyna Malinowska, Kowel, (rodzice: Piotr Malinowski i Kazimiera z d. Pniewska), 29/4/1845.","note_pl":"[Rodzice chrzestni: Baltazar Malinowski i Karolina Panasewicz ż. Ignacego]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Katarzyna&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1845&rok_koniec_szuk=1845","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20248/pages/PL_1_436_248_0002.htm","claimname":"Piotr Malinowska","claimrole":"father","matched":true,"date_sort":1845.3801923076924},{"page":"Sig. 251, p. 7, pos. 14","text":"Birth of Stefan Malinowski in Kowel (parents: Piotr Malinowski and Kazimiera Pniewska) on 2/9/1848.","note":"[Godparents: Baltazar Malinowski and Karolina Panasiewicz wife of Ignacy]","text_pl":"Ur. Stefan Malinowski, Kowel, (rodzice: Piotr Malinowski i Kazimiera z d. Pniewska), 2/9/1848.","note_pl":"[Rodzice chrzestni: Baltazar Malinowski i Karolina Panasiewicz ż. Ignacego]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Stefan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1848&rok_koniec_szuk=1848","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20251/pages/PL_1_436_251_0004.htm","claimname":"Piotr Malinowski","claimrole":"father","matched":true,"date_sort":1848.6973076923077},{"page":"Sig. 252, p. 38, pos. 1","text":"Death of Katarzyna Malinowska in Kowel aged 4 on 18/1/1849.","note":"[daughter of Piotr and Kazimiera née Pniewska]","text_pl":"Zg. Katarzyna Malinowska, Kowel, lat 4, 18/1/1849.","note_pl":"[c. Piotra i Kazimiery z Pniewskich]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Katarzyna&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1849&rok_koniec_szuk=1849","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20252/pages/PL_1_436_252_0022.htm","claimname":"Piotr Malinowska","claimrole":"decedent_father","matched":true,"date_sort":1849.1219230769232},{"page":"Sig. 255, p. 25, pos. 2","text":"Death of Piotr Malinowski in Kowel aged 54 on 22/1/1853.","note":"[wife Kazimiera née Pniewska, sons: Roman and Stefan]","text_pl":"Zg. Piotr Malinowski, Kowel, lat 54, 22/1/1853.","note_pl":"[żona Kazimiera z Pniewskich, synowie Roman i Stefan]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Piotr&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1853&rok_koniec_szuk=1853","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20255/pages/PL_1_436_255_0015.htm","claimname":"Piotr Malinowski","claimrole":"decedent","matched":true,"date_sort":1853.1319230769232},{"page":"Sig. 257, p. 183, pos. 308","text":"Death of Roman Malinowski in Kowel aged 12 on 28/7/1855.","note":"[son of burgher Piotr and Kazimiera]","text_pl":"Zg. Roman Malinowski, Kowel, lat 12, 28/7/1855.","note_pl":"[s. mieszcz. Piotra i Kazimiery]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Roman&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1855&rok_koniec_szuk=1855","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20257/pages/PL_1_436_257_0097.htm","claimname":"Piotr Malinowski","claimrole":"decedent_father","matched":true,"date_sort":1855.6084615384614},{"page":"Sig. 906, p. 53R, pos. 35","text":"Death of Kazimiera Malinowska in Kowel aged 97 on 11/6/1895.","note":"[of old age, née Plewska, burgher, widow, son Stefan]","text_pl":"Zg. Kazimiera Malinowska, Kowel, lat 97, 11/6/1895.","note_pl":"[od starości, z Plewskich, mieszcz., wdowa, syn Stefan]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Kazimiera&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1895&rok_koniec_szuk=1895","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20906/pages/PL_1_436_906_0037.htm","claimname":"Malinowska","claimrole":"decedent_spouse","matched":true,"date_sort":1895.4890384615385},{"page":"Sig. 906, p. 53R, pos. 35","text":"Death of Kazimiera Malinowska in Kowel aged 97 on 11/6/1895.","note":"[of old age, née Plewska, burgher, widow, son Stefan]","text_pl":"Zg. Kazimiera Malinowska, Kowel, lat 97, 11/6/1895.","note_pl":"[od starości, z Plewskich, mieszcz., wdowa, syn Stefan]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Kazimiera&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1895&rok_koniec_szuk=1895","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20906/pages/PL_1_436_906_0037.htm","claimname":"Malinowski","claimrole":"father","matched":true,"date_sort":1895.4890384615385},{"page":"Sig. 1072, p. 110","text":"Death of Stefan Malinowski in Kowel aged 71 on 28/12/1915.","note":"[son of Piotr and Honorata née Turewicz, left behind wife and sons: Mikołaj and Aleksander]","text_pl":"Zg. Stefan Malinowski, Kowel, lat 71, 28/12/1915.","note_pl":"[s. Piotra i Honoraty z Turewiczów, zostawił żonę i synów Mikołaja i Aleksandra]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Stefan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1915&rok_koniec_szuk=1915","scan_url":"http://agadd2.home.net.pl/metrykalia/436/sygn.%201072/pages/1_436_0_0_1072_0058.htm","claimname":"Piotr Malinowski","claimrole":"decedent_father","matched":true,"date_sort":1915.9930769230768}]}],"b":[{"xref":"@I008391@","name":"Piotr Malinowski","givn":"Piotr","surn":"Malinowski","sex":"M","birth":"","death":"","birth_sort":1837.2407692307693,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 852, p. 327, pos. 7"],"sources":[{"page":"Sig. 852, p. 327, pos. 7","text":"Death of Mikołaj Malinowski in Kowel aged 75 on 4/3/1837.","note":"[from stomach pain, esteemed, widower, sons: Ignacy and Piotr]","text_pl":"Zg. Mikołaj Malinowski, Kowel, lat 75, 4/3/1837.","note_pl":"[z bólu żołądka, sław., wdowiec, synowie Ignacy i Piotr]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Miko%B3aj&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1837&rok_koniec_szuk=1837","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20852/pages/PL_1_436_852_0172.htm","claimname":"Piotr Malinowski","claimrole":"decedent_child","matched":true,"date_sort":1837.2407692307693}]},{"xref":"@I001046@","name":"Piotr Malinowski","givn":"Piotr","surn":"Malinowski","sex":"M","birth":"1800","death":"22 Jan 1853","birth_sort":1842.4096153846156,"n_claims":7,"n_matched":7,"n_unmatched":0,"pages":["Sig. 245, p. 13, pos. 2","Sig. 248, p. 3, pos. 6","Sig. 251, p. 7, pos. 14","Sig. 252, p. 38, pos. 1","Sig. 255, p. 25, pos. 2","Sig. 257, p. 183, pos. 308","Sig. 858, p. 287, pos. 3"],"sources":[{"page":"Sig. 245, p. 13, pos. 2","text":"Marriage of Piotr Malinowski of Kowel aged 40 (son of Mikołaj Malinowski and Anastazja Tomaszewicz) (widower) and Kazimiera Pniewska of Kowel aged 25 (daughter of Józef and Franciszka\nWolańska) on 10/5/1842.","note":"[Witnesses: Bazyli Iwankiewicz, Bazyli Malinowski, Wojciech Malinowski, Jakub Malinowski]","text_pl":"Ślub Piotr Malinowski z Kowel lat 40 (s. Mikołaj Malinowski i Anastazja z d. Tomaszewicz) (wdowiec) i Kazimiera Pniewska z Kowel lat 25 (c. Józef i Franciszka z d. Wolańska), 10/5/1842.","note_pl":"[Świadkowie: Bazyli Iwankiewicz, Bazyli Malinowski, Wojciech Malinowski, Jakub Malinowski]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Piotr&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1842&rok_koniec_szuk=1842","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20245/pages/PL_1_436_245_0009.htm","claimname":"Piotr Malinowski","claimrole":"groom","matched":true,"date_sort":1842.4096153846156},{"page":"Sig. 858, p. 287, pos. 3","text":"Birth of Roman Malinowski in Kowel (parents: Piotr Malinowski and Kazimiera Pinińska) on 28/2/1843.","note":"[Godparents: Baltazar Malinowski and Karolina Panasiewicz wife of Ignacy]","text_pl":"Ur. Roman Malinowski, Kowel, (rodzice: Piotr Malinowski i Kazimiera z d. Pinińska), 28/2/1843.","note_pl":"[Rodzice chrzestni: Baltazar Malinowski i Karolina Panasiewicz ż. Ignacego]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Roman&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1843&rok_koniec_szuk=1843","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20858/pages/PL_1_436_858_0153.htm","claimname":"Piotr Malinowski","claimrole":"father","matched":true,"date_sort":1843.2238461538461},{"page":"Sig. 248, p. 3, pos. 6","text":"Birth of Katarzyna Malinowska in Kowel (parents: Piotr Malinowski and Kazimiera Pniewska) on 29/4/1845.","note":"[Godparents: Baltazar Malinowski and Karolina Panasewicz wife of Ignacy]","text_pl":"Ur. Katarzyna Malinowska, Kowel, (rodzice: Piotr Malinowski i Kazimiera z d. Pniewska), 29/4/1845.","note_pl":"[Rodzice chrzestni: Baltazar Malinowski i Karolina Panasewicz ż. Ignacego]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Katarzyna&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1845&rok_koniec_szuk=1845","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20248/pages/PL_1_436_248_0002.htm","claimname":"Piotr Malinowska","claimrole":"father","matched":true,"date_sort":1845.3801923076924},{"page":"Sig. 251, p. 7, pos. 14","text":"Birth of Stefan Malinowski in Kowel (parents: Piotr Malinowski and Kazimiera Pniewska) on 2/9/1848.","note":"[Godparents: Baltazar Malinowski and Karolina Panasiewicz wife of Ignacy]","text_pl":"Ur. Stefan Malinowski, Kowel, (rodzice: Piotr Malinowski i Kazimiera z d. Pniewska), 2/9/1848.","note_pl":"[Rodzice chrzestni: Baltazar Malinowski i Karolina Panasiewicz ż. Ignacego]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Stefan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1848&rok_koniec_szuk=1848","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20251/pages/PL_1_436_251_0004.htm","claimname":"Piotr Malinowski","claimrole":"father","matched":true,"date_sort":1848.6973076923077},{"page":"Sig. 252, p. 38, pos. 1","text":"Death of Katarzyna Malinowska in Kowel aged 4 on 18/1/1849.","note":"[daughter of Piotr and Kazimiera née Pniewska]","text_pl":"Zg. Katarzyna Malinowska, Kowel, lat 4, 18/1/1849.","note_pl":"[c. Piotra i Kazimiery z Pniewskich]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Katarzyna&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1849&rok_koniec_szuk=1849","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20252/pages/PL_1_436_252_0022.htm","claimname":"Piotr Malinowska","claimrole":"decedent_father","matched":true,"date_sort":1849.1219230769232},{"page":"Sig. 255, p. 25, pos. 2","text":"Death of Piotr Malinowski in Kowel aged 54 on 22/1/1853.","note":"[wife Kazimiera née Pniewska, sons: Roman and Stefan]","text_pl":"Zg. Piotr Malinowski, Kowel, lat 54, 22/1/1853.","note_pl":"[żona Kazimiera z Pniewskich, synowie Roman i Stefan]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Piotr&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1853&rok_koniec_szuk=1853","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20255/pages/PL_1_436_255_0015.htm","claimname":"Piotr Malinowski","claimrole":"decedent","matched":true,"date_sort":1853.1319230769232},{"page":"Sig. 257, p. 183, pos. 308","text":"Death of Roman Malinowski in Kowel aged 12 on 28/7/1855.","note":"[son of burgher Piotr and Kazimiera]","text_pl":"Zg. Roman Malinowski, Kowel, lat 12, 28/7/1855.","note_pl":"[s. mieszcz. Piotra i Kazimiery]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Roman&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1855&rok_koniec_szuk=1855","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20257/pages/PL_1_436_257_0097.htm","claimname":"Piotr Malinowski","claimrole":"decedent_father","matched":true,"date_sort":1855.6084615384614}]},{"xref":"@I010656@","name":"NN Malinowski","givn":"NN","surn":"Malinowski","sex":"M","birth":"","death":"","birth_sort":1895.4890384615385,"n_claims":2,"n_matched":2,"n_unmatched":0,"pages":["Sig. 906, p. 53R, pos. 35"],"sources":[{"page":"Sig. 906, p. 53R, pos. 35","text":"Death of Kazimiera Malinowska in Kowel aged 97 on 11/6/1895.","note":"[of old age, née Plewska, burgher, widow, son Stefan]","text_pl":"Zg. Kazimiera Malinowska, Kowel, lat 97, 11/6/1895.","note_pl":"[od starości, z Plewskich, mieszcz., wdowa, syn Stefan]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Kazimiera&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1895&rok_koniec_szuk=1895","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20906/pages/PL_1_436_906_0037.htm","claimname":"Malinowska","claimrole":"decedent_spouse","matched":true,"date_sort":1895.4890384615385},{"page":"Sig. 906, p. 53R, pos. 35","text":"Death of Kazimiera Malinowska in Kowel aged 97 on 11/6/1895.","note":"[of old age, née Plewska, burgher, widow, son Stefan]","text_pl":"Zg. Kazimiera Malinowska, Kowel, lat 97, 11/6/1895.","note_pl":"[od starości, z Plewskich, mieszcz., wdowa, syn Stefan]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Kazimiera&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1895&rok_koniec_szuk=1895","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20906/pages/PL_1_436_906_0037.htm","claimname":"Malinowski","claimrole":"father","matched":true,"date_sort":1895.4890384615385}]},{"xref":"@I011880@","name":"Piotr Malinowski","givn":"Piotr","surn":"Malinowski","sex":"M","birth":"","death":"","birth_sort":1915.9930769230768,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 1072, p. 110"],"sources":[{"page":"Sig. 1072, p. 110","text":"Death of Stefan Malinowski in Kowel aged 71 on 28/12/1915.","note":"[son of Piotr and Honorata née Turewicz, left behind wife and sons: Mikołaj and Aleksander]","text_pl":"Zg. Stefan Malinowski, Kowel, lat 71, 28/12/1915.","note_pl":"[s. Piotra i Honoraty z Turewiczów, zostawił żonę i synów Mikołaja i Aleksandra]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Stefan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1915&rok_koniec_szuk=1915","scan_url":"http://agadd2.home.net.pl/metrykalia/436/sygn.%201072/pages/1_436_0_0_1072_0058.htm","claimname":"Piotr Malinowski","claimrole":"decedent_father","matched":true,"date_sort":1915.9930769230768}]}],"claims":[{"page":"Sig. 852, p. 327, pos. 7","a_xref":"@I001046@","b_xref":"@I008391@","claimname":"piotr malinowski","claimrole":"decedent_child","date_sort":1837.2407692307693},{"page":"Sig. 245, p. 13, pos. 2","a_xref":"@I001046@","b_xref":"@I001046@","claimname":"piotr malinowski","claimrole":"groom","date_sort":1842.4096153846156},{"page":"Sig. 858, p. 287, pos. 3","a_xref":"@I001046@","b_xref":"@I001046@","claimname":"piotr malinowski","claimrole":"father","date_sort":1843.2238461538461},{"page":"Sig. 248, p. 3, pos. 6","a_xref":"@I001046@","b_xref":"@I001046@","claimname":"piotr malinowska","claimrole":"father","date_sort":1845.3801923076924},{"page":"Sig. 251, p. 7, pos. 14","a_xref":"@I001046@","b_xref":"@I001046@","claimname":"piotr malinowski","claimrole":"father","date_sort":1848.6973076923077},{"page":"Sig. 252, p. 38, pos. 1","a_xref":"@I001046@","b_xref":"@I001046@","claimname":"piotr malinowska","claimrole":"decedent_father","date_sort":1849.1219230769232},{"page":"Sig. 255, p. 25, pos. 2","a_xref":"@I001046@","b_xref":"@I001046@","claimname":"piotr malinowski","claimrole":"decedent","date_sort":1853.1319230769232},{"page":"Sig. 257, p. 183, pos. 308","a_xref":"@I001046@","b_xref":"@I001046@","claimname":"piotr malinowski","claimrole":"decedent_father","date_sort":1855.6084615384614},{"page":"Sig. 906, p. 53R, pos. 35","a_xref":"@I001046@","b_xref":"@I010656@","claimname":"malinowska","claimrole":"decedent_spouse","date_sort":1895.4890384615385},{"page":"Sig. 906, p. 53R, pos. 35","a_xref":"@I001046@","b_xref":"@I010656@","claimname":"malinowski","claimrole":"father","date_sort":1895.4890384615385},{"page":"Sig. 1072, p. 110","a_xref":"@I001046@","b_xref":"@I011880@","claimname":"piotr malinowski","claimrole":"decedent_father","date_sort":1915.9930769230768}],"n_claims":11,"name":"Piotr Malinowski","surn":"Malinowski"},{"type":"split","a":[{"xref":"@I001299@","name":"Honorata Turewicz","givn":"Honorata","surn":"Turewicz","sex":"F","birth":"1827","death":"","birth_sort":1847.7992307692307,"n_claims":10,"n_matched":10,"n_unmatched":0,"pages":["Sig. 251, p. 34, pos. 34","Sig. 251, p. 8, pos. 15","Sig. 252, p. 23-25, pos. 28","Sig. 253, p. 47, pos. 42","Sig. 254, p. 14-15, pos. 20","Sig. 256, p. 16-17, pos. 20","Sig. 263, p. 22-23, pos. 21","Sig. 269, p. 32, pos. 8","Sig. 862, p. 328, pos. 6","Sig. 870, p. 15-16, pos. 14"],"sources":[{"page":"Sig. 862, p. 328, pos. 6","text":"Marriage of Gabriel Żuk of parish Kowel aged 22 (son of Stanisław Żuk and Marianna Wyrzykowska) and Honorata Turewicz of parish Kowel aged 20 (daughter of Jakub and Ludwika) on 12/10/1847.","note":"[Witnesses: Franciszek Lisiecki, Józef Lisiecki, Jan Kwiatkowski]","text_pl":"Ślub Gabriel Żuk z par. Kowel lat 22 (s. Stanisław Żuk i Marianna z d. Wyrzykowska) i Honorata Turewicz z par. Kowel lat 20 (c. Jakub i Ludwika), 12/10/1847.","note_pl":"[Świadkowie: Franciszek Lisiecki, Józef Lisiecki, Jan Kwiatkowski]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Gabriel&nazw_szuk=%AFuk&miej_szuk=par.%20Kowel&para_szuk=Kowel&rok_start_szuk=1847&rok_koniec_szuk=1847","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20862/pages/PL_1_436_862_0176.htm","claimname":"Honorata Turewicz","claimrole":"bride","matched":true,"date_sort":1847.7992307692307},{"page":"Sig. 251, p. 8, pos. 15","text":"Birth of Piotr Żuk in Kowel (parents: Gabriel Żuk and Honorata Turewicz) on 9/9/1848.","note":"[Godparents: Maciej Więckowski and Marianna Mrozowicz]","text_pl":"Ur. Piotr Żuk, Kowel, (rodzice: Gabriel Żuk i Honorata z d. Turewicz), 9/9/1848.","note_pl":"[Rodzice chrzestni: Maciej Więckowski i Marianna Mrozowicz]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Piotr&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1848&rok_koniec_szuk=1848","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20251/pages/PL_1_436_251_0005.htm","claimname":"Honorata Turewicz","claimrole":"mother","matched":true,"date_sort":1848.7148076923077},{"page":"Sig. 251, p. 34, pos. 34","text":"Death of Ludwika Turewicz in Kowel aged 47 on 4/10/1848.","note":"[née Diaczyńska, husband Jakub, son Kajetan and daughter Honorata]","text_pl":"Zg. Ludwika Turewicz, Kowel, lat 47, 4/10/1848.","note_pl":"[z d. Diaczyńska, mąż Jakub, syn Kajetan i córka Honorata]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Ludwika&nazw_szuk=Turewicz&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1848&rok_koniec_szuk=1848","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20251/pages/PL_1_436_251_0019.htm","claimname":"Honorata Turewicz","claimrole":"decedent_child","matched":true,"date_sort":1848.7792307692307},{"page":"Sig. 252, p. 23-25, pos. 28","text":"Birth of Karolina Żuk in Kowel (parents: Gabriel Żuk and Honorata Turewicz) on 4/11/1849.","note":"[Godparents: Franciszek Lisiecki and Dominika Bobołowicz widow]","text_pl":"Ur. Karolina Żuk, Kowel, (rodzice: Gabriel Żuk i Honorata z d. Turewicz), 4/11/1849.","note_pl":"[Rodzice chrzestni: Franciszek Lisiecki i Dominika Bobołowicz wdowa]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Karolina&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1849&rok_koniec_szuk=1849","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20252/pages/PL_1_436_252_0013.htm","claimname":"Honorata Turewicz","claimrole":"mother","matched":true,"date_sort":1849.8561538461538},{"page":"Sig. 253, p. 47, pos. 42","text":"Death of Balbina Żuk in Kowel aged 1 on 15/10/1850.","note":"[daughter of Their Magnificences Gabriel and Honorata]","text_pl":"Zg. Balbina Żuk, Kowel, lat 1, 15/10/1850.","note_pl":"[c. Wlm. Gabriela i Honoraty]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Balbina&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1850&rok_koniec_szuk=1850","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20253/pages/PL_1_436_253_0025.htm","claimname":"Honorata","claimrole":"decedent_mother","matched":true,"date_sort":1850.8067307692306},{"page":"Sig. 254, p. 14-15, pos. 20","text":"Birth of Paulina Żuk in Kowel (parents: Gabriel Żuk and Honorata Turewicz) on 11/9/1851.","note":"[Godparents: Salezy Lisiecki and Antonina Myślińska]","text_pl":"Ur. Paulina Żuk, Kowel, (rodzice: Gabriel Żuk i Honorata z d. Turewicz), 11/9/1851.","note_pl":"[Rodzice chrzestni: Salezy Lisiecki i Antonina Myślińska]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Paulina&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1851&rok_koniec_szuk=1851","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20254/pages/PL_1_436_254_0008.htm","claimname":"Honorata Turewicz","claimrole":"mother","matched":true,"date_sort":1851.7198076923075},{"page":"Sig. 256, p. 16-17, pos. 20","text":"Birth of August Żuk in Kowel (parents: Gabriel Żuk and Honorata Turewicz) on 28/8/1854.","note":"[Godparents: Stanisław Lisiecki and Apolonia Rusiłowicz unmarried]","text_pl":"Ur. August Żuk, Kowel, (rodzice: Gabriel Żuk i Honorata z d. Turewicz), 28/8/1854.","note_pl":"[Rodzice chrzestni: Stanisław Lisiecki i Apolonia Rusiłowicz panna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=August&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1854&rok_koniec_szuk=1854","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20256/pages/PL_1_436_256_0009.htm","claimname":"Honorata Turewicz","claimrole":"mother","matched":true,"date_sort":1854.6853846153845},{"page":"Sig. 870, p. 15-16, pos. 14","text":"Birth of Józef Żuk in Kowel (parents: Gabriel Żuk and Honorata Turewicz) on 20/3/1859.","note":"[Godparents: Franciszek Bartoszewski, Julia Ochman wife of Marcin]","text_pl":"Ur. Józef Żuk, Kowel, (rodzice: Gabriel Żuk i Honorata z d. Turewicz), 20/3/1859.","note_pl":"[Rodzice chrzestni: Franciszek Bartoszewski, Julia Ochman ż. Marcina]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=J%F3zef&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1859&rok_koniec_szuk=1859","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20870/pages/PL_1_436_870_0009.htm","claimname":"Honorata Turewicz","claimrole":"mother","matched":true,"date_sort":1859.2807692307692},{"page":"Sig. 263, p. 22-23, pos. 21","text":"Birth of Ludwik Żuk in Kowel (parents: Gabriel Żuk and Honorata Turewicz) on 24/8/1862.","note":"[Godparents: Stefan Łoza, Marianna Leszczuk]","text_pl":"Ur. Ludwik Żuk, Kowel, (rodzice: Gabriel Żuk i Honorata z d. Turewicz), 24/8/1862.","note_pl":"[Rodzice chrzestni: Stefan Łoza, Marianna Leszczuk]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Ludwik&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1862&rok_koniec_szuk=1862","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20263/pages/PL_1_436_263_0012.htm","claimname":"Honorata Turewicz","claimrole":"mother","matched":true,"date_sort":1862.6753846153845},{"page":"Sig. 269, p. 32, pos. 8","text":"Death of Ludwika Żuk in Kowel aged 5 on 1/5/1868.","note":"[daughter of citizens Gabriel and Honorata née Turewicz]","text_pl":"Zg. Ludwika Żuk, Kowel, lat 5, 1/5/1868.","note_pl":"[c. obywateli Gabriela i Honoraty z Turewiczów]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Ludwika&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1868&rok_koniec_szuk=1868","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20269/pages/PL_1_436_269_0018.htm","claimname":"Honorata Turewicz","claimrole":"decedent_mother","matched":true,"date_sort":1868.3871153846155}]}],"b":[{"xref":"@I001299@","name":"Honorata Turewicz","givn":"Honorata","surn":"Turewicz","sex":"F","birth":"1827","death":"","birth_sort":1847.7992307692307,"n_claims":9,"n_matched":9,"n_unmatched":0,"pages":["Sig. 251, p. 8, pos. 15","Sig. 252, p. 23-25, pos. 28","Sig. 253, p. 47, pos. 42","Sig. 254, p. 14-15, pos. 20","Sig. 256, p. 16-17, pos. 20","Sig. 263, p. 22-23, pos. 21","Sig. 269, p. 32, pos. 8","Sig. 862, p. 328, pos. 6","Sig. 870, p. 15-16, pos. 14"],"sources":[{"page":"Sig. 862, p. 328, pos. 6","text":"Marriage of Gabriel Żuk of parish Kowel aged 22 (son of Stanisław Żuk and Marianna Wyrzykowska) and Honorata Turewicz of parish Kowel aged 20 (daughter of Jakub and Ludwika) on 12/10/1847.","note":"[Witnesses: Franciszek Lisiecki, Józef Lisiecki, Jan Kwiatkowski]","text_pl":"Ślub Gabriel Żuk z par. Kowel lat 22 (s. Stanisław Żuk i Marianna z d. Wyrzykowska) i Honorata Turewicz z par. Kowel lat 20 (c. Jakub i Ludwika), 12/10/1847.","note_pl":"[Świadkowie: Franciszek Lisiecki, Józef Lisiecki, Jan Kwiatkowski]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Gabriel&nazw_szuk=%AFuk&miej_szuk=par.%20Kowel&para_szuk=Kowel&rok_start_szuk=1847&rok_koniec_szuk=1847","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20862/pages/PL_1_436_862_0176.htm","claimname":"Honorata Turewicz","claimrole":"bride","matched":true,"date_sort":1847.7992307692307},{"page":"Sig. 251, p. 8, pos. 15","text":"Birth of Piotr Żuk in Kowel (parents: Gabriel Żuk and Honorata Turewicz) on 9/9/1848.","note":"[Godparents: Maciej Więckowski and Marianna Mrozowicz]","text_pl":"Ur. Piotr Żuk, Kowel, (rodzice: Gabriel Żuk i Honorata z d. Turewicz), 9/9/1848.","note_pl":"[Rodzice chrzestni: Maciej Więckowski i Marianna Mrozowicz]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Piotr&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1848&rok_koniec_szuk=1848","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20251/pages/PL_1_436_251_0005.htm","claimname":"Honorata Turewicz","claimrole":"mother","matched":true,"date_sort":1848.7148076923077},{"page":"Sig. 252, p. 23-25, pos. 28","text":"Birth of Karolina Żuk in Kowel (parents: Gabriel Żuk and Honorata Turewicz) on 4/11/1849.","note":"[Godparents: Franciszek Lisiecki and Dominika Bobołowicz widow]","text_pl":"Ur. Karolina Żuk, Kowel, (rodzice: Gabriel Żuk i Honorata z d. Turewicz), 4/11/1849.","note_pl":"[Rodzice chrzestni: Franciszek Lisiecki i Dominika Bobołowicz wdowa]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Karolina&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1849&rok_koniec_szuk=1849","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20252/pages/PL_1_436_252_0013.htm","claimname":"Honorata Turewicz","claimrole":"mother","matched":true,"date_sort":1849.8561538461538},{"page":"Sig. 253, p. 47, pos. 42","text":"Death of Balbina Żuk in Kowel aged 1 on 15/10/1850.","note":"[daughter of Their Magnificences Gabriel and Honorata]","text_pl":"Zg. Balbina Żuk, Kowel, lat 1, 15/10/1850.","note_pl":"[c. Wlm. Gabriela i Honoraty]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Balbina&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1850&rok_koniec_szuk=1850","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20253/pages/PL_1_436_253_0025.htm","claimname":"Honorata","claimrole":"decedent_mother","matched":true,"date_sort":1850.8067307692306},{"page":"Sig. 254, p. 14-15, pos. 20","text":"Birth of Paulina Żuk in Kowel (parents: Gabriel Żuk and Honorata Turewicz) on 11/9/1851.","note":"[Godparents: Salezy Lisiecki and Antonina Myślińska]","text_pl":"Ur. Paulina Żuk, Kowel, (rodzice: Gabriel Żuk i Honorata z d. Turewicz), 11/9/1851.","note_pl":"[Rodzice chrzestni: Salezy Lisiecki i Antonina Myślińska]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Paulina&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1851&rok_koniec_szuk=1851","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20254/pages/PL_1_436_254_0008.htm","claimname":"Honorata Turewicz","claimrole":"mother","matched":true,"date_sort":1851.7198076923075},{"page":"Sig. 256, p. 16-17, pos. 20","text":"Birth of August Żuk in Kowel (parents: Gabriel Żuk and Honorata Turewicz) on 28/8/1854.","note":"[Godparents: Stanisław Lisiecki and Apolonia Rusiłowicz unmarried]","text_pl":"Ur. August Żuk, Kowel, (rodzice: Gabriel Żuk i Honorata z d. Turewicz), 28/8/1854.","note_pl":"[Rodzice chrzestni: Stanisław Lisiecki i Apolonia Rusiłowicz panna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=August&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1854&rok_koniec_szuk=1854","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20256/pages/PL_1_436_256_0009.htm","claimname":"Honorata Turewicz","claimrole":"mother","matched":true,"date_sort":1854.6853846153845},{"page":"Sig. 870, p. 15-16, pos. 14","text":"Birth of Józef Żuk in Kowel (parents: Gabriel Żuk and Honorata Turewicz) on 20/3/1859.","note":"[Godparents: Franciszek Bartoszewski, Julia Ochman wife of Marcin]","text_pl":"Ur. Józef Żuk, Kowel, (rodzice: Gabriel Żuk i Honorata z d. Turewicz), 20/3/1859.","note_pl":"[Rodzice chrzestni: Franciszek Bartoszewski, Julia Ochman ż. Marcina]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=J%F3zef&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1859&rok_koniec_szuk=1859","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20870/pages/PL_1_436_870_0009.htm","claimname":"Honorata Turewicz","claimrole":"mother","matched":true,"date_sort":1859.2807692307692},{"page":"Sig. 263, p. 22-23, pos. 21","text":"Birth of Ludwik Żuk in Kowel (parents: Gabriel Żuk and Honorata Turewicz) on 24/8/1862.","note":"[Godparents: Stefan Łoza, Marianna Leszczuk]","text_pl":"Ur. Ludwik Żuk, Kowel, (rodzice: Gabriel Żuk i Honorata z d. Turewicz), 24/8/1862.","note_pl":"[Rodzice chrzestni: Stefan Łoza, Marianna Leszczuk]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Ludwik&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1862&rok_koniec_szuk=1862","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20263/pages/PL_1_436_263_0012.htm","claimname":"Honorata Turewicz","claimrole":"mother","matched":true,"date_sort":1862.6753846153845},{"page":"Sig. 269, p. 32, pos. 8","text":"Death of Ludwika Żuk in Kowel aged 5 on 1/5/1868.","note":"[daughter of citizens Gabriel and Honorata née Turewicz]","text_pl":"Zg. Ludwika Żuk, Kowel, lat 5, 1/5/1868.","note_pl":"[c. obywateli Gabriela i Honoraty z Turewiczów]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Ludwika&nazw_szuk=%AFuk&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1868&rok_koniec_szuk=1868","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20269/pages/PL_1_436_269_0018.htm","claimname":"Honorata Turewicz","claimrole":"decedent_mother","matched":true,"date_sort":1868.3871153846155}]},{"xref":"@I008850@","name":"Honorata Turewicz","givn":"Honorata","surn":"Turewicz","sex":"F","birth":"","death":"","birth_sort":1848.7792307692307,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 251, p. 34, pos. 34"],"sources":[{"page":"Sig. 251, p. 34, pos. 34","text":"Death of Ludwika Turewicz in Kowel aged 47 on 4/10/1848.","note":"[née Diaczyńska, husband Jakub, son Kajetan and daughter Honorata]","text_pl":"Zg. Ludwika Turewicz, Kowel, lat 47, 4/10/1848.","note_pl":"[z d. Diaczyńska, mąż Jakub, syn Kajetan i córka Honorata]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Ludwika&nazw_szuk=Turewicz&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1848&rok_koniec_szuk=1848","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20251/pages/PL_1_436_251_0019.htm","claimname":"Honorata Turewicz","claimrole":"decedent_child","matched":true,"date_sort":1848.7792307692307}]}],"claims":[{"page":"Sig. 862, p. 328, pos. 6","a_xref":"@I001299@","b_xref":"@I001299@","claimname":"honorata turewicz","claimrole":"bride","date_sort":1847.7992307692307},{"page":"Sig. 251, p. 8, pos. 15","a_xref":"@I001299@","b_xref":"@I001299@","claimname":"honorata turewicz","claimrole":"mother","date_sort":1848.7148076923077},{"page":"Sig. 251, p. 34, pos. 34","a_xref":"@I001299@","b_xref":"@I008850@","claimname":"honorata turewicz","claimrole":"decedent_child","date_sort":1848.7792307692307},{"page":"Sig. 252, p. 23-25, pos. 28","a_xref":"@I001299@","b_xref":"@I001299@","claimname":"honorata turewicz","claimrole":"mother","date_sort":1849.8561538461538},{"page":"Sig. 253, p. 47, pos. 42","a_xref":"@I001299@","b_xref":"@I001299@","claimname":"honorata","claimrole":"decedent_mother","date_sort":1850.8067307692306},{"page":"Sig. 254, p. 14-15, pos. 20","a_xref":"@I001299@","b_xref":"@I001299@","claimname":"honorata turewicz","claimrole":"mother","date_sort":1851.7198076923075},{"page":"Sig. 256, p. 16-17, pos. 20","a_xref":"@I001299@","b_xref":"@I001299@","claimname":"honorata turewicz","claimrole":"mother","date_sort":1854.6853846153845},{"page":"Sig. 870, p. 15-16, pos. 14","a_xref":"@I001299@","b_xref":"@I001299@","claimname":"honorata turewicz","claimrole":"mother","date_sort":1859.2807692307692},{"page":"Sig. 263, p. 22-23, pos. 21","a_xref":"@I001299@","b_xref":"@I001299@","claimname":"honorata turewicz","claimrole":"mother","date_sort":1862.6753846153845},{"page":"Sig. 269, p. 32, pos. 8","a_xref":"@I001299@","b_xref":"@I001299@","claimname":"honorata turewicz","claimrole":"decedent_mother","date_sort":1868.3871153846155}],"n_claims":10,"name":"Honorata Turewicz","surn":"Turewicz"},{"type":"split","a":[{"xref":"@I001047@","name":"Kazimiera Pniewska","givn":"Kazimiera","surn":"Pniewska","sex":"F","birth":"1817","death":"","birth_sort":1842.4096153846156,"n_claims":9,"n_matched":9,"n_unmatched":0,"pages":["Sig. 1072, p. 110","Sig. 245, p. 13, pos. 2","Sig. 248, p. 3, pos. 6","Sig. 251, p. 7, pos. 14","Sig. 252, p. 38, pos. 1","Sig. 255, p. 25, pos. 2","Sig. 257, p. 183, pos. 308","Sig. 858, p. 287, pos. 3"],"sources":[{"page":"Sig. 245, p. 13, pos. 2","text":"Marriage of Piotr Malinowski of Kowel aged 40 (son of Mikołaj Malinowski and Anastazja Tomaszewicz) (widower) and Kazimiera Pniewska of Kowel aged 25 (daughter of Józef and Franciszka\nWolańska) on 10/5/1842.","note":"[Witnesses: Bazyli Iwankiewicz, Bazyli Malinowski, Wojciech Malinowski, Jakub Malinowski]","text_pl":"Ślub Piotr Malinowski z Kowel lat 40 (s. Mikołaj Malinowski i Anastazja z d. Tomaszewicz) (wdowiec) i Kazimiera Pniewska z Kowel lat 25 (c. Józef i Franciszka z d. Wolańska), 10/5/1842.","note_pl":"[Świadkowie: Bazyli Iwankiewicz, Bazyli Malinowski, Wojciech Malinowski, Jakub Malinowski]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Piotr&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1842&rok_koniec_szuk=1842","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20245/pages/PL_1_436_245_0009.htm","claimname":"Kazimiera Pniewska","claimrole":"bride","matched":true,"date_sort":1842.4096153846156},{"page":"Sig. 858, p. 287, pos. 3","text":"Birth of Roman Malinowski in Kowel (parents: Piotr Malinowski and Kazimiera Pinińska) on 28/2/1843.","note":"[Godparents: Baltazar Malinowski and Karolina Panasiewicz wife of Ignacy]","text_pl":"Ur. Roman Malinowski, Kowel, (rodzice: Piotr Malinowski i Kazimiera z d. Pinińska), 28/2/1843.","note_pl":"[Rodzice chrzestni: Baltazar Malinowski i Karolina Panasiewicz ż. Ignacego]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Roman&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1843&rok_koniec_szuk=1843","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20858/pages/PL_1_436_858_0153.htm","claimname":"Kazimiera Pininska","claimrole":"mother","matched":true,"date_sort":1843.2238461538461},{"page":"Sig. 248, p. 3, pos. 6","text":"Birth of Katarzyna Malinowska in Kowel (parents: Piotr Malinowski and Kazimiera Pniewska) on 29/4/1845.","note":"[Godparents: Baltazar Malinowski and Karolina Panasewicz wife of Ignacy]","text_pl":"Ur. Katarzyna Malinowska, Kowel, (rodzice: Piotr Malinowski i Kazimiera z d. Pniewska), 29/4/1845.","note_pl":"[Rodzice chrzestni: Baltazar Malinowski i Karolina Panasewicz ż. Ignacego]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Katarzyna&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1845&rok_koniec_szuk=1845","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20248/pages/PL_1_436_248_0002.htm","claimname":"Kazimiera Pniewska","claimrole":"mother","matched":true,"date_sort":1845.3801923076924},{"page":"Sig. 251, p. 7, pos. 14","text":"Birth of Stefan Malinowski in Kowel (parents: Piotr Malinowski and Kazimiera Pniewska) on 2/9/1848.","note":"[Godparents: Baltazar Malinowski and Karolina Panasiewicz wife of Ignacy]","text_pl":"Ur. Stefan Malinowski, Kowel, (rodzice: Piotr Malinowski i Kazimiera z d. Pniewska), 2/9/1848.","note_pl":"[Rodzice chrzestni: Baltazar Malinowski i Karolina Panasiewicz ż. Ignacego]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Stefan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1848&rok_koniec_szuk=1848","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20251/pages/PL_1_436_251_0004.htm","claimname":"Kazimiera Pniewska","claimrole":"mother","matched":true,"date_sort":1848.6973076923077},{"page":"Sig. 252, p. 38, pos. 1","text":"Death of Katarzyna Malinowska in Kowel aged 4 on 18/1/1849.","note":"[daughter of Piotr and Kazimiera née Pniewska]","text_pl":"Zg. Katarzyna Malinowska, Kowel, lat 4, 18/1/1849.","note_pl":"[c. Piotra i Kazimiery z Pniewskich]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Katarzyna&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1849&rok_koniec_szuk=1849","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20252/pages/PL_1_436_252_0022.htm","claimname":"Kazimiera Pniewski","claimrole":"decedent_mother","matched":true,"date_sort":1849.1219230769232},{"page":"Sig. 255, p. 25, pos. 2","text":"Death of Piotr Malinowski in Kowel aged 54 on 22/1/1853.","note":"[wife Kazimiera née Pniewska, sons: Roman and Stefan]","text_pl":"Zg. Piotr Malinowski, Kowel, lat 54, 22/1/1853.","note_pl":"[żona Kazimiera z Pniewskich, synowie Roman i Stefan]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Piotr&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1853&rok_koniec_szuk=1853","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20255/pages/PL_1_436_255_0015.htm","claimname":"Kazimiera Pniewski","claimrole":"decedent_spouse","matched":true,"date_sort":1853.1319230769232},{"page":"Sig. 255, p. 25, pos. 2","text":"Death of Piotr Malinowski in Kowel aged 54 on 22/1/1853.","note":"[wife Kazimiera née Pniewska, sons: Roman and Stefan]","text_pl":"Zg. Piotr Malinowski, Kowel, lat 54, 22/1/1853.","note_pl":"[żona Kazimiera z Pniewskich, synowie Roman i Stefan]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Piotr&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1853&rok_koniec_szuk=1853","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20255/pages/PL_1_436_255_0015.htm","claimname":"Kazimiera Pniewski","claimrole":"mother","matched":true,"date_sort":1853.1319230769232},{"page":"Sig. 257, p. 183, pos. 308","text":"Death of Roman Malinowski in Kowel aged 12 on 28/7/1855.","note":"[son of burgher Piotr and Kazimiera]","text_pl":"Zg. Roman Malinowski, Kowel, lat 12, 28/7/1855.","note_pl":"[s. mieszcz. Piotra i Kazimiery]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Roman&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1855&rok_koniec_szuk=1855","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20257/pages/PL_1_436_257_0097.htm","claimname":"Kazimiera","claimrole":"decedent_mother","matched":true,"date_sort":1855.6084615384614},{"page":"Sig. 1072, p. 110","text":"Death of Stefan Malinowski in Kowel aged 71 on 28/12/1915.","note":"[son of Piotr and Honorata née Turewicz, left behind wife and sons: Mikołaj and Aleksander]","text_pl":"Zg. Stefan Malinowski, Kowel, lat 71, 28/12/1915.","note_pl":"[s. Piotra i Honoraty z Turewiczów, zostawił żonę i synów Mikołaja i Aleksandra]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Stefan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1915&rok_koniec_szuk=1915","scan_url":"http://agadd2.home.net.pl/metrykalia/436/sygn.%201072/pages/1_436_0_0_1072_0058.htm","claimname":"Honorata Turewicz","claimrole":"decedent_mother","matched":true,"date_sort":1915.9930769230768}]}],"b":[{"xref":"@I001047@","name":"Kazimiera Pniewska","givn":"Kazimiera","surn":"Pniewska","sex":"F","birth":"1817","death":"","birth_sort":1842.4096153846156,"n_claims":8,"n_matched":8,"n_unmatched":0,"pages":["Sig. 245, p. 13, pos. 2","Sig. 248, p. 3, pos. 6","Sig. 251, p. 7, pos. 14","Sig. 252, p. 38, pos. 1","Sig. 255, p. 25, pos. 2","Sig. 257, p. 183, pos. 308","Sig. 858, p. 287, pos. 3"],"sources":[{"page":"Sig. 245, p. 13, pos. 2","text":"Marriage of Piotr Malinowski of Kowel aged 40 (son of Mikołaj Malinowski and Anastazja Tomaszewicz) (widower) and Kazimiera Pniewska of Kowel aged 25 (daughter of Józef and Franciszka\nWolańska) on 10/5/1842.","note":"[Witnesses: Bazyli Iwankiewicz, Bazyli Malinowski, Wojciech Malinowski, Jakub Malinowski]","text_pl":"Ślub Piotr Malinowski z Kowel lat 40 (s. Mikołaj Malinowski i Anastazja z d. Tomaszewicz) (wdowiec) i Kazimiera Pniewska z Kowel lat 25 (c. Józef i Franciszka z d. Wolańska), 10/5/1842.","note_pl":"[Świadkowie: Bazyli Iwankiewicz, Bazyli Malinowski, Wojciech Malinowski, Jakub Malinowski]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Piotr&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1842&rok_koniec_szuk=1842","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20245/pages/PL_1_436_245_0009.htm","claimname":"Kazimiera Pniewska","claimrole":"bride","matched":true,"date_sort":1842.4096153846156},{"page":"Sig. 858, p. 287, pos. 3","text":"Birth of Roman Malinowski in Kowel (parents: Piotr Malinowski and Kazimiera Pinińska) on 28/2/1843.","note":"[Godparents: Baltazar Malinowski and Karolina Panasiewicz wife of Ignacy]","text_pl":"Ur. Roman Malinowski, Kowel, (rodzice: Piotr Malinowski i Kazimiera z d. Pinińska), 28/2/1843.","note_pl":"[Rodzice chrzestni: Baltazar Malinowski i Karolina Panasiewicz ż. Ignacego]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Roman&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1843&rok_koniec_szuk=1843","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20858/pages/PL_1_436_858_0153.htm","claimname":"Kazimiera Pininska","claimrole":"mother","matched":true,"date_sort":1843.2238461538461},{"page":"Sig. 248, p. 3, pos. 6","text":"Birth of Katarzyna Malinowska in Kowel (parents: Piotr Malinowski and Kazimiera Pniewska) on 29/4/1845.","note":"[Godparents: Baltazar Malinowski and Karolina Panasewicz wife of Ignacy]","text_pl":"Ur. Katarzyna Malinowska, Kowel, (rodzice: Piotr Malinowski i Kazimiera z d. Pniewska), 29/4/1845.","note_pl":"[Rodzice chrzestni: Baltazar Malinowski i Karolina Panasewicz ż. Ignacego]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Katarzyna&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1845&rok_koniec_szuk=1845","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20248/pages/PL_1_436_248_0002.htm","claimname":"Kazimiera Pniewska","claimrole":"mother","matched":true,"date_sort":1845.3801923076924},{"page":"Sig. 251, p. 7, pos. 14","text":"Birth of Stefan Malinowski in Kowel (parents: Piotr Malinowski and Kazimiera Pniewska) on 2/9/1848.","note":"[Godparents: Baltazar Malinowski and Karolina Panasiewicz wife of Ignacy]","text_pl":"Ur. Stefan Malinowski, Kowel, (rodzice: Piotr Malinowski i Kazimiera z d. Pniewska), 2/9/1848.","note_pl":"[Rodzice chrzestni: Baltazar Malinowski i Karolina Panasiewicz ż. Ignacego]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Stefan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1848&rok_koniec_szuk=1848","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20251/pages/PL_1_436_251_0004.htm","claimname":"Kazimiera Pniewska","claimrole":"mother","matched":true,"date_sort":1848.6973076923077},{"page":"Sig. 252, p. 38, pos. 1","text":"Death of Katarzyna Malinowska in Kowel aged 4 on 18/1/1849.","note":"[daughter of Piotr and Kazimiera née Pniewska]","text_pl":"Zg. Katarzyna Malinowska, Kowel, lat 4, 18/1/1849.","note_pl":"[c. Piotra i Kazimiery z Pniewskich]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Katarzyna&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1849&rok_koniec_szuk=1849","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20252/pages/PL_1_436_252_0022.htm","claimname":"Kazimiera Pniewski","claimrole":"decedent_mother","matched":true,"date_sort":1849.1219230769232},{"page":"Sig. 255, p. 25, pos. 2","text":"Death of Piotr Malinowski in Kowel aged 54 on 22/1/1853.","note":"[wife Kazimiera née Pniewska, sons: Roman and Stefan]","text_pl":"Zg. Piotr Malinowski, Kowel, lat 54, 22/1/1853.","note_pl":"[żona Kazimiera z Pniewskich, synowie Roman i Stefan]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Piotr&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1853&rok_koniec_szuk=1853","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20255/pages/PL_1_436_255_0015.htm","claimname":"Kazimiera Pniewski","claimrole":"decedent_spouse","matched":true,"date_sort":1853.1319230769232},{"page":"Sig. 255, p. 25, pos. 2","text":"Death of Piotr Malinowski in Kowel aged 54 on 22/1/1853.","note":"[wife Kazimiera née Pniewska, sons: Roman and Stefan]","text_pl":"Zg. Piotr Malinowski, Kowel, lat 54, 22/1/1853.","note_pl":"[żona Kazimiera z Pniewskich, synowie Roman i Stefan]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Piotr&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1853&rok_koniec_szuk=1853","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20255/pages/PL_1_436_255_0015.htm","claimname":"Kazimiera Pniewski","claimrole":"mother","matched":true,"date_sort":1853.1319230769232},{"page":"Sig. 257, p. 183, pos. 308","text":"Death of Roman Malinowski in Kowel aged 12 on 28/7/1855.","note":"[son of burgher Piotr and Kazimiera]","text_pl":"Zg. Roman Malinowski, Kowel, lat 12, 28/7/1855.","note_pl":"[s. mieszcz. Piotra i Kazimiery]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Roman&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1855&rok_koniec_szuk=1855","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20257/pages/PL_1_436_257_0097.htm","claimname":"Kazimiera","claimrole":"decedent_mother","matched":true,"date_sort":1855.6084615384614}]},{"xref":"@I011881@","name":"Honorata Turewicz","givn":"Honorata","surn":"Turewicz","sex":"F","birth":"","death":"","birth_sort":1915.9930769230768,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 1072, p. 110"],"sources":[{"page":"Sig. 1072, p. 110","text":"Death of Stefan Malinowski in Kowel aged 71 on 28/12/1915.","note":"[son of Piotr and Honorata née Turewicz, left behind wife and sons: Mikołaj and Aleksander]","text_pl":"Zg. Stefan Malinowski, Kowel, lat 71, 28/12/1915.","note_pl":"[s. Piotra i Honoraty z Turewiczów, zostawił żonę i synów Mikołaja i Aleksandra]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Stefan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1915&rok_koniec_szuk=1915","scan_url":"http://agadd2.home.net.pl/metrykalia/436/sygn.%201072/pages/1_436_0_0_1072_0058.htm","claimname":"Honorata Turewicz","claimrole":"decedent_mother","matched":true,"date_sort":1915.9930769230768}]}],"claims":[{"page":"Sig. 245, p. 13, pos. 2","a_xref":"@I001047@","b_xref":"@I001047@","claimname":"kazimiera pniewska","claimrole":"bride","date_sort":1842.4096153846156},{"page":"Sig. 858, p. 287, pos. 3","a_xref":"@I001047@","b_xref":"@I001047@","claimname":"kazimiera pininska","claimrole":"mother","date_sort":1843.2238461538461},{"page":"Sig. 248, p. 3, pos. 6","a_xref":"@I001047@","b_xref":"@I001047@","claimname":"kazimiera pniewska","claimrole":"mother","date_sort":1845.3801923076924},{"page":"Sig. 251, p. 7, pos. 14","a_xref":"@I001047@","b_xref":"@I001047@","claimname":"kazimiera pniewska","claimrole":"mother","date_sort":1848.6973076923077},{"page":"Sig. 252, p. 38, pos. 1","a_xref":"@I001047@","b_xref":"@I001047@","claimname":"kazimiera pniewski","claimrole":"decedent_mother","date_sort":1849.1219230769232},{"page":"Sig. 255, p. 25, pos. 2","a_xref":"@I001047@","b_xref":"@I001047@","claimname":"kazimiera pniewski","claimrole":"mother","date_sort":1853.1319230769232},{"page":"Sig. 255, p. 25, pos. 2","a_xref":"@I001047@","b_xref":"@I001047@","claimname":"kazimiera pniewski","claimrole":"decedent_spouse","date_sort":1853.1319230769232},{"page":"Sig. 257, p. 183, pos. 308","a_xref":"@I001047@","b_xref":"@I001047@","claimname":"kazimiera","claimrole":"decedent_mother","date_sort":1855.6084615384614},{"page":"Sig. 1072, p. 110","a_xref":"@I001047@","b_xref":"@I011881@","claimname":"honorata turewicz","claimrole":"decedent_mother","date_sort":1915.9930769230768}],"n_claims":9,"name":"Kazimiera Pniewska","surn":"Pniewska"},{"type":"split","a":[{"xref":"@I001296@","name":"Stefan Malinowski","givn":"Stefan","surn":"Malinowski","sex":"M","birth":"2 Sep 1848","death":"28 Dec 1915","birth_sort":1848.6973076923077,"n_claims":7,"n_matched":7,"n_unmatched":0,"pages":["Sig. 1072, p. 110","Sig. 251, p. 7, pos. 14","Sig. 255, p. 25, pos. 2","Sig. 275, p. 65, pos. 26","Sig. 280, p. 36-37, pos. 54","Sig. 282, p. 6-7, pos. 12","Sig. 963, p. 40R, pos. 3"],"sources":[{"page":"Sig. 251, p. 7, pos. 14","text":"Birth of Stefan Malinowski in Kowel (parents: Piotr Malinowski and Kazimiera Pniewska) on 2/9/1848.","note":"[Godparents: Baltazar Malinowski and Karolina Panasiewicz wife of Ignacy]","text_pl":"Ur. Stefan Malinowski, Kowel, (rodzice: Piotr Malinowski i Kazimiera z d. Pniewska), 2/9/1848.","note_pl":"[Rodzice chrzestni: Baltazar Malinowski i Karolina Panasiewicz ż. Ignacego]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Stefan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1848&rok_koniec_szuk=1848","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20251/pages/PL_1_436_251_0004.htm","claimname":"Stefan Malinowski","claimrole":"child","matched":true,"date_sort":1848.6973076923077},{"page":"Sig. 255, p. 25, pos. 2","text":"Death of Piotr Malinowski in Kowel aged 54 on 22/1/1853.","note":"[wife Kazimiera née Pniewska, sons: Roman and Stefan]","text_pl":"Zg. Piotr Malinowski, Kowel, lat 54, 22/1/1853.","note_pl":"[żona Kazimiera z Pniewskich, synowie Roman i Stefan]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Piotr&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1853&rok_koniec_szuk=1853","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20255/pages/PL_1_436_255_0015.htm","claimname":"Stefan Malinowski","claimrole":"decedent_child","matched":true,"date_sort":1853.1319230769232},{"page":"Sig. 275, p. 65, pos. 26","text":"Death of Barbara Malinowska in Kowel aged 3 on 18/9/1874.","note":"[daughter of burgher Stefan and Paulina née Żuk]","text_pl":"Zg. Barbara Malinowska, Kowel, lat 3, 18/9/1874.","note_pl":"[c. miesz. Stefana i Pauliny z Żuków]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Barbara&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1874&rok_koniec_szuk=1874","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20275/pages/PL_1_436_275_0035.htm","claimname":"Stefan Malinowska","claimrole":"decedent_father","matched":true,"date_sort":1874.7373076923077},{"page":"Sig. 280, p. 36-37, pos. 54","text":"Birth of Aleksander Malinowski in Kowel (parents: Stefan Malinowski and Pauina Żuk) on 16/7/1879.","note":"[Godparents: burgher Józef Żuk, Salomea Karpowicz wife of Andrzej]","text_pl":"Ur. Aleksander Malinowski, Kowel, (rodzice: Stefan Malinowski i Pauina z d. Żuk), 16/7/1879.","note_pl":"[Rodzice chrzestni: miesz. Józef Żuk, Salomea Karpowicz ż. Andrzeja]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Aleksander&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1879&rok_koniec_szuk=1879","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20280/pages/PL_1_436_280_0019.htm","claimname":"Stefan Malinowski","claimrole":"father","matched":true,"date_sort":1879.5784615384614},{"page":"Sig. 282, p. 6-7, pos. 12","text":"Birth of Franciszka Malinowska in Kowel (parents: Stefan Malinowski and Paulina Żuk) on 9/3/1881.","note":"","text_pl":"Ur. Franciszka Malinowska, Kowel, (rodzice: Stefan Malinowski i Paulina z d. Żuk), 9/3/1881.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Franciszka&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1881&rok_koniec_szuk=1881","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20282/pages/PL_1_436_282_0004.htm","claimname":"Stefan Malinowska","claimrole":"father","matched":true,"date_sort":1881.2532692307693},{"page":"Sig. 963, p. 40R, pos. 3","text":"Marriage of Mikołaj Malinowski of Kowel aged 24 (son of Stefan Malinowski and Paulina Żuk) and Stanisława Dunajska of Radomle aged 17 (daughter of Jan and Apolonia Wasilewska) on 3/2/1902.","note":"[Witnesses: Konstanty Dunajewski, Józef Żuk]","text_pl":"Ślub Mikołaj Malinowski z Kowel lat 24 (s. Stefan Malinowski i Paulina z d. Żuk) i Stanisława Dunajska z Radomle lat 17 (c. Jan i Apolonia z d. Wasilewska), 3/2/1902.","note_pl":"[Świadkowie: Konstanty Dunajewski, Józef Żuk]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Miko%B3aj&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1902&rok_koniec_szuk=1902","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20963/pages/PL_1_436_963_0041.htm","claimname":"Stefan Malinowski","claimrole":"groom_father","matched":true,"date_sort":1902.1613461538461},{"page":"Sig. 1072, p. 110","text":"Death of Stefan Malinowski in Kowel aged 71 on 28/12/1915.","note":"[son of Piotr and Honorata née Turewicz, left behind wife and sons: Mikołaj and Aleksander]","text_pl":"Zg. Stefan Malinowski, Kowel, lat 71, 28/12/1915.","note_pl":"[s. Piotra i Honoraty z Turewiczów, zostawił żonę i synów Mikołaja i Aleksandra]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Stefan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1915&rok_koniec_szuk=1915","scan_url":"http://agadd2.home.net.pl/metrykalia/436/sygn.%201072/pages/1_436_0_0_1072_0058.htm","claimname":"Stefan Malinowski","claimrole":"decedent","matched":true,"date_sort":1915.9930769230768}]}],"b":[{"xref":"@I001296@","name":"Stefan Malinowski","givn":"Stefan","surn":"Malinowski","sex":"M","birth":"2 Sep 1848","death":"","birth_sort":1848.6973076923077,"n_claims":2,"n_matched":2,"n_unmatched":0,"pages":["Sig. 251, p. 7, pos. 14","Sig. 255, p. 25, pos. 2"],"sources":[{"page":"Sig. 251, p. 7, pos. 14","text":"Birth of Stefan Malinowski in Kowel (parents: Piotr Malinowski and Kazimiera Pniewska) on 2/9/1848.","note":"[Godparents: Baltazar Malinowski and Karolina Panasiewicz wife of Ignacy]","text_pl":"Ur. Stefan Malinowski, Kowel, (rodzice: Piotr Malinowski i Kazimiera z d. Pniewska), 2/9/1848.","note_pl":"[Rodzice chrzestni: Baltazar Malinowski i Karolina Panasiewicz ż. Ignacego]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Stefan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1848&rok_koniec_szuk=1848","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20251/pages/PL_1_436_251_0004.htm","claimname":"Stefan Malinowski","claimrole":"child","matched":true,"date_sort":1848.6973076923077},{"page":"Sig. 255, p. 25, pos. 2","text":"Death of Piotr Malinowski in Kowel aged 54 on 22/1/1853.","note":"[wife Kazimiera née Pniewska, sons: Roman and Stefan]","text_pl":"Zg. Piotr Malinowski, Kowel, lat 54, 22/1/1853.","note_pl":"[żona Kazimiera z Pniewskich, synowie Roman i Stefan]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Piotr&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1853&rok_koniec_szuk=1853","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20255/pages/PL_1_436_255_0015.htm","claimname":"Stefan Malinowski","claimrole":"decedent_child","matched":true,"date_sort":1853.1319230769232}]},{"xref":"@I002298@","name":"Stefan Malinowski","givn":"Stefan","surn":"Malinowski","sex":"M","birth":"","death":"","birth_sort":1874.7373076923077,"n_claims":4,"n_matched":4,"n_unmatched":0,"pages":["Sig. 275, p. 65, pos. 26","Sig. 280, p. 36-37, pos. 54","Sig. 282, p. 6-7, pos. 12","Sig. 963, p. 40R, pos. 3"],"sources":[{"page":"Sig. 275, p. 65, pos. 26","text":"Death of Barbara Malinowska in Kowel aged 3 on 18/9/1874.","note":"[daughter of burgher Stefan and Paulina née Żuk]","text_pl":"Zg. Barbara Malinowska, Kowel, lat 3, 18/9/1874.","note_pl":"[c. miesz. Stefana i Pauliny z Żuków]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Barbara&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1874&rok_koniec_szuk=1874","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20275/pages/PL_1_436_275_0035.htm","claimname":"Stefan Malinowska","claimrole":"decedent_father","matched":true,"date_sort":1874.7373076923077},{"page":"Sig. 280, p. 36-37, pos. 54","text":"Birth of Aleksander Malinowski in Kowel (parents: Stefan Malinowski and Pauina Żuk) on 16/7/1879.","note":"[Godparents: burgher Józef Żuk, Salomea Karpowicz wife of Andrzej]","text_pl":"Ur. Aleksander Malinowski, Kowel, (rodzice: Stefan Malinowski i Pauina z d. Żuk), 16/7/1879.","note_pl":"[Rodzice chrzestni: miesz. Józef Żuk, Salomea Karpowicz ż. Andrzeja]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Aleksander&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1879&rok_koniec_szuk=1879","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20280/pages/PL_1_436_280_0019.htm","claimname":"Stefan Malinowski","claimrole":"father","matched":true,"date_sort":1879.5784615384614},{"page":"Sig. 282, p. 6-7, pos. 12","text":"Birth of Franciszka Malinowska in Kowel (parents: Stefan Malinowski and Paulina Żuk) on 9/3/1881.","note":"","text_pl":"Ur. Franciszka Malinowska, Kowel, (rodzice: Stefan Malinowski i Paulina z d. Żuk), 9/3/1881.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Franciszka&nazw_szuk=Malinowska&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1881&rok_koniec_szuk=1881","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20282/pages/PL_1_436_282_0004.htm","claimname":"Stefan Malinowska","claimrole":"father","matched":true,"date_sort":1881.2532692307693},{"page":"Sig. 963, p. 40R, pos. 3","text":"Marriage of Mikołaj Malinowski of Kowel aged 24 (son of Stefan Malinowski and Paulina Żuk) and Stanisława Dunajska of Radomle aged 17 (daughter of Jan and Apolonia Wasilewska) on 3/2/1902.","note":"[Witnesses: Konstanty Dunajewski, Józef Żuk]","text_pl":"Ślub Mikołaj Malinowski z Kowel lat 24 (s. Stefan Malinowski i Paulina z d. Żuk) i Stanisława Dunajska z Radomle lat 17 (c. Jan i Apolonia z d. Wasilewska), 3/2/1902.","note_pl":"[Świadkowie: Konstanty Dunajewski, Józef Żuk]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Miko%B3aj&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1902&rok_koniec_szuk=1902","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20963/pages/PL_1_436_963_0041.htm","claimname":"Stefan Malinowski","claimrole":"groom_father","matched":true,"date_sort":1902.1613461538461}]},{"xref":"@I011879@","name":"Stefan Malinowski","givn":"Stefan","surn":"Malinowski","sex":"M","birth":"1844","death":"28 Dec 1915","birth_sort":1915.9930769230768,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 1072, p. 110"],"sources":[{"page":"Sig. 1072, p. 110","text":"Death of Stefan Malinowski in Kowel aged 71 on 28/12/1915.","note":"[son of Piotr and Honorata née Turewicz, left behind wife and sons: Mikołaj and Aleksander]","text_pl":"Zg. Stefan Malinowski, Kowel, lat 71, 28/12/1915.","note_pl":"[s. Piotra i Honoraty z Turewiczów, zostawił żonę i synów Mikołaja i Aleksandra]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Stefan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1915&rok_koniec_szuk=1915","scan_url":"http://agadd2.home.net.pl/metrykalia/436/sygn.%201072/pages/1_436_0_0_1072_0058.htm","claimname":"Stefan Malinowski","claimrole":"decedent","matched":true,"date_sort":1915.9930769230768}]}],"claims":[{"page":"Sig. 251, p. 7, pos. 14","a_xref":"@I001296@","b_xref":"@I001296@","claimname":"stefan malinowski","claimrole":"child","date_sort":1848.6973076923077},{"page":"Sig. 255, p. 25, pos. 2","a_xref":"@I001296@","b_xref":"@I001296@","claimname":"stefan malinowski","claimrole":"decedent_child","date_sort":1853.1319230769232},{"page":"Sig. 275, p. 65, pos. 26","a_xref":"@I001296@","b_xref":"@I002298@","claimname":"stefan malinowska","claimrole":"decedent_father","date_sort":1874.7373076923077},{"page":"Sig. 280, p. 36-37, pos. 54","a_xref":"@I001296@","b_xref":"@I002298@","claimname":"stefan malinowski","claimrole":"father","date_sort":1879.5784615384614},{"page":"Sig. 282, p. 6-7, pos. 12","a_xref":"@I001296@","b_xref":"@I002298@","claimname":"stefan malinowska","claimrole":"father","date_sort":1881.2532692307693},{"page":"Sig. 963, p. 40R, pos. 3","a_xref":"@I001296@","b_xref":"@I002298@","claimname":"stefan malinowski","claimrole":"groom_father","date_sort":1902.1613461538461},{"page":"Sig. 1072, p. 110","a_xref":"@I001296@","b_xref":"@I011879@","claimname":"stefan malinowski","claimrole":"decedent","date_sort":1915.9930769230768}],"n_claims":7,"name":"Stefan Malinowski","surn":"Malinowski"},{"type":"split","a":[{"xref":"@I001656@","name":"Kajetan Malinowski","givn":"Kajetan","surn":"Malinowski","sex":"M","birth":"","death":"","birth_sort":1856.7573076923077,"n_claims":2,"n_matched":2,"n_unmatched":0,"pages":["Sig. 293, p. 52, pos. 15","Sig. 868, p. 15-16, pos. 14"],"sources":[{"page":"Sig. 868, p. 15-16, pos. 14","text":"Birth of Jozefat Malinowski in Kowel (parents: Kajetan Malinowski and Józefa Kulczyńska) on 26/9/1856.","note":"","text_pl":"Ur. Jozefat Malinowski, Kowel, (rodzice: Kajetan Malinowski i Józefa z d. Kulczyńska), 26/9/1856.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Jozefat&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1856&rok_koniec_szuk=1856","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20868/pages/PL_1_436_868_0009.htm","claimname":"Kajetan Malinowski","claimrole":"father","matched":true,"date_sort":1856.7573076923077},{"page":"Sig. 293, p. 52, pos. 15","text":"Marriage of Jan Malinowski of Kowel aged 34 (son of Kajetan Malinowski and Aleksandra Ulanowska) and Ludwika Cywińska of Kowel aged 17 (daughter of Ludwik and Marianna Leonowicz) on 24/5/1892.","note":"","text_pl":"Ślub Jan Malinowski z Kowel lat 34 (s. Kajetan Malinowski i Aleksandra z d. Ulanowska) i Ludwika Cywińska z Kowel lat 17 (c. Ludwik i Marianna z d. Leonowicz), 24/5/1892.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Jan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1892&rok_koniec_szuk=1892","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20293/pages/PL_1_436_293_0028.htm","claimname":"Kajetan Malinowski","claimrole":"groom_father","matched":true,"date_sort":1892.4446153846154}]}],"b":[{"xref":"@I001656@","name":"Kajetan Malinowski","givn":"Kajetan","surn":"Malinowski","sex":"M","birth":"","death":"","birth_sort":1856.7573076923077,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 868, p. 15-16, pos. 14"],"sources":[{"page":"Sig. 868, p. 15-16, pos. 14","text":"Birth of Jozefat Malinowski in Kowel (parents: Kajetan Malinowski and Józefa Kulczyńska) on 26/9/1856.","note":"","text_pl":"Ur. Jozefat Malinowski, Kowel, (rodzice: Kajetan Malinowski i Józefa z d. Kulczyńska), 26/9/1856.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Jozefat&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1856&rok_koniec_szuk=1856","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20868/pages/PL_1_436_868_0009.htm","claimname":"Kajetan Malinowski","claimrole":"father","matched":true,"date_sort":1856.7573076923077}]},{"xref":"@I006502@","name":"Kajetan Malinowski","givn":"Kajetan","surn":"Malinowski","sex":"M","birth":"","death":"","birth_sort":1892.4446153846154,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 293, p. 52, pos. 15"],"sources":[{"page":"Sig. 293, p. 52, pos. 15","text":"Marriage of Jan Malinowski of Kowel aged 34 (son of Kajetan Malinowski and Aleksandra Ulanowska) and Ludwika Cywińska of Kowel aged 17 (daughter of Ludwik and Marianna Leonowicz) on 24/5/1892.","note":"","text_pl":"Ślub Jan Malinowski z Kowel lat 34 (s. Kajetan Malinowski i Aleksandra z d. Ulanowska) i Ludwika Cywińska z Kowel lat 17 (c. Ludwik i Marianna z d. Leonowicz), 24/5/1892.","note_pl":"","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Jan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1892&rok_koniec_szuk=1892","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20293/pages/PL_1_436_293_0028.htm","claimname":"Kajetan Malinowski","claimrole":"groom_father","matched":true,"date_sort":1892.4446153846154}]}],"claims":[{"page":"Sig. 868, p. 15-16, pos. 14","a_xref":"@I001656@","b_xref":"@I001656@","claimname":"kajetan malinowski","claimrole":"father","date_sort":1856.7573076923077},{"page":"Sig. 293, p. 52, pos. 15","a_xref":"@I001656@","b_xref":"@I006502@","claimname":"kajetan malinowski","claimrole":"groom_father","date_sort":1892.4446153846154}],"n_claims":2,"name":"Kajetan Malinowski","surn":"Malinowski"},{"type":"split","a":[{"xref":"@I006712@","name":"Mikolaj Malinowski","givn":"Mikolaj","surn":"Malinowski","sex":"M","birth":"1878","death":"","birth_sort":1902.1613461538461,"n_claims":2,"n_matched":2,"n_unmatched":0,"pages":["Sig. 1072, p. 110","Sig. 963, p. 40R, pos. 3"],"sources":[{"page":"Sig. 963, p. 40R, pos. 3","text":"Marriage of Mikołaj Malinowski of Kowel aged 24 (son of Stefan Malinowski and Paulina Żuk) and Stanisława Dunajska of Radomle aged 17 (daughter of Jan and Apolonia Wasilewska) on 3/2/1902.","note":"[Witnesses: Konstanty Dunajewski, Józef Żuk]","text_pl":"Ślub Mikołaj Malinowski z Kowel lat 24 (s. Stefan Malinowski i Paulina z d. Żuk) i Stanisława Dunajska z Radomle lat 17 (c. Jan i Apolonia z d. Wasilewska), 3/2/1902.","note_pl":"[Świadkowie: Konstanty Dunajewski, Józef Żuk]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Miko%B3aj&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1902&rok_koniec_szuk=1902","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20963/pages/PL_1_436_963_0041.htm","claimname":"Mikolaj Malinowski","claimrole":"groom","matched":true,"date_sort":1902.1613461538461},{"page":"Sig. 1072, p. 110","text":"Death of Stefan Malinowski in Kowel aged 71 on 28/12/1915.","note":"[son of Piotr and Honorata née Turewicz, left behind wife and sons: Mikołaj and Aleksander]","text_pl":"Zg. Stefan Malinowski, Kowel, lat 71, 28/12/1915.","note_pl":"[s. Piotra i Honoraty z Turewiczów, zostawił żonę i synów Mikołaja i Aleksandra]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Stefan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1915&rok_koniec_szuk=1915","scan_url":"http://agadd2.home.net.pl/metrykalia/436/sygn.%201072/pages/1_436_0_0_1072_0058.htm","claimname":"Mikolaj Malinowski","claimrole":"decedent_child","matched":true,"date_sort":1915.9930769230768}]}],"b":[{"xref":"@I006715@","name":"Mikolaj Malinowski","givn":"Mikolaj","surn":"Malinowski","sex":"M","birth":"1878","death":"","birth_sort":1902.1613461538461,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 963, p. 40R, pos. 3"],"sources":[{"page":"Sig. 963, p. 40R, pos. 3","text":"Marriage of Mikołaj Malinowski of Kowel aged 24 (son of Stefan Malinowski and Paulina Żuk) and Stanisława Dunajska of Radomle aged 17 (daughter of Jan and Apolonia Wasilewska) on 3/2/1902.","note":"[Witnesses: Konstanty Dunajewski, Józef Żuk]","text_pl":"Ślub Mikołaj Malinowski z Kowel lat 24 (s. Stefan Malinowski i Paulina z d. Żuk) i Stanisława Dunajska z Radomle lat 17 (c. Jan i Apolonia z d. Wasilewska), 3/2/1902.","note_pl":"[Świadkowie: Konstanty Dunajewski, Józef Żuk]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Miko%B3aj&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1902&rok_koniec_szuk=1902","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20963/pages/PL_1_436_963_0041.htm","claimname":"Mikolaj Malinowski","claimrole":"groom","matched":true,"date_sort":1902.1613461538461}]},{"xref":"@I011882@","name":"Mikolaj Malinowski","givn":"Mikolaj","surn":"Malinowski","sex":"M","birth":"","death":"","birth_sort":1915.9930769230768,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 1072, p. 110"],"sources":[{"page":"Sig. 1072, p. 110","text":"Death of Stefan Malinowski in Kowel aged 71 on 28/12/1915.","note":"[son of Piotr and Honorata née Turewicz, left behind wife and sons: Mikołaj and Aleksander]","text_pl":"Zg. Stefan Malinowski, Kowel, lat 71, 28/12/1915.","note_pl":"[s. Piotra i Honoraty z Turewiczów, zostawił żonę i synów Mikołaja i Aleksandra]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Stefan&nazw_szuk=Malinowski&miej_szuk=Kowel&para_szuk=Kowel&rok_start_szuk=1915&rok_koniec_szuk=1915","scan_url":"http://agadd2.home.net.pl/metrykalia/436/sygn.%201072/pages/1_436_0_0_1072_0058.htm","claimname":"Mikolaj Malinowski","claimrole":"decedent_child","matched":true,"date_sort":1915.9930769230768}]}],"claims":[{"page":"Sig. 963, p. 40R, pos. 3","a_xref":"@I006712@","b_xref":"@I006715@","claimname":"mikolaj malinowski","claimrole":"groom","date_sort":1902.1613461538461},{"page":"Sig. 1072, p. 110","a_xref":"@I006712@","b_xref":"@I011882@","claimname":"mikolaj malinowski","claimrole":"decedent_child","date_sort":1915.9930769230768}],"n_claims":2,"name":"Mikolaj Malinowski","surn":"Malinowski"},{"type":"merge","a":[{"xref":"@I001364@","name":"Helena Łobaczewska","givn":"Helena","surn":"Łobaczewska","sex":"F","birth":"1826","death":"","birth_sort":1850.5609615384615,"n_claims":3,"n_matched":3,"n_unmatched":0,"pages":["Sig. 0195-1-28, p. 1V-2R, pos. 1","Sig. 253, p. 18-19, pos. 25","Sig. 253, p. 28, pos. 8"],"sources":[{"page":"Sig. 253, p. 28, pos. 8","text":"Marriage of Dominik Myśliński of Myślina aged 33 (son of Franciszek Myśliński and Salomea Myślińska) and Helena Łobaczewska of Myślina aged 24 (daughter of Leon and Agnieszka Myślińska) on\n9/7/1850.","note":"[Witnesses: Karol Bałkowski, Joachim Łobaczewski]","text_pl":"Ślub Dominik Myśliński z Myślina lat 33 (s. Franciszek Myśliński i Salomea z d. Myślińska) i Helena Łobaczewska z Myślina lat 24 (c. Leon i Agnieszka z d. Myślińska), 9/7/1850.","note_pl":"[Świadkowie: Karol Bałkowski, Joachim Łobaczewski]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Dominik&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1850&rok_koniec_szuk=1850","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20253/pages/PL_1_436_253_0015.htm","claimname":"Helena Lobaczewska","claimrole":"bride","matched":true,"date_sort":1850.5609615384615},{"page":"Sig. 253, p. 18-19, pos. 25","text":"Birth of Urszula Myślińska in Myślina (parents: Dominik Myśliński and Helena Łobaczewska) on 22/11/1850.","note":"[Godparents: Julian Myśliński and Julia Myślińska married]","text_pl":"Ur. Urszula Myślińska, Myślina, (rodzice: Dominik Myśliński i Helena z d. Łobaczewska), 22/11/1850.","note_pl":"[Rodzice chrzestni: Julian Myśliński i Julia Myślińska zamężna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Urszula&nazw_szuk=My%B6li%F1ska&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1850&rok_koniec_szuk=1850","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20253/pages/PL_1_436_253_0010.htm","claimname":"Helena Lobaczewska","claimrole":"mother","matched":true,"date_sort":1850.9011538461539},{"page":"Sig. 0195-1-28, p. 1V-2R, pos. 1","text":"Birth of Adam Makary Myśliński in Myślina (parents: Dominik Myśliński and Helena Łobaczewska) on 20/1/1852.","note":"[Godparents: Joachim Łobaczewski and Julia Łączyńska unmarried]","text_pl":"Ur. Adam Makary Myśliński, Myślina, (rodzice: Dominik Myśliński i Helena z d. Łobaczewska), 20/1/1852.","note_pl":"[Rodzice chrzestni: Joachim Łobaczewski i Julia Łączyńska panna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Adam%20Makary&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1852&rok_koniec_szuk=1852","scan_url":"","claimname":"Helena Lobaczewska","claimrole":"mother","matched":true,"date_sort":1852.126923076923}]},{"xref":"@I009620@","name":"Helena Łobaczewska","givn":"Helena","surn":"Łobaczewska","sex":"F","birth":"","death":"","birth_sort":1855.8836538461537,"n_claims":2,"n_matched":2,"n_unmatched":0,"pages":["Sig. 257, p. 199, pos. 339"],"sources":[{"page":"Sig. 257, p. 199, pos. 339","text":"Death of Dominik Myśliński in Myślina aged 25 on 15/11/1855.","note":"[Magnificence, wife Helena née Łobaczewska, son Adam, daughter Urszula]","text_pl":"Zg. Dominik Myśliński, Myślina, lat 25, 15/11/1855.","note_pl":"[wlm., żona Helena z Łobaczewskich, syn Adam, córka Urszula]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Dominik&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1855&rok_koniec_szuk=1855","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20257/pages/PL_1_436_257_0105.htm","claimname":"Helena Lobaczewski","claimrole":"decedent_spouse","matched":true,"date_sort":1855.8836538461537},{"page":"Sig. 257, p. 199, pos. 339","text":"Death of Dominik Myśliński in Myślina aged 25 on 15/11/1855.","note":"[Magnificence, wife Helena née Łobaczewska, son Adam, daughter Urszula]","text_pl":"Zg. Dominik Myśliński, Myślina, lat 25, 15/11/1855.","note_pl":"[wlm., żona Helena z Łobaczewskich, syn Adam, córka Urszula]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Dominik&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1855&rok_koniec_szuk=1855","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20257/pages/PL_1_436_257_0105.htm","claimname":"Helena Lobaczewski","claimrole":"mother","matched":true,"date_sort":1855.8836538461537}]},{"xref":"@I009858@","name":"Helena Łobaczewska","givn":"Helena","surn":"Łobaczewska","sex":"F","birth":"","death":"","birth_sort":1867.2807692307692,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 268, p. 35, pos. 9"],"sources":[{"page":"Sig. 268, p. 35, pos. 9","text":"Death of Agnieszka Łobaczewska in Myślina aged 83 on 20/3/1867.","note":"[citizen, widow, sons: Józef and Joachim, daughter Helena Myślińska]","text_pl":"Zg. Agnieszka Łobaczewska, Myślina, lat 83, 20/3/1867.","note_pl":"[Ob.., wdowa, synowie Józef i Joachim, córka Helena Myślińska]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Agnieszka&nazw_szuk=%A3obaczewska&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1867&rok_koniec_szuk=1867","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20268/pages/PL_1_436_268_0019.htm","claimname":"Helena Lobaczewska","claimrole":"decedent_child","matched":true,"date_sort":1867.2807692307692}]}],"b":[{"xref":"@I001364@","name":"Helena Łobaczewska","givn":"Helena","surn":"Łobaczewska","sex":"F","birth":"1826","death":"","birth_sort":1850.5609615384615,"n_claims":6,"n_matched":6,"n_unmatched":0,"pages":["Sig. 0195-1-28, p. 1V-2R, pos. 1","Sig. 253, p. 18-19, pos. 25","Sig. 253, p. 28, pos. 8","Sig. 257, p. 199, pos. 339","Sig. 268, p. 35, pos. 9"],"sources":[{"page":"Sig. 253, p. 28, pos. 8","text":"Marriage of Dominik Myśliński of Myślina aged 33 (son of Franciszek Myśliński and Salomea Myślińska) and Helena Łobaczewska of Myślina aged 24 (daughter of Leon and Agnieszka Myślińska) on\n9/7/1850.","note":"[Witnesses: Karol Bałkowski, Joachim Łobaczewski]","text_pl":"Ślub Dominik Myśliński z Myślina lat 33 (s. Franciszek Myśliński i Salomea z d. Myślińska) i Helena Łobaczewska z Myślina lat 24 (c. Leon i Agnieszka z d. Myślińska), 9/7/1850.","note_pl":"[Świadkowie: Karol Bałkowski, Joachim Łobaczewski]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Dominik&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1850&rok_koniec_szuk=1850","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20253/pages/PL_1_436_253_0015.htm","claimname":"Helena Lobaczewska","claimrole":"bride","matched":true,"date_sort":1850.5609615384615},{"page":"Sig. 253, p. 18-19, pos. 25","text":"Birth of Urszula Myślińska in Myślina (parents: Dominik Myśliński and Helena Łobaczewska) on 22/11/1850.","note":"[Godparents: Julian Myśliński and Julia Myślińska married]","text_pl":"Ur. Urszula Myślińska, Myślina, (rodzice: Dominik Myśliński i Helena z d. Łobaczewska), 22/11/1850.","note_pl":"[Rodzice chrzestni: Julian Myśliński i Julia Myślińska zamężna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Urszula&nazw_szuk=My%B6li%F1ska&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1850&rok_koniec_szuk=1850","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20253/pages/PL_1_436_253_0010.htm","claimname":"Helena Lobaczewska","claimrole":"mother","matched":true,"date_sort":1850.9011538461539},{"page":"Sig. 0195-1-28, p. 1V-2R, pos. 1","text":"Birth of Adam Makary Myśliński in Myślina (parents: Dominik Myśliński and Helena Łobaczewska) on 20/1/1852.","note":"[Godparents: Joachim Łobaczewski and Julia Łączyńska unmarried]","text_pl":"Ur. Adam Makary Myśliński, Myślina, (rodzice: Dominik Myśliński i Helena z d. Łobaczewska), 20/1/1852.","note_pl":"[Rodzice chrzestni: Joachim Łobaczewski i Julia Łączyńska panna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Adam%20Makary&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1852&rok_koniec_szuk=1852","scan_url":"","claimname":"Helena Lobaczewska","claimrole":"mother","matched":true,"date_sort":1852.126923076923},{"page":"Sig. 257, p. 199, pos. 339","text":"Death of Dominik Myśliński in Myślina aged 25 on 15/11/1855.","note":"[Magnificence, wife Helena née Łobaczewska, son Adam, daughter Urszula]","text_pl":"Zg. Dominik Myśliński, Myślina, lat 25, 15/11/1855.","note_pl":"[wlm., żona Helena z Łobaczewskich, syn Adam, córka Urszula]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Dominik&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1855&rok_koniec_szuk=1855","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20257/pages/PL_1_436_257_0105.htm","claimname":"Helena Lobaczewski","claimrole":"decedent_spouse","matched":true,"date_sort":1855.8836538461537},{"page":"Sig. 257, p. 199, pos. 339","text":"Death of Dominik Myśliński in Myślina aged 25 on 15/11/1855.","note":"[Magnificence, wife Helena née Łobaczewska, son Adam, daughter Urszula]","text_pl":"Zg. Dominik Myśliński, Myślina, lat 25, 15/11/1855.","note_pl":"[wlm., żona Helena z Łobaczewskich, syn Adam, córka Urszula]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Dominik&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1855&rok_koniec_szuk=1855","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20257/pages/PL_1_436_257_0105.htm","claimname":"Helena Lobaczewski","claimrole":"mother","matched":true,"date_sort":1855.8836538461537},{"page":"Sig. 268, p. 35, pos. 9","text":"Death of Agnieszka Łobaczewska in Myślina aged 83 on 20/3/1867.","note":"[citizen, widow, sons: Józef and Joachim, daughter Helena Myślińska]","text_pl":"Zg. Agnieszka Łobaczewska, Myślina, lat 83, 20/3/1867.","note_pl":"[Ob.., wdowa, synowie Józef i Joachim, córka Helena Myślińska]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Agnieszka&nazw_szuk=%A3obaczewska&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1867&rok_koniec_szuk=1867","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20268/pages/PL_1_436_268_0019.htm","claimname":"Helena Lobaczewska","claimrole":"decedent_child","matched":true,"date_sort":1867.2807692307692}]}],"claims":[{"page":"Sig. 253, p. 28, pos. 8","a_xref":"@I001364@","b_xref":"@I001364@","claimname":"helena lobaczewska","claimrole":"bride","date_sort":1850.5609615384615},{"page":"Sig. 253, p. 18-19, pos. 25","a_xref":"@I001364@","b_xref":"@I001364@","claimname":"helena lobaczewska","claimrole":"mother","date_sort":1850.9011538461539},{"page":"Sig. 0195-1-28, p. 1V-2R, pos. 1","a_xref":"@I001364@","b_xref":"@I001364@","claimname":"helena lobaczewska","claimrole":"mother","date_sort":1852.126923076923},{"page":"Sig. 257, p. 199, pos. 339","a_xref":"@I009620@","b_xref":"@I001364@","claimname":"helena lobaczewski","claimrole":"decedent_spouse","date_sort":1855.8836538461537},{"page":"Sig. 257, p. 199, pos. 339","a_xref":"@I009620@","b_xref":"@I001364@","claimname":"helena lobaczewski","claimrole":"mother","date_sort":1855.8836538461537},{"page":"Sig. 268, p. 35, pos. 9","a_xref":"@I009858@","b_xref":"@I001364@","claimname":"helena lobaczewska","claimrole":"decedent_child","date_sort":1867.2807692307692}],"n_claims":6,"name":"Helena Łobaczewska","surn":"Łobaczewska"},{"type":"merge","a":[{"xref":"@I001362@","name":"Urszula Myślińska","givn":"Urszula","surn":"Myślińska","sex":"F","birth":"22 Nov 1850","death":"","birth_sort":1850.9011538461539,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 253, p. 18-19, pos. 25"],"sources":[{"page":"Sig. 253, p. 18-19, pos. 25","text":"Birth of Urszula Myślińska in Myślina (parents: Dominik Myśliński and Helena Łobaczewska) on 22/11/1850.","note":"[Godparents: Julian Myśliński and Julia Myślińska married]","text_pl":"Ur. Urszula Myślińska, Myślina, (rodzice: Dominik Myśliński i Helena z d. Łobaczewska), 22/11/1850.","note_pl":"[Rodzice chrzestni: Julian Myśliński i Julia Myślińska zamężna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Urszula&nazw_szuk=My%B6li%F1ska&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1850&rok_koniec_szuk=1850","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20253/pages/PL_1_436_253_0010.htm","claimname":"Urszula Myslinska","claimrole":"child","matched":true,"date_sort":1850.9011538461539}]},{"xref":"@I009622@","name":"Urszula Myślińska","givn":"Urszula","surn":"Myślińska","sex":"F","birth":"","death":"","birth_sort":1855.8836538461537,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 257, p. 199, pos. 339"],"sources":[{"page":"Sig. 257, p. 199, pos. 339","text":"Death of Dominik Myśliński in Myślina aged 25 on 15/11/1855.","note":"[Magnificence, wife Helena née Łobaczewska, son Adam, daughter Urszula]","text_pl":"Zg. Dominik Myśliński, Myślina, lat 25, 15/11/1855.","note_pl":"[wlm., żona Helena z Łobaczewskich, syn Adam, córka Urszula]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Dominik&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1855&rok_koniec_szuk=1855","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20257/pages/PL_1_436_257_0105.htm","claimname":"Urszula Myslinski","claimrole":"decedent_child","matched":true,"date_sort":1855.8836538461537}]}],"b":[{"xref":"@I001362@","name":"Urszula Myślińska","givn":"Urszula","surn":"Myślińska","sex":"F","birth":"22 Nov 1850","death":"","birth_sort":1850.9011538461539,"n_claims":2,"n_matched":2,"n_unmatched":0,"pages":["Sig. 253, p. 18-19, pos. 25","Sig. 257, p. 199, pos. 339"],"sources":[{"page":"Sig. 253, p. 18-19, pos. 25","text":"Birth of Urszula Myślińska in Myślina (parents: Dominik Myśliński and Helena Łobaczewska) on 22/11/1850.","note":"[Godparents: Julian Myśliński and Julia Myślińska married]","text_pl":"Ur. Urszula Myślińska, Myślina, (rodzice: Dominik Myśliński i Helena z d. Łobaczewska), 22/11/1850.","note_pl":"[Rodzice chrzestni: Julian Myśliński i Julia Myślińska zamężna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Urszula&nazw_szuk=My%B6li%F1ska&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1850&rok_koniec_szuk=1850","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20253/pages/PL_1_436_253_0010.htm","claimname":"Urszula Myslinska","claimrole":"child","matched":true,"date_sort":1850.9011538461539},{"page":"Sig. 257, p. 199, pos. 339","text":"Death of Dominik Myśliński in Myślina aged 25 on 15/11/1855.","note":"[Magnificence, wife Helena née Łobaczewska, son Adam, daughter Urszula]","text_pl":"Zg. Dominik Myśliński, Myślina, lat 25, 15/11/1855.","note_pl":"[wlm., żona Helena z Łobaczewskich, syn Adam, córka Urszula]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Dominik&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1855&rok_koniec_szuk=1855","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20257/pages/PL_1_436_257_0105.htm","claimname":"Urszula Myslinski","claimrole":"decedent_child","matched":true,"date_sort":1855.8836538461537}]}],"claims":[{"page":"Sig. 253, p. 18-19, pos. 25","a_xref":"@I001362@","b_xref":"@I001362@","claimname":"urszula myslinska","claimrole":"child","date_sort":1850.9011538461539},{"page":"Sig. 257, p. 199, pos. 339","a_xref":"@I009622@","b_xref":"@I001362@","claimname":"urszula myslinski","claimrole":"decedent_child","date_sort":1855.8836538461537}],"n_claims":2,"name":"Urszula Myślińska","surn":"Myślińska"},{"type":"merge","a":[{"xref":"@I001461@","name":"Adam Makary Myśliński","givn":"Adam Makary","surn":"Myśliński","sex":"M","birth":"20 Jan 1852","death":"","birth_sort":1852.126923076923,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 0195-1-28, p. 1V-2R, pos. 1"],"sources":[{"page":"Sig. 0195-1-28, p. 1V-2R, pos. 1","text":"Birth of Adam Makary Myśliński in Myślina (parents: Dominik Myśliński and Helena Łobaczewska) on 20/1/1852.","note":"[Godparents: Joachim Łobaczewski and Julia Łączyńska unmarried]","text_pl":"Ur. Adam Makary Myśliński, Myślina, (rodzice: Dominik Myśliński i Helena z d. Łobaczewska), 20/1/1852.","note_pl":"[Rodzice chrzestni: Joachim Łobaczewski i Julia Łączyńska panna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Adam%20Makary&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1852&rok_koniec_szuk=1852","scan_url":"","claimname":"Adam Makary Myslinski","claimrole":"child","matched":true,"date_sort":1852.126923076923}]},{"xref":"@I009621@","name":"Adam Myśliński","givn":"Adam","surn":"Myśliński","sex":"M","birth":"","death":"","birth_sort":1855.8836538461537,"n_claims":1,"n_matched":1,"n_unmatched":0,"pages":["Sig. 257, p. 199, pos. 339"],"sources":[{"page":"Sig. 257, p. 199, pos. 339","text":"Death of Dominik Myśliński in Myślina aged 25 on 15/11/1855.","note":"[Magnificence, wife Helena née Łobaczewska, son Adam, daughter Urszula]","text_pl":"Zg. Dominik Myśliński, Myślina, lat 25, 15/11/1855.","note_pl":"[wlm., żona Helena z Łobaczewskich, syn Adam, córka Urszula]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Dominik&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1855&rok_koniec_szuk=1855","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20257/pages/PL_1_436_257_0105.htm","claimname":"Adam Myslinski","claimrole":"decedent_child","matched":true,"date_sort":1855.8836538461537}]}],"b":[{"xref":"@I001461@","name":"Adam Makary Myśliński","givn":"Adam Makary","surn":"Myśliński","sex":"M","birth":"20 Jan 1852","death":"","birth_sort":1852.126923076923,"n_claims":2,"n_matched":2,"n_unmatched":0,"pages":["Sig. 0195-1-28, p. 1V-2R, pos. 1","Sig. 257, p. 199, pos. 339"],"sources":[{"page":"Sig. 0195-1-28, p. 1V-2R, pos. 1","text":"Birth of Adam Makary Myśliński in Myślina (parents: Dominik Myśliński and Helena Łobaczewska) on 20/1/1852.","note":"[Godparents: Joachim Łobaczewski and Julia Łączyńska unmarried]","text_pl":"Ur. Adam Makary Myśliński, Myślina, (rodzice: Dominik Myśliński i Helena z d. Łobaczewska), 20/1/1852.","note_pl":"[Rodzice chrzestni: Joachim Łobaczewski i Julia Łączyńska panna]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Adam%20Makary&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1852&rok_koniec_szuk=1852","scan_url":"","claimname":"Adam Makary Myslinski","claimrole":"child","matched":true,"date_sort":1852.126923076923},{"page":"Sig. 257, p. 199, pos. 339","text":"Death of Dominik Myśliński in Myślina aged 25 on 15/11/1855.","note":"[Magnificence, wife Helena née Łobaczewska, son Adam, daughter Urszula]","text_pl":"Zg. Dominik Myśliński, Myślina, lat 25, 15/11/1855.","note_pl":"[wlm., żona Helena z Łobaczewskich, syn Adam, córka Urszula]","url":"https://wolyn-metryki.pl/Wolyn/index.php?imie_szuk=Dominik&nazw_szuk=My%B6li%F1ski&miej_szuk=My%B6lina&para_szuk=Kowel&rok_start_szuk=1855&rok_koniec_szuk=1855","scan_url":"http://agadd.home.net.pl/metrykalia/436/sygn.%20257/pages/PL_1_436_257_0105.htm","claimname":"Adam Myslinski","claimrole":"decedent_child","matched":true,"date_sort":1855.8836538461537}]}],"claims":[{"page":"Sig. 0195-1-28, p. 1V-2R, pos. 1","a_xref":"@I001461@","b_xref":"@I001461@","claimname":"adam makary myslinski","claimrole":"child","date_sort":1852.126923076923},{"page":"Sig. 257, p. 199, pos. 339","a_xref":"@I009621@","b_xref":"@I001461@","claimname":"adam myslinski","claimrole":"decedent_child","date_sort":1855.8836538461537}],"n_claims":2,"name":"Adam Makary Myśliński","surn":"Myśliński"}],"summary":{"agreed":12384,"split":6,"merge":3,"complex":1,"a_orphans":0,"b_orphans":0,"total_claims":18874,"a_individuals":13732,"b_individuals":13737,"claim_tags_a":true,"claim_tags_b":true},"a_orphans":[],"b_orphans":[],"name_a":"Kowel_v3.0.1116_snap_round2","name_b":"Kowel_v3.0.1120_snap_round2"};
+const state = {
+  filter: 'all',
+  activeIndex: -1,
+  lang: 'en',
+};
+
+function srcText(src) { return state.lang === 'pl' && src.text_pl ? src.text_pl : src.text || ''; }
+function srcNote(src) { return state.lang === 'pl' && src.note_pl ? src.note_pl : src.note || ''; }
+
+function toggleLang() {
+  state.lang = state.lang === 'en' ? 'pl' : 'en';
+  document.getElementById('langBtn').textContent = state.lang === 'en' ? 'PL' : 'EN';
+  // Re-render current detail view
+  const items = getFilteredItems();
+  if (state.activeIndex >= 0 && state.activeIndex < items.length) {
+    const item = items[state.activeIndex];
+    if (item.kind === 'disagreement') showDisagreement(item.data);
+    else showOrphan(item.data, item.kind);
+  }
+}
+
+function init() {
+  const s = __DATA.summary;
+  
+  // Summary chips
+  const chips = document.getElementById('summaryChips');
+  chips.innerHTML = [
+    { type: 'agreed', label: 'Agreed', count: s.agreed },
+    { type: 'split', label: 'Splits', count: s.split },
+    { type: 'merge', label: 'Merges', count: s.merge },
+    { type: 'complex', label: 'Complex', count: s.complex },
+    { type: 'orphan', label: 'Orphans', count: s.a_orphans + s.b_orphans },
+  ].map(c => `<div class="chip ${c.type}"><span class="dot"></span><span class="count">${c.count.toLocaleString()}</span> ${c.label}</div>`).join('');
+  
+  // Type tabs
+  const tabs = document.getElementById('typeTabs');
+  const disagreeCount = s.split + s.merge + s.complex;
+  const orphanCount = s.a_orphans + s.b_orphans;
+  tabs.innerHTML = [
+    { type: 'all', label: `All (${disagreeCount + orphanCount})`, cls: 't-all' },
+    { type: 'split', label: `Splits (${s.split})`, cls: 't-split' },
+    { type: 'merge', label: `Merges (${s.merge})`, cls: 't-merge' },
+    { type: 'complex', label: `Complex (${s.complex})`, cls: 't-complex' },
+    { type: 'orphan', label: `Orphans (${orphanCount})`, cls: 't-orphan' },
+  ].filter(t => t.type === 'all' || (t.type === 'orphan' ? orphanCount > 0 : s[t.type] > 0))
+   .map(t => `<div class="type-tab ${t.cls}${t.type === 'all' ? ' active' : ''}" data-type="${t.type}">${t.label}</div>`)
+   .join('');
+  
+  tabs.querySelectorAll('.type-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      state.filter = tab.dataset.type;
+      state.activeIndex = -1;
+      renderList();
+    });
+  });
+  
+  renderList();
+}
+
+function getFilteredItems() {
+  const items = [];
+  
+  // Disagreements
+  for (let i = 0; i < __DATA.disagreements.length; i++) {
+    const d = __DATA.disagreements[i];
+    if (state.filter === 'all' || state.filter === d.type) {
+      items.push({ kind: 'disagreement', index: i, data: d });
+    }
+  }
+  
+  // Orphans
+  if (state.filter === 'all' || state.filter === 'orphan') {
+    for (let i = 0; i < __DATA.a_orphans.length; i++) {
+      items.push({ kind: 'orphan-a', index: i, data: __DATA.a_orphans[i] });
+    }
+    for (let i = 0; i < __DATA.b_orphans.length; i++) {
+      items.push({ kind: 'orphan-b', index: i, data: __DATA.b_orphans[i] });
+    }
+  }
+  
+  return items;
+}
+
+function renderList() {
+  const list = document.getElementById('itemList');
+  const items = getFilteredItems();
+  
+  list.innerHTML = items.map((item, idx) => {
+    if (item.kind === 'disagreement') {
+      const d = item.data;
+      const na = d.a.length;
+      const nb = d.b.length;
+      let detail = '';
+      if (d.type === 'split') detail = `1 in A → ${nb} in B · ${d.n_claims} claims`;
+      else if (d.type === 'merge') detail = `${na} in A → 1 in B · ${d.n_claims} claims`;
+      else detail = `${na} in A ↔ ${nb} in B · ${d.n_claims} claims`;
+      
+      return `<div class="item t-${d.type}${state.activeIndex === idx ? ' active' : ''}" onclick="selectItem(${idx})">
+        <div class="item-type ${d.type}">${d.type}</div>
+        <div class="item-name">${esc(d.name)}</div>
+        <div class="item-detail">${detail}</div>
+      </div>`;
+    } else {
+      const o = item.data;
+      const side = item.kind === 'orphan-a' ? 'A' : 'B';
+      const dates = [o.birth ? `b. ${o.birth}` : '', o.death ? `d. ${o.death}` : ''].filter(Boolean).join(' — ');
+      return `<div class="item t-${item.kind}${state.activeIndex === idx ? ' active' : ''}" onclick="selectItem(${idx})">
+        <div class="item-type orphan">only in ${side}</div>
+        <div class="item-name">${esc(o.name)}</div>
+        <div class="item-detail">${dates}${o.n_claims ? ` · ${o.n_claims} claims` : ''}</div>
+      </div>`;
+    }
+  }).join('');
+}
+
+function selectItem(idx) {
+  state.activeIndex = idx;
+  renderList();
+  
+  const items = getFilteredItems();
+  const item = items[idx];
+  if (!item) return;
+  
+  if (item.kind === 'disagreement') {
+    showDisagreement(item.data);
+  } else {
+    showOrphan(item.data, item.kind);
+  }
+}
+
+function showDisagreement(d) {
+  const main = document.getElementById('mainContent');
+  const na = d.a.length;
+  const nb = d.b.length;
+  
+  let typeLabel = d.type;
+  let subtitle = '';
+  if (d.type === 'split') subtitle = `Version A has 1 individual; version B has ${nb}`;
+  else if (d.type === 'merge') subtitle = `Version A has ${na} individuals; version B has 1`;
+  else subtitle = `Version A has ${na} individuals; version B has ${nb}`;
+  
+  let html = `
+    <div class="comp-header">
+      <div class="comp-type ${d.type}">${typeLabel}</div>
+      <div class="comp-title">${esc(d.name)}</div>
+      <div class="comp-subtitle">${subtitle} · ${d.n_claims} shared claims</div>
+    </div>
+    
+    <div class="versus">
+      <div class="ver-panel side-a">
+        <div class="ver-label">${esc(__DATA.name_a)}</div>
+        ${d.a.map(p => personCard(p)).join('')}
+      </div>
+      <div class="ver-panel side-b">
+        <div class="ver-label">${esc(__DATA.name_b)}</div>
+        ${d.b.map(p => personCard(p)).join('')}
+      </div>
+    </div>`;
+  
+  // Claim flow table — simple one-line-per-claim with color-coded individuals
+  if (d.claims.length > 0) {
+    const aNames = {};
+    d.a.forEach(p => aNames[p.xref] = p.name);
+    const bNames = {};
+    d.b.forEach(p => bNames[p.xref] = p.name);
+    
+    const groupColors = ['#d4a855','#6a9fcc','#b07ab0','#5a8a5a','#cc7a8a','#7bc47c','#c4756a','#8ac','#c96','#9b9'];
+    
+    // Assign colors to the "many" side
+    const aColorMap = {};
+    const bColorMap = {};
+    d.a.forEach((p, i) => aColorMap[p.xref] = d.a.length > 1 ? groupColors[i % groupColors.length] : 'var(--ver-a)');
+    d.b.forEach((p, i) => bColorMap[p.xref] = d.b.length > 1 ? groupColors[i % groupColors.length] : 'var(--ver-b)');
+    
+    html += `<div class="flow-section">
+      <h3>Claim Flow</h3>
+      <table class="flow-table">
+        <tr>
+          <th>Source Record</th>
+          <th>Claim</th>
+          <th>Role</th>
+          <th style="color:var(--ver-a)">${esc(__DATA.name_a)}</th>
+          <th style="color:var(--ver-b)">${esc(__DATA.name_b)}</th>
+        </tr>`;
+    
+    for (const c of d.claims) {
+      const aName = aNames[c.a_xref] || c.a_xref;
+      const bName = bNames[c.b_xref] || c.b_xref;
+      const aColor = aColorMap[c.a_xref] || 'var(--ver-a)';
+      const bColor = bColorMap[c.b_xref] || 'var(--ver-b)';
+      html += `<tr>
+        <td class="col-page">${esc(c.page)}</td>
+        <td class="col-name">${esc(c.claimname)}</td>
+        <td style="color:var(--text-dim);font-size:11px;">${esc(c.claimrole || '')}</td>
+        <td style="color:${aColor}">${esc(aName)}</td>
+        <td style="color:${bColor}">${esc(bName)}</td>
+      </tr>`;
+    }
+    
+    html += `</table></div>`;
+  }
+  
+  main.innerHTML = html;
+}
+
+function showOrphan(o, kind) {
+  const main = document.getElementById('mainContent');
+  const side = kind === 'orphan-a' ? 'A' : 'B';
+  const verName = kind === 'orphan-a' ? __DATA.name_a : __DATA.name_b;
+  const dates = [o.birth ? `b. ${o.birth}` : '', o.death ? `d. ${o.death}` : ''].filter(Boolean).join(' — ');
+  
+  let html = `
+    <div class="comp-header">
+      <div class="comp-type orphan">Only in ${side}</div>
+      <div class="comp-title">${esc(o.name)}</div>
+      <div class="comp-subtitle">${dates} · ${o.n_claims} claims · present in ${esc(verName)} only</div>
+    </div>
+    <div class="flow-section">
+      <h3>Source Records</h3>`;
+  
+  if (o.sources && o.sources.length > 0) {
+    html += `<div class="pc-sources">`;
+    for (const src of o.sources) {
+      html += `<div class="pc-source">`;
+      if (src.claimrole) html += `<div class="src-role">${esc(src.claimrole)}</div>`;
+      if (src.page) html += `<div class="src-page">${esc(src.page)}</div>`;
+      const text = srcText(src);
+      if (text) html += `<div class="src-text">${esc(text)}</div>`;
+      const note = srcNote(src);
+      if (note) html += `<div class="src-note">${esc(note)}</div>`;
+      if (src.url || src.scan_url) {
+        html += `<div class="src-links">`;
+        if (src.url) html += `<a href="${esc(src.url)}" target="_blank" rel="noopener">record</a>`;
+        if (src.scan_url) html += `<a href="${esc(src.scan_url)}" target="_blank" rel="noopener">scan</a>`;
+        html += `</div>`;
+      }
+      html += `</div>`;
+    }
+    html += `</div>`;
+  } else {
+    html += `<p style="color:var(--text-dim)">No source records.</p>`;
+  }
+  
+  html += `</div>`;
+  main.innerHTML = html;
+}
+
+function personCard(p) {
+  const sexClass = p.sex === 'M' ? 'male' : p.sex === 'F' ? 'female' : '';
+  const dates = [p.birth ? `b. ${p.birth}` : '', p.death ? `d. ${p.death}` : ''].filter(Boolean).join(' — ');
+  const claimInfo = p.n_unmatched > 0 
+    ? `<span class="matched">${p.n_matched} matched</span>, <span class="unmatched">${p.n_unmatched} unmatched</span>`
+    : `${p.n_claims} claims`;
+  
+  let sourcesHtml = '';
+  if (p.sources && p.sources.length > 0) {
+    sourcesHtml = `<div class="pc-sources">`;
+    for (const src of p.sources) {
+      const unmatchedClass = src.matched ? '' : ' unmatched-src';
+      sourcesHtml += `<div class="pc-source${unmatchedClass}">`;
+      if (src.claimrole) sourcesHtml += `<div class="src-role">${esc(src.claimrole)}</div>`;
+      if (src.page) sourcesHtml += `<div class="src-page">${esc(src.page)}</div>`;
+      const text = srcText(src);
+      if (text) sourcesHtml += `<div class="src-text">${esc(text)}</div>`;
+      const note = srcNote(src);
+      if (note) sourcesHtml += `<div class="src-note">${esc(note)}</div>`;
+      if (src.url || src.scan_url) {
+        sourcesHtml += `<div class="src-links">`;
+        if (src.url) sourcesHtml += `<a href="${esc(src.url)}" target="_blank" rel="noopener">record</a>`;
+        if (src.scan_url) sourcesHtml += `<a href="${esc(src.scan_url)}" target="_blank" rel="noopener">scan</a>`;
+        sourcesHtml += `</div>`;
+      }
+      sourcesHtml += `</div>`;
+    }
+    sourcesHtml += `</div>`;
+  }
+  
+  return `<div class="person-card">
+    <div class="pc-name ${sexClass}">${esc(p.name)} <span style="font-family:var(--ui);font-size:11px;color:var(--text-dim);font-weight:400;">${esc(p.xref)}</span></div>
+    <div class="pc-dates">${esc(dates)}</div>
+    <div class="pc-claims">${claimInfo}</div>
+    ${sourcesHtml}
+  </div>`;
+}
+
+function esc(str) {
+  if (!str) return '';
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+init();
+</script>
+</body>
+</html>
